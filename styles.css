@@ -3426,6 +3426,27 @@ p {
 }
 
 @media (max-width: 767px) {
+  .site-header .brand {
+    flex: 1 1 auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .site-header .brand-ocean-logo {
+    width: clamp(148px, 42vw, 190px);
+    flex: 0 0 auto;
+  }
+
+  .site-header .brand-subtitle,
+  html[lang="en"] .site-header .brand-subtitle {
+    max-width: min(34vw, 160px);
+    font-size: 12px;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
   .booth-list-page .booth-filter-panel {
     height: auto;
     min-height: auto;
