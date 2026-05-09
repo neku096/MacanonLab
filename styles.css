@@ -3061,6 +3061,28 @@ p {
     min-height: 32px;
   }
 
+  .booth-list-page .booth-filter-tabs {
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-inline: -2px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 2px 2px 8px;
+    scrollbar-width: none;
+  }
+
+  .booth-list-page .booth-filter-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .booth-list-page .booth-filter-button {
+    flex: 0 0 auto;
+  }
+
+  .booth-list-page .booth-filter-status {
+    text-align: right;
+  }
+
   .pr-hero-copy h1 span,
   .pr-hero-copy h2 span {
     white-space: normal;
