@@ -209,60 +209,6 @@
   }
 }
 
-@media (max-width: 768px) {
-  .macanon-hero {
-    min-height: auto;
-    grid-template-columns: minmax(0, 58%) minmax(0, 42%);
-    gap: 12px;
-    align-items: center;
-    padding: clamp(28px, 7vw, 44px) clamp(16px, 5vw, 28px);
-  }
-
-  .macanon-hero-copy {
-    min-width: 0;
-    max-width: none;
-  }
-
-  .macanon-hero-copy h1 {
-    max-width: 100%;
-    font-size: clamp(26px, 7.4vw, 42px);
-    line-height: 1.1;
-    overflow-wrap: anywhere;
-  }
-
-  .macanon-hero-copy p {
-    font-size: clamp(14px, 3.4vw, 17px);
-    line-height: 1.65;
-  }
-
-  .macanon-hero-visual {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    justify-self: end;
-    transform: translateX(10px);
-  }
-
-  .macanon-hero-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .macanon-hero .hero-actions {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 18px;
-  }
-
-  .macanon-hero .hero-actions .button {
-    flex: 0 1 auto;
-    min-height: 44px;
-    padding-inline: 10px;
-    font-size: 14px;
-  }
-}
-
 * {
   box-sizing: border-box;
 }
@@ -3476,5 +3422,31 @@ p {
   .nav a {
     padding: 7px 10px;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .booth-list-page .booth-filter-panel {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .booth-list-page .booth-filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: visible;
+    white-space: normal;
+  }
+
+  .booth-list-page .booth-filter-button {
+    flex: 0 0 auto;
+    max-width: 100%;
+    white-space: nowrap;
   }
 }
