@@ -656,9 +656,9 @@ p {
 
 .product-cover {
   aspect-ratio: 1 / 1;
-  max-height: clamp(150px, 20vw, 260px);
   min-height: 0;
   width: 100%;
+  height: auto;
   object-fit: cover;
   object-position: center;
 }
@@ -760,6 +760,10 @@ p {
   -webkit-user-drag: none;
   scroll-snap-align: start;
   transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.product-card .product-cover {
+  height: auto;
 }
 
 .product-card img,
@@ -1210,6 +1214,7 @@ p {
 .booth-list-thumb {
   display: block;
   min-width: 0;
+  aspect-ratio: 1 / 1;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 16px 34px rgba(116, 99, 132, 0.12);
@@ -1224,7 +1229,7 @@ p {
 .booth-list-thumb img {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: cover;
 }
 
