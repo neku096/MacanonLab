@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="220" viewBox="0 0 640 220" role="img" aria-labelledby="title desc">
+  <title id="title">macanon whale logo</title>
+  <desc id="desc">A cyan to pink gradient whale, wave, bubble, and macanon wordmark logo.</desc>
+  <defs>
+    <linearGradient id="macanonGradient" x1="44" y1="72" x2="586" y2="156" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#45d8f5"/>
+      <stop offset="0.48" stop-color="#9f8cf5"/>
+      <stop offset="1" stop-color="#f25acc"/>
+    </linearGradient>
+    <filter id="softLogoGlow" x="-8%" y="-20%" width="116%" height="140%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g fill="url(#macanonGradient)" filter="url(#softLogoGlow)">
+    <path d="M48 118c8-24 42-35 89-31 31 3 63 17 88 11 11-3 19-5 22-1 2 4-3 9-12 16 18 8 38 8 57-4 19-12 31-30 28-45-1-7 4-10 10-5 12 10 23 12 37 14 8 2 9 7 4 14-9 14-23 22-41 24-9 16-20 31-38 43-39 26-88 29-128 10-24-12-43-29-53-49-26-1-49 2-63 3Z"/>
+    <path d="M123 115c-4 18 6 33 27 43 4 2 7-1 6-5-5-16-2-26 8-36Z"/>
+    <path d="M206 159c19 19 50 24 83 12-27 22-68 25-104 11-22-9-45-9-64-1 24-19 56-23 85-22Z"/>
+    <path d="M52 178c35-12 69-7 103 8 33 15 70 16 108 1-44 28-87 30-132 10-29-13-55-17-79-19Z"/>
+    <path d="M194 196c35-17 70-19 106-5 26 9 49 10 70 0-32 20-66 23-102 9-28-11-53-12-74-4Z"/>
+    <circle cx="58" cy="134" r="6"/>
+    <circle cx="72" cy="152" r="9"/>
+    <circle cx="260" cy="148" r="9"/>
+    <circle cx="275" cy="134" r="7"/>
+    <text x="330" y="139" font-family="Avenir Next, Inter, Helvetica Neue, Arial, sans-serif" font-size="66" font-weight="900" letter-spacing="0">macanon</text>
+  </g>
+</svg>
