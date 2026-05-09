@@ -3447,6 +3447,25 @@ p {
     white-space: normal;
   }
 
+  .site-footer .footer-brand {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .site-footer .footer-ocean-logo {
+    width: clamp(148px, 42vw, 190px);
+    flex: 0 0 auto;
+  }
+
+  .site-footer .footer-tagline {
+    max-width: min(34vw, 160px);
+    font-size: 12px;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
   .booth-list-page .booth-filter-panel {
     height: auto;
     min-height: auto;
