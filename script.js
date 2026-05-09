@@ -2,6 +2,22 @@
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
   const translations = {
     "VRChat 3D衣装・ギミック制作": "VRChat 3D Outfit & Gimmick",
+    "macanon | VRChat向け3D衣装・ギミック": "macanon | VRChat 3D Outfits & Gimmicks",
+    "BOOTH作品一覧 | macanon": "BOOTH Works | macanon",
+    "制作PR・案件相談 | macanon": "Commissions | macanon",
+    "利用規約 | macanon": "Terms | macanon",
+    "macanonはVRChat向けの3D衣装、召喚ギミック、アクセサリーを制作しています。BOOTH商品、制作PR、Blog記事への導線をまとめた公式サイトです。": "macanon creates VRChat 3D outfits, summon gimmicks, and accessories. This official site collects links to BOOTH products, commission information, and blog posts.",
+    "VRChat向けの3D衣装、召喚ギミック、アクセサリーを制作するmacanonの公式サイトです。": "The official macanon site for VRChat 3D outfits, summon gimmicks, and accessories.",
+    "macanon BOOTH商品サムネイル": "macanon BOOTH product thumbnail",
+    "macanonのVRChat向け3D衣装、召喚ギミック、アクセサリーをBOOTH商品サムネイルで確認できます。": "Browse macanon's VRChat 3D outfits, summon gimmicks, and accessories through BOOTH product thumbnails.",
+    "macanonのVRChat向け3D衣装、召喚ギミック、アクセサリー一覧です。": "A list of macanon's VRChat 3D outfits, summon gimmicks, and accessories.",
+    "macanonのVRChat向け3D衣装・ギミック制作PRページです。BOOTH販売実績、制作できる内容、案件相談の流れを掲載しています。": "A commission information page for macanon's VRChat 3D outfit and gimmick production, including BOOTH work examples, available services, and inquiry guidance.",
+    "VRChat向け3D衣装・ギミック制作の実績と案件相談窓口です。": "Portfolio and commission contact information for VRChat 3D outfit and gimmick production.",
+    "macanonサイトの利用規約と、BOOTH商品ページの規約確認に関する案内です。": "Terms for the macanon site and guidance for checking BOOTH product terms.",
+    "macanonのVRChat、Unity、Modular Avatar向けTips、商品レビュー、制作ブログ記事一覧です。タグで絞り込みできます。": "A tag-filterable list of macanon tips, product reviews, and production blog posts for VRChat, Unity, and Modular Avatar.",
+    "macanonのTips、商品レビュー、制作ブログ記事一覧です。": "A list of macanon tips, product reviews, and production blog posts.",
+    "macanonのVRChat、Unity、Modular Avatar向けTips記事一覧です。記事は今後追加予定です。": "A list of macanon tips articles for VRChat, Unity, and Modular Avatar. Articles will be added in the future.",
+    "macanonのVRChat、Unity、Modular Avatar向けTips記事一覧です。": "A list of macanon tips articles for VRChat, Unity, and Modular Avatar.",
     "BOOTH作品": "BOOTH Works",
     "制作PR": "Commissions",
     "利用規約": "Terms",
@@ -17,6 +33,29 @@
     "3D装飾品": "3D Accessory",
     "3Dモデル": "3D Model",
     "ワールドギミック": "World Gimmick",
+    "〖ルミナ対応〗CravingDance": "CravingDance for Lumina",
+    "〖召喚ギミック〗鮫召喚 Shark summon": "Shark Summon Gimmick",
+    "鮫召喚 / Shark summon": "Shark Summon",
+    "鯨召喚 Whale summon": "Whale Summon",
+    "鯨召喚 / Whale summon": "Whale Summon",
+    "カピバラ召喚 Capybara summon": "Capybara Summon",
+    "カピバラ召喚": "Capybara Summon",
+    "ミリロリ制服 MiriLori Uniform": "MiriLori Uniform",
+    "ミリロリ制服": "MiriLori Uniform",
+    "スターガーディアン Star Guardian": "Star Guardian",
+    "ギャルヘイロー GalHalo": "Gal Halo",
+    "ギャルヘイロー": "Gal Halo",
+    "無料 ミニ クジラ": "Free Mini Whale",
+    "ミニ クジラ": "Mini Whale",
+    "Dark Knight 対応衣装": "Dark Knight Outfit",
+    "にゃんこお面 CatMask": "CatMask",
+    "鮫召喚 Shark summon の制作実績サムネイル": "Shark Summon portfolio thumbnail",
+    "CravingDance 制作実績": "CravingDance portfolio work",
+    "鮫召喚 制作実績": "Shark Summon portfolio work",
+    "鯨召喚 制作実績": "Whale Summon portfolio work",
+    "Dark Knight 制作実績": "Dark Knight portfolio work",
+    "Star Guardian 制作実績": "Star Guardian portfolio work",
+    "ミリロリ制服 制作実績": "MiriLori Uniform portfolio work",
     "商品レビュー・制作ブログ": "Product Reviews / Dev Blog",
     "Blogを見る": "View Blog",
     "レビュー記事は準備中です。公開後はこのエリアに、Tipsと同じカード形式で掲載します。": "Review articles are being prepared. Once published, they will appear here in the same card style as Tips.",
@@ -50,7 +89,7 @@
     "レビュー": "Reviews",
     "商品紹介": "Product Posts",
     "制作メモ": "Work Logs",
-    "該当するBlog記事はまだありません。記事を追加すると、この一覧にカード形式で表示できます。": "No matching blog posts yet. When posts are added, they will appear here as cards.",
+    "該当するBlog記事はまだありません。": "No matching blog posts yet.",
     "Blog記事はまだありません。公開後はタグごとに絞り込みできます。": "There are no blog posts yet. Once published, they can be filtered by tag.",
     "Tips記事はまだありません。記事を追加すると、この一覧にカード形式で表示できます。": "There are no Tips articles yet. When articles are added, they will appear here as cards.",
     "このサイトは、macanonのBOOTH商品、制作実績、Blogへの導線をまとめた案内ページです。": "This site collects links to macanon's BOOTH products, portfolio works, and blog.",
@@ -61,15 +100,38 @@
   };
 
   const originalTextNodes = new WeakMap();
+  const originalDocumentTitle = document.title;
+  const originalAttributes = new WeakMap();
   const languageButtons = [...document.querySelectorAll("[data-language-option]")];
   let currentLanguage = localStorage.getItem("macanon-language") === "en" ? "en" : "ja";
 
   const translateText = (text) => (currentLanguage === "en" ? translations[text] || text : text);
 
+  const translateAttributes = () => {
+    document.title = currentLanguage === "en" ? translations[originalDocumentTitle] || originalDocumentTitle : originalDocumentTitle;
+    document.querySelectorAll("[content], [alt], [aria-label]").forEach((element) => {
+      ["content", "alt", "aria-label"].forEach((attribute) => {
+        if (!element.hasAttribute(attribute)) {
+          return;
+        }
+        if (!originalAttributes.has(element)) {
+          originalAttributes.set(element, new Map());
+        }
+        const originalValues = originalAttributes.get(element);
+        if (!originalValues.has(attribute)) {
+          originalValues.set(attribute, element.getAttribute(attribute));
+        }
+        const originalValue = originalValues.get(attribute);
+        element.setAttribute(attribute, currentLanguage === "en" ? translations[originalValue] || originalValue : originalValue);
+      });
+    });
+  };
+
   const applyLanguage = (language) => {
     currentLanguage = language === "en" ? "en" : "ja";
     localStorage.setItem("macanon-language", currentLanguage);
     document.documentElement.lang = currentLanguage;
+    translateAttributes();
     languageButtons.forEach((button) => {
       const isActive = button.dataset.languageOption === currentLanguage;
       button.classList.toggle("is-active", isActive);
