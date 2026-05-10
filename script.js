@@ -190,7 +190,17 @@
       return Number.isNaN(gap) ? 24 : gap;
     };
     const getCardDistance = () => slides[0].getBoundingClientRect().width + getGap();
-    const getCurrentIndex = () => clamp(Math.round(slider.scrollLeft / getCardDistance()), 0, slides.length - 1);
+    const getMaxScrollLeft = () => Math.max(0, slider.scrollWidth - slider.clientWidth);
+    const getMaxIndex = () => {
+      const distance = getCardDistance();
+      return distance > 0 ? Math.ceil(getMaxScrollLeft() / distance) : 0;
+    };
+    const getSlideLeft = (index) => Math.min(getCardDistance() * index, getMaxScrollLeft());
+    const isAtEnd = () => slider.scrollLeft >= getMaxScrollLeft() - 2;
+    const getCurrentIndex = () => {
+      const distance = getCardDistance();
+      return distance > 0 ? clamp(Math.round(slider.scrollLeft / distance), 0, getMaxIndex()) : 0;
+    };
 
     const updateActiveDot = () => {
       if (!dots) {
@@ -232,16 +242,20 @@
     };
 
     const slideByCard = (direction) => {
+      const maxScrollLeft = getMaxScrollLeft();
+      if (maxScrollLeft <= 0) {
+        return;
+      }
       const currentIndex = getCurrentIndex();
-      if (shouldLoop && direction > 0 && currentIndex >= slides.length - 1) {
+      if (shouldLoop && direction > 0 && isAtEnd()) {
         fastScrollToStart();
         return;
       }
-      if (shouldLoop && direction < 0 && currentIndex <= 0) {
-        slider.scrollTo({ left: slider.scrollWidth - slider.clientWidth, behavior: "smooth" });
+      if (shouldLoop && direction < 0 && slider.scrollLeft <= 2) {
+        slider.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
         return;
       }
-      slider.scrollBy({ left: getCardDistance() * direction, behavior: "smooth" });
+      slider.scrollTo({ left: getSlideLeft(currentIndex + direction), behavior: "smooth" });
     };
 
     let autoSlideTimer = window.setInterval(() => slideByCard(1), 3600);
@@ -255,23 +269,20 @@
     let dragStartScrollLeft = 0;
     let pressedLink = null;
     let suppressNextClick = false;
-    const shouldUseNativeTouchScroll = (event) =>
-      event.pointerType === "touch" &&
-      slider.classList.contains("product-card-slider") &&
-      window.matchMedia("(max-width: 767px)").matches;
 
     const renderDots = () => {
       if (!dots) {
         return;
       }
       dots.innerHTML = "";
-      slides.forEach((_, dotIndex) => {
+      const dotCount = getMaxIndex() + 1;
+      Array.from({ length: dotCount }).forEach((_, dotIndex) => {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "slider-dot";
         button.setAttribute("aria-label", currentLanguage === "en" ? `Go to slide ${dotIndex + 1}` : `${dotIndex + 1}枚目へ`);
         button.addEventListener("click", () => {
-          slider.scrollTo({ left: getCardDistance() * dotIndex, behavior: "smooth" });
+          slider.scrollTo({ left: getSlideLeft(dotIndex), behavior: "smooth" });
           restartAutoSlide();
         });
         dots.append(button);
@@ -308,10 +319,6 @@
     });
     slider.addEventListener("pointerdown", (event) => {
       if (event.button !== 0) {
-        return;
-      }
-      if (shouldUseNativeTouchScroll(event)) {
-        window.clearInterval(autoSlideTimer);
         return;
       }
       event.preventDefault();
@@ -395,6 +402,7 @@
     slider.addEventListener("focusin", () => window.clearInterval(autoSlideTimer));
     slider.addEventListener("focusout", restartAutoSlide);
     window.addEventListener("macanon:languagechange", updateDotLabels);
+    window.addEventListener("resize", renderDots);
 
     renderDots();
   });
