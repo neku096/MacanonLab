@@ -72,7 +72,8 @@
     "制作で大切にしていること": "What I Focus On",
     "相談しやすい内容": "Good Topics To Discuss",
     "3D衣装・ギミック制作": "3D Outfits & Gimmicks",
-    "企業・個人様の依頼について": "Commissions for Businesses and Individuals",
+    "企業・個人様の": "Commissions for",
+    "ご依頼について": "Businesses and Individuals",
     "VRChat向け3D衣装、召喚ギミック、アクセサリー制作などのご相談を受け付けています。": "I accept inquiries for VRChat 3D outfits, summon gimmicks, accessories, and related production.",
     "世界観や用途に合わせた制作をご提案します。": "I propose production plans tailored to your worldbuilding and intended use.",
     "BOOTHで販売している衣装、召喚ギミック、アクセサリー制作の経験を活かし、コンセプトに合わせた3Dアイテム制作をお手伝いします。": "Using my experience creating BOOTH outfits, summon gimmicks, and accessories, I can help produce 3D items that match your concept.",
@@ -96,6 +97,10 @@
     "各商品の利用条件、禁止事項、更新履歴、導入条件は、BOOTHの商品ページおよび商品同梱の規約を優先します。": "For each product, the BOOTH product page and included terms take priority for usage conditions, restrictions, update history, and setup requirements.",
     "画像、文章、商品データの無断転載、再配布、販売、AI学習への利用は行わないでください。": "Do not repost, redistribute, sell, or use images, text, or product data for AI training without permission.",
     "案件相談や商品に関する問い合わせは、BOOTHまたはXの案内からご連絡ください。": "For commissions or product inquiries, please contact me through BOOTH or X.",
+    "アクセス解析について": "About Access Analytics",
+    "当サイトでは、サイト改善や閲覧状況の把握のため、アクセス解析ツールを利用する場合があります。": "This site may use access analytics tools to improve the site and understand browsing activity.",
+    "アクセス解析により、閲覧ページ、利用環境、アクセス日時などの情報が収集される場合があります。収集される情報は、個人を特定する目的では使用しません。": "Analytics may collect information such as viewed pages, usage environment, and access date and time. This information is not used to identify individuals.",
+    "Google Analytics等の解析ツールを利用する場合、収集された情報は各提供元のプライバシーポリシーに基づいて管理されます。": "When analytics tools such as Google Analytics are used, collected information is managed according to each provider's privacy policy.",
     "BOOTHで規約を確認": "Check Terms on BOOTH"
   };
 
