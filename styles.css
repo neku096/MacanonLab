@@ -3546,6 +3546,9 @@ p {
     gap: 14px;
     grid-auto-columns: clamp(150px, calc((100% - 14px) / 2), 174px);
     padding-inline: 0;
+    scroll-snap-type: inline proximity;
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
   }
 
   .product-card-slider .product-cover {

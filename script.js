@@ -255,6 +255,10 @@
     let dragStartScrollLeft = 0;
     let pressedLink = null;
     let suppressNextClick = false;
+    const shouldUseNativeTouchScroll = (event) =>
+      event.pointerType === "touch" &&
+      slider.classList.contains("product-card-slider") &&
+      window.matchMedia("(max-width: 767px)").matches;
 
     const renderDots = () => {
       if (!dots) {
@@ -304,6 +308,10 @@
     });
     slider.addEventListener("pointerdown", (event) => {
       if (event.button !== 0) {
+        return;
+      }
+      if (shouldUseNativeTouchScroll(event)) {
+        window.clearInterval(autoSlideTimer);
         return;
       }
       event.preventDefault();
@@ -375,6 +383,8 @@
     };
     slider.addEventListener("pointerup", stopDragging);
     slider.addEventListener("pointercancel", stopDragging);
+    slider.addEventListener("touchend", restartAutoSlide, { passive: true });
+    slider.addEventListener("touchcancel", restartAutoSlide, { passive: true });
     slider.addEventListener("lostpointercapture", () => {
       isDragging = false;
       slider.classList.remove("is-dragging");
