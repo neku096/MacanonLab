@@ -180,6 +180,7 @@
     const previousButton = slider.parentElement.querySelector("[data-slider-prev]");
     const nextButton = slider.parentElement.querySelector("[data-slider-next]");
     const shouldLoop = slider.dataset.loop === "true";
+    const stepSize = 2;
 
     if (!slides.length) {
       return;
@@ -195,18 +196,21 @@
       const distance = getCardDistance();
       return distance > 0 ? Math.ceil(getMaxScrollLeft() / distance) : 0;
     };
+    const getMaxStepIndex = () => Math.ceil(getMaxIndex() / stepSize);
     const getSlideLeft = (index) => Math.min(getCardDistance() * index, getMaxScrollLeft());
+    const getStepLeft = (stepIndex) => getSlideLeft(stepIndex * stepSize);
     const isAtEnd = () => slider.scrollLeft >= getMaxScrollLeft() - 2;
     const getCurrentIndex = () => {
       const distance = getCardDistance();
       return distance > 0 ? clamp(Math.round(slider.scrollLeft / distance), 0, getMaxIndex()) : 0;
     };
+    const getCurrentStepIndex = () => clamp(Math.round(getCurrentIndex() / stepSize), 0, getMaxStepIndex());
 
     const updateActiveDot = () => {
       if (!dots) {
         return;
       }
-      const index = getCurrentIndex();
+      const index = getCurrentStepIndex();
       dots.querySelectorAll(".slider-dot").forEach((dot, dotIndex) => {
         const isActive = dotIndex === index;
         dot.setAttribute("aria-current", isActive ? "true" : "false");
@@ -255,7 +259,7 @@
         slider.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
         return;
       }
-      slider.scrollTo({ left: getSlideLeft(currentIndex + direction), behavior: "smooth" });
+      slider.scrollTo({ left: getSlideLeft(currentIndex + direction * stepSize), behavior: "smooth" });
     };
 
     let autoSlideTimer = window.setInterval(() => slideByCard(1), 3600);
@@ -275,14 +279,14 @@
         return;
       }
       dots.innerHTML = "";
-      const dotCount = getMaxIndex() + 1;
+      const dotCount = getMaxStepIndex() + 1;
       Array.from({ length: dotCount }).forEach((_, dotIndex) => {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "slider-dot";
         button.setAttribute("aria-label", currentLanguage === "en" ? `Go to slide ${dotIndex + 1}` : `${dotIndex + 1}枚目へ`);
         button.addEventListener("click", () => {
-          slider.scrollTo({ left: getSlideLeft(dotIndex), behavior: "smooth" });
+          slider.scrollTo({ left: getStepLeft(dotIndex), behavior: "smooth" });
           restartAutoSlide();
         });
         dots.append(button);
