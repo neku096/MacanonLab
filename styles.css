@@ -3557,22 +3557,29 @@ p {
   }
 
   .product-card-slider .product-card {
+    align-self: start;
+    display: block;
+    height: fit-content;
     min-height: 0;
   }
 
   .product-card-slider .product-card strong,
   .product-card-slider .product-card small {
+    margin: 0;
     padding-inline: 12px;
   }
 
   .product-card-slider .product-card strong {
+    padding-top: 6px;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.32;
   }
 
   .product-card-slider .product-card small {
     min-height: 0;
-    padding-bottom: 12px;
+    padding-top: 2px;
+    padding-bottom: 6px;
     font-size: 12px;
+    line-height: 1.35;
   }
 }
