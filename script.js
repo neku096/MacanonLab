@@ -3,6 +3,7 @@
   const translations = {
     "VRChat 3D衣装・ギミック制作": "VRChat 3D Outfit & Gimmick",
     "macanon | VRChat向け3D衣装・ギミック": "macanon | VRChat 3D Outfits & Gimmicks",
+    "macanon | VRChat向け3D衣装・ギミック制作": "macanon | VRChat 3D Outfits & Gimmicks",
     "BOOTH作品一覧 | macanon": "BOOTH Works | macanon",
     "制作PR・案件相談 | macanon": "Commissions | macanon",
     "利用規約 | macanon": "Terms | macanon",
@@ -18,6 +19,14 @@
     "macanonのTips、商品レビュー、制作ブログ記事一覧です。": "A list of macanon tips, product reviews, and production blog posts.",
     "macanonのVRChat、Unity、Modular Avatar向けTips記事一覧です。記事は今後追加予定です。": "A list of macanon tips articles for VRChat, Unity, and Modular Avatar. Articles will be added in the future.",
     "macanonのVRChat、Unity、Modular Avatar向けTips記事一覧です。": "A list of macanon tips articles for VRChat, Unity, and Modular Avatar.",
+    "このページを共有": "Share this page",
+    "共有": "Share",
+    "現在のページを共有": "Share this page",
+    "閉じる": "Close",
+    "Xでシェア": "Share on X",
+    "LINEでシェア": "Share on LINE",
+    "URLをコピー": "Copy URL",
+    "URLをコピーしました": "URL copied",
     "BOOTH作品": "BOOTH Works",
     "制作PR": "Commissions",
     "利用規約": "Terms",
@@ -87,6 +96,20 @@
     "召喚、追従、ON/OFF切り替えなどの演出付きギミック制作": "Gimmicks with summon, follow, ON/OFF, and other interactive effects.",
     "既存商品の追加対応、色差分、商品サムネイル改善の相談": "Additional avatar support, color variations, and product thumbnail improvements.",
     "BOOTH販売を想定した商品構成、説明文、導線設計の相談": "Product structure, descriptions, and sales flow planning for BOOTH releases.",
+    "制作の流れ": "Production Flow",
+    "相談": "Consultation",
+    "見積もり": "Estimate",
+    "制作": "Production",
+    "確認": "Review",
+    "納品": "Delivery",
+    "相談時に必要なもの": "What To Prepare",
+    "ご希望アバター": "Desired avatar",
+    "作りたい内容": "What you want made",
+    "参考画像": "Reference images",
+    "希望納期": "Preferred deadline",
+    "予算感": "Budget range",
+    "制作の流れ: 相談、見積もり、制作、確認、納品": "Production flow: consultation, estimate, production, review, delivery",
+    "相談時に必要なもの: ご希望アバター、作りたい内容、参考画像、希望納期、予算感": "What to prepare: desired avatar, desired content, reference images, preferred deadline, budget range",
     "レビュー": "Reviews",
     "商品紹介": "Product Posts",
     "制作メモ": "Work Logs",
@@ -114,8 +137,8 @@
 
   const translateAttributes = () => {
     document.title = currentLanguage === "en" ? translations[originalDocumentTitle] || originalDocumentTitle : originalDocumentTitle;
-    document.querySelectorAll("[content], [alt], [aria-label]").forEach((element) => {
-      ["content", "alt", "aria-label"].forEach((attribute) => {
+    document.querySelectorAll("[content], [alt], [aria-label], [title]").forEach((element) => {
+      ["content", "alt", "aria-label", "title"].forEach((attribute) => {
         if (!element.hasAttribute(attribute)) {
           return;
         }
@@ -132,11 +155,21 @@
     });
   };
 
+  const updateLocalizedImages = () => {
+    document.querySelectorAll("[data-ja-src][data-en-src]").forEach((image) => {
+      const nextSrc = currentLanguage === "en" ? image.dataset.enSrc : image.dataset.jaSrc;
+      if (nextSrc && image.getAttribute("src") !== nextSrc) {
+        image.setAttribute("src", nextSrc);
+      }
+    });
+  };
+
   const applyLanguage = (language) => {
     currentLanguage = language === "en" ? "en" : "ja";
     localStorage.setItem("macanon-language", currentLanguage);
     document.documentElement.lang = currentLanguage;
     translateAttributes();
+    updateLocalizedImages();
     languageButtons.forEach((button) => {
       const isActive = button.dataset.languageOption === currentLanguage;
       button.classList.toggle("is-active", isActive);
@@ -168,6 +201,128 @@
 
     window.dispatchEvent(new CustomEvent("macanon:languagechange"));
   };
+
+  const getShareData = () => ({
+    title: document.title,
+    text: document.querySelector('meta[name="description"]')?.content || "",
+    url: document.querySelector('link[rel="canonical"]')?.href || window.location.href
+  });
+
+  const createShareModal = () => {
+    const modal = document.createElement("div");
+    modal.className = "share-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-labelledby", "share-modal-title");
+    modal.hidden = true;
+    modal.innerHTML = `
+      <div class="share-backdrop" data-share-close></div>
+      <div class="share-panel">
+        <button class="share-close" type="button" data-share-close aria-label="閉じる">×</button>
+        <h2 id="share-modal-title" class="share-title">現在のページを共有</h2>
+        <p class="share-page-title" data-share-title></p>
+        <p class="share-page-url" data-share-url></p>
+        <div class="share-options" role="list">
+          <button class="share-option" type="button" data-share-action="x" role="listitem">
+            <span class="share-option-icon share-option-x" aria-hidden="true">X</span>
+            <span>Xでシェア</span>
+          </button>
+          <button class="share-option" type="button" data-share-action="line" role="listitem">
+            <span class="share-option-icon share-option-line" aria-hidden="true">LINE</span>
+            <span>LINEでシェア</span>
+          </button>
+          <button class="share-option" type="button" data-share-action="copy" role="listitem">
+            <span class="share-option-icon share-option-copy" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.9-3.9a3 3 0 0 1 4.2 4.2l-3 3a3 3 0 0 1-4.25 0 1 1 0 1 1 1.42-1.42 1 1 0 0 0 1.41 0l3-3a1 1 0 0 0-1.41-1.41L12 13.4a1 1 0 0 1-1.4 0Zm2.8-2.8a1 1 0 0 1 0 1.4l-3.9 3.9a3 3 0 1 1-4.2-4.2l3-3a3 3 0 0 1 4.25 0 1 1 0 0 1-1.42 1.42 1 1 0 0 0-1.41 0l-3 3a1 1 0 1 0 1.41 1.41L12 10.6a1 1 0 0 1 1.4 0Z"></path></svg>
+            </span>
+            <span data-copy-label>URLをコピー</span>
+          </button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    return modal;
+  };
+
+  let shareModal = null;
+  let lastFocusedShareButton = null;
+
+  const closeShareModal = () => {
+    if (!shareModal || shareModal.hidden) {
+      return;
+    }
+    shareModal.hidden = true;
+    document.body.classList.remove("is-share-modal-open");
+    lastFocusedShareButton?.focus();
+  };
+
+  const openShareModal = (button) => {
+    shareModal ||= createShareModal();
+    lastFocusedShareButton = button;
+    const shareData = getShareData();
+    shareModal.querySelector(".share-close").setAttribute("aria-label", translateText("閉じる"));
+    shareModal.querySelector(".share-title").textContent = translateText("現在のページを共有");
+    shareModal.querySelector("[data-share-title]").textContent = shareData.title;
+    shareModal.querySelector("[data-share-url]").textContent = shareData.url;
+    shareModal.querySelector('[data-share-action="x"] span:last-child').textContent = translateText("Xでシェア");
+    shareModal.querySelector('[data-share-action="line"] span:last-child').textContent = translateText("LINEでシェア");
+    shareModal.querySelector("[data-copy-label]").textContent = translateText("URLをコピー");
+    shareModal.hidden = false;
+    document.body.classList.add("is-share-modal-open");
+    translateAttributes();
+    shareModal.querySelector("[data-share-close]")?.focus();
+  };
+
+  document.addEventListener("click", async (event) => {
+    const shareButton = event.target.closest("[data-share-button]");
+    if (shareButton) {
+      openShareModal(shareButton);
+      return;
+    }
+
+    if (!shareModal || shareModal.hidden) {
+      return;
+    }
+
+    if (event.target.closest("[data-share-close]")) {
+      closeShareModal();
+      return;
+    }
+
+    const actionButton = event.target.closest("[data-share-action]");
+    if (!actionButton) {
+      return;
+    }
+
+    const shareData = getShareData();
+    if (actionButton.dataset.shareAction === "x") {
+      const intent = new URL("https://twitter.com/intent/tweet");
+      intent.searchParams.set("text", shareData.title);
+      intent.searchParams.set("url", shareData.url);
+      window.open(intent.href, "_blank", "noopener,noreferrer");
+      closeShareModal();
+    }
+    if (actionButton.dataset.shareAction === "line") {
+      const intent = new URL("https://social-plugins.line.me/lineit/share");
+      intent.searchParams.set("url", shareData.url);
+      window.open(intent.href, "_blank", "noopener,noreferrer");
+      closeShareModal();
+    }
+    if (actionButton.dataset.shareAction === "copy") {
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        actionButton.querySelector("[data-copy-label]").textContent = translateText("URLをコピーしました");
+      } catch {
+        actionButton.querySelector("[data-copy-label]").textContent = shareData.url;
+      }
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeShareModal();
+    }
+  });
 
   languageButtons.forEach((button) => {
     button.addEventListener("click", () => applyLanguage(button.dataset.languageOption));
@@ -205,6 +360,30 @@
       return distance > 0 ? clamp(Math.round(slider.scrollLeft / distance), 0, getMaxIndex()) : 0;
     };
     const getCurrentStepIndex = () => clamp(Math.round(getCurrentIndex() / stepSize), 0, getMaxStepIndex());
+    const loadImage = (image) => {
+      if (image.dataset.srcset && !image.hasAttribute("srcset")) {
+        image.setAttribute("srcset", image.dataset.srcset);
+      }
+      if (image.dataset.src && !image.hasAttribute("src")) {
+        image.setAttribute("src", image.dataset.src);
+      }
+    };
+    const loadSlideImages = (index) => {
+      const slide = slides[clamp(index, 0, slides.length - 1)];
+      if (!slide) {
+        return;
+      }
+      slide.querySelectorAll("img[data-src]").forEach(loadImage);
+    };
+    const loadSlideRange = (startIndex, endIndex) => {
+      for (let index = Math.max(0, startIndex); index <= Math.min(slides.length - 1, endIndex); index += 1) {
+        loadSlideImages(index);
+      }
+    };
+    const loadCurrentSlideImages = () => {
+      const currentIndex = getCurrentIndex();
+      loadSlideRange(currentIndex, currentIndex + stepSize + 1);
+    };
 
     const updateActiveDot = () => {
       if (!dots) {
@@ -252,20 +431,36 @@
       }
       const currentIndex = getCurrentIndex();
       if (shouldLoop && direction > 0 && isAtEnd()) {
+        loadSlideRange(0, stepSize + 1);
         fastScrollToStart();
         return;
       }
       if (shouldLoop && direction < 0 && slider.scrollLeft <= 2) {
+        loadSlideRange(slides.length - stepSize - 2, slides.length - 1);
         slider.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
         return;
       }
-      slider.scrollTo({ left: getSlideLeft(currentIndex + direction * stepSize), behavior: "smooth" });
+      const nextIndex = clamp(currentIndex + direction * stepSize, 0, slides.length - 1);
+      loadSlideRange(nextIndex, nextIndex + stepSize + 1);
+      slider.scrollTo({ left: getSlideLeft(nextIndex), behavior: "smooth" });
     };
 
-    let autoSlideTimer = window.setInterval(() => slideByCard(1), 3600);
-    const restartAutoSlide = () => {
+    const autoSlideDelay = 3600;
+    let autoSlideTimer;
+    let canAutoSlide = !("IntersectionObserver" in window);
+    const stopAutoSlide = () => {
       window.clearInterval(autoSlideTimer);
-      autoSlideTimer = window.setInterval(() => slideByCard(1), 3600);
+      autoSlideTimer = undefined;
+    };
+    const startAutoSlide = () => {
+      if (autoSlideTimer || !canAutoSlide) {
+        return;
+      }
+      autoSlideTimer = window.setInterval(() => slideByCard(1), autoSlideDelay);
+    };
+    const restartAutoSlide = () => {
+      stopAutoSlide();
+      startAutoSlide();
     };
     let isDragging = false;
     let hasDragged = false;
@@ -286,6 +481,8 @@
         button.className = "slider-dot";
         button.setAttribute("aria-label", currentLanguage === "en" ? `Go to slide ${dotIndex + 1}` : `${dotIndex + 1}枚目へ`);
         button.addEventListener("click", () => {
+          const targetIndex = dotIndex * stepSize;
+          loadSlideRange(targetIndex, targetIndex + stepSize + 1);
           slider.scrollTo({ left: getStepLeft(dotIndex), behavior: "smooth" });
           restartAutoSlide();
         });
@@ -317,6 +514,7 @@
 
     let scrollEndTimer;
     slider.addEventListener("scroll", () => {
+      loadCurrentSlideImages();
       updateActiveDot();
       window.clearTimeout(scrollEndTimer);
       scrollEndTimer = window.setTimeout(updateActiveDot, 180);
@@ -332,7 +530,7 @@
       dragStartScrollLeft = slider.scrollLeft;
       pressedLink = event.target.closest("a[href]");
       slider.setPointerCapture(event.pointerId);
-      window.clearInterval(autoSlideTimer);
+      stopAutoSlide();
     });
     slider.addEventListener("dragstart", (event) => {
       event.preventDefault();
@@ -401,14 +599,33 @@
       slider.classList.remove("is-dragging");
       restartAutoSlide();
     });
-    slider.addEventListener("mouseenter", () => window.clearInterval(autoSlideTimer));
+    slider.addEventListener("mouseenter", stopAutoSlide);
     slider.addEventListener("mouseleave", restartAutoSlide);
-    slider.addEventListener("focusin", () => window.clearInterval(autoSlideTimer));
+    slider.addEventListener("focusin", stopAutoSlide);
     slider.addEventListener("focusout", restartAutoSlide);
     window.addEventListener("macanon:languagechange", updateDotLabels);
     window.addEventListener("resize", renderDots);
 
+    if ("IntersectionObserver" in window) {
+      const sliderObserver = new IntersectionObserver(
+        (entries) => {
+          canAutoSlide = entries.some((entry) => entry.isIntersecting);
+          if (canAutoSlide) {
+            loadCurrentSlideImages();
+            startAutoSlide();
+            return;
+          }
+          stopAutoSlide();
+        },
+        { rootMargin: "160px 0px" }
+      );
+      sliderObserver.observe(slider);
+    } else {
+      startAutoSlide();
+    }
+
     renderDots();
+    loadCurrentSlideImages();
   });
 
   document.querySelectorAll("[data-booth-filter]").forEach((filterPanel) => {
