@@ -354,6 +354,10 @@
     const getMaxStepIndex = () => Math.ceil(getMaxIndex() / stepSize);
     const getSlideLeft = (index) => Math.min(getCardDistance() * index, getMaxScrollLeft());
     const getStepLeft = (stepIndex) => getSlideLeft(stepIndex * stepSize);
+    const getVisibleCardCount = () => {
+      const distance = getCardDistance();
+      return distance > 0 ? Math.ceil(slider.clientWidth / distance) : stepSize;
+    };
     const isAtEnd = () => slider.scrollLeft >= getMaxScrollLeft() - 2;
     const getCurrentIndex = () => {
       const distance = getCardDistance();
@@ -382,7 +386,7 @@
     };
     const loadCurrentSlideImages = () => {
       const currentIndex = getCurrentIndex();
-      loadSlideRange(currentIndex, currentIndex + stepSize + 1);
+      loadSlideRange(currentIndex, currentIndex + getVisibleCardCount() + stepSize);
     };
 
     const updateActiveDot = () => {
