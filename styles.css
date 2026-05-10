@@ -3541,4 +3541,35 @@ p {
     max-width: 100%;
     white-space: nowrap;
   }
+
+  .product-card-slider {
+    gap: 14px;
+    grid-auto-columns: clamp(150px, calc((100% - 14px) / 2), 174px);
+    padding-inline: 0;
+  }
+
+  .product-card-slider .product-cover {
+    height: clamp(150px, 42vw, 174px);
+    max-height: none;
+  }
+
+  .product-card-slider .product-card {
+    min-height: 0;
+  }
+
+  .product-card-slider .product-card strong,
+  .product-card-slider .product-card small {
+    padding-inline: 12px;
+  }
+
+  .product-card-slider .product-card strong {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .product-card-slider .product-card small {
+    min-height: 0;
+    padding-bottom: 12px;
+    font-size: 12px;
+  }
 }
