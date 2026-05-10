@@ -3543,8 +3543,11 @@ p {
   }
 
   .product-card-slider {
+    align-content: start;
+    align-items: start;
     gap: 14px;
     grid-auto-columns: clamp(150px, calc((100% - 14px) / 2), 174px);
+    grid-auto-rows: max-content;
     padding-inline: 0;
     scroll-snap-type: inline proximity;
     touch-action: pan-x pan-y;
@@ -3559,7 +3562,8 @@ p {
   .product-card-slider .product-card {
     align-self: start;
     display: block;
-    height: fit-content;
+    height: auto;
+    max-height: none;
     min-height: 0;
   }
 
@@ -3570,12 +3574,20 @@ p {
   }
 
   .product-card-slider .product-card strong {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     padding-top: 6px;
     font-size: 14px;
     line-height: 1.32;
   }
 
   .product-card-slider .product-card small {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
     min-height: 0;
     padding-top: 2px;
     padding-bottom: 6px;
