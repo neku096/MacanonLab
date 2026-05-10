@@ -3474,43 +3474,48 @@ p {
 
 @media (max-width: 767px) {
   .site-header .brand {
-    flex: 1 1 auto;
+    flex: 1 1 100%;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     min-width: 0;
   }
 
   .site-header .brand-ocean-logo {
-    width: clamp(148px, 42vw, 190px);
+    width: clamp(128px, 36vw, 170px);
     flex: 0 0 auto;
   }
 
   .site-header .brand-subtitle,
   html[lang="en"] .site-header .brand-subtitle {
-    max-width: min(34vw, 160px);
-    font-size: 12px;
+    max-width: none;
+    overflow: visible;
+    font-size: clamp(10px, 2.8vw, 12px);
     line-height: 1.35;
-    white-space: normal;
+    text-overflow: clip;
+    white-space: nowrap;
   }
 
   .site-footer .footer-brand {
+    width: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 6px;
   }
 
   .site-footer .footer-ocean-logo {
-    width: clamp(148px, 42vw, 190px);
+    width: clamp(128px, 36vw, 170px);
     flex: 0 0 auto;
   }
 
   .site-footer .footer-tagline {
-    max-width: min(34vw, 160px);
-    font-size: 12px;
+    max-width: none;
+    overflow: visible;
+    font-size: clamp(10px, 2.8vw, 12px);
     line-height: 1.35;
-    white-space: normal;
+    text-overflow: clip;
+    white-space: nowrap;
   }
 
   .booth-list-page .booth-filter-panel {
