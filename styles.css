@@ -3756,7 +3756,7 @@ p {
 
   .site-header .header-actions {
     width: 100%;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 8px;
     order: 2;
   }
@@ -3862,7 +3862,7 @@ p {
 
   .booth-list-page .booth-sort-tabs {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     overflow-x: visible;
     padding: 2px 0 6px;
   }
