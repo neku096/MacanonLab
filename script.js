@@ -6,7 +6,9 @@
     "macanon | VRChat向け3D衣装・ギミック制作": "macanon | VRChat 3D Outfits & Gimmicks",
     "BOOTH作品一覧 | macanon": "BOOTH Works | macanon",
     "制作実績・案件相談 | macanon": "Portfolio & Commissions | macanon",
+    "公式リンク集 | macanon": "Official Links | macanon",
     "利用規約 | macanon": "Terms | macanon",
+    "利用規約・ライセンス | macanon": "Terms & License | macanon",
     "macanonはVRChat向けの3D衣装、召喚ギミック、アクセサリーを制作しています。BOOTH作品、制作相談、ブログ記事への導線をまとめた公式サイトです。": "macanon creates VRChat 3D outfits, summon gimmicks, and accessories. This official site collects links to BOOTH works, commission information, and blog posts.",
     "VRChat向けの3D衣装、召喚ギミック、アクセサリーを制作するmacanonの公式サイトです。": "The official macanon site for VRChat 3D outfits, summon gimmicks, and accessories.",
     "macanon BOOTH商品サムネイル": "macanon BOOTH product thumbnail",
@@ -15,8 +17,23 @@
     "macanonのVRChat向け3D衣装・ギミック制作実績・案件相談ページです。BOOTH販売実績、制作できる内容、案件相談の流れを掲載しています。": "A portfolio and commission information page for macanon's VRChat 3D outfit and gimmick production, including BOOTH work examples, available services, and inquiry guidance.",
     "VRChat向け3D衣装・ギミック制作の実績と案件相談窓口です。": "Portfolio and commission contact information for VRChat 3D outfit and gimmick production.",
     "macanonサイトの利用規約と、BOOTH商品ページの規約確認に関する案内です。": "Terms for the macanon site and guidance for checking BOOTH product terms.",
+    "macanonサイトの利用規約とBOOTH商品向けライセンスを確認できます。日本語版と英語版のライセンス画像をタブで掲載しています。": "View the macanon site terms and BOOTH product license. Japanese and English license images are shown in tabs.",
+    "macanonサイトの利用規約とBOOTH商品向けライセンスを確認できます。日本語版、英語版、韓国語版、中国語版のライセンス画像をタブで掲載しています。": "View the macanon site terms and BOOTH product license. Japanese, English, Korean, and Chinese license images are shown in tabs.",
     "macanonのVRChat、Unity、Modular Avatar向けTips、商品レビュー、制作ブログ記事一覧です。タグで絞り込みできます。": "A tag-filterable list of macanon tips, product reviews, and production blog posts for VRChat, Unity, and Modular Avatar.",
     "macanonのTips、商品レビュー、制作ブログ記事一覧です。": "A list of macanon tips, product reviews, and production blog posts.",
+    "macanonの公式リンク集です。BOOTH作品ページとXへの導線をスマホでも見やすくまとめています。": "Official macanon links, with easy mobile access to the BOOTH product page and X.",
+    "macanonのBOOTH作品ページとXへの公式リンクをまとめています。": "Official links to macanon's BOOTH product page and X.",
+    "macanon 公式リンク集": "macanon Official Links",
+    "macanon 公式リンク集へ": "macanon official links",
+    "VRChat向け3D衣装、召喚ギミック、アクセサリーを制作しています。作品ページと更新情報はこちらから確認できます。": "I create VRChat 3D outfits, summon gimmicks, and accessories. You can check product pages and updates here.",
+    "公式外部リンク": "Official external links",
+    "VRChat向け3D衣装・ギミック作品ページ": "VRChat 3D outfit and gimmick product page",
+    "制作告知・更新情報・お問い合わせ": "Announcements, updates, and inquiries",
+    "サイト内で探す": "Browse This Site",
+    "サムネイルから作品を探す": "Browse works from thumbnails",
+    "使用条件を確認する": "Check usage conditions",
+    "ブログを確認する": "View the blog",
+    "Links": "Links",
     "macanonのVRChat、Unity、Modular Avatar向けTips記事一覧です。記事は今後追加予定です。": "A list of macanon tips articles for VRChat, Unity, and Modular Avatar. Articles will be added in the future.",
     "macanonのVRChat、Unity、Modular Avatar向けTips記事一覧です。": "A list of macanon tips articles for VRChat, Unity, and Modular Avatar.",
     "このページを共有": "Share this page",
@@ -36,6 +53,15 @@
     "次のブログページ": "Next blog page",
     "BOOTH作品": "BOOTH Works",
     "利用規約": "Terms",
+    "利用規約・ライセンス": "Terms & License",
+    "サイトの規約": "Site Terms",
+    "BOOTHの規約": "BOOTH Terms",
+    "利用規約の分類": "Terms category",
+    "BOOTH規約の言語": "BOOTH terms language",
+    "日本語BOOTH規約PDF": "Japanese BOOTH terms PDF",
+    "英語BOOTH規約PDF": "English BOOTH terms PDF",
+    "韓国語BOOTH規約PDF": "Korean BOOTH terms PDF",
+    "中国語BOOTH規約PDF": "Chinese BOOTH terms PDF",
     "VRChat向け": "For VRChat",
     "3Dアイテム制作": "3D Item Creation",
     "衣装、召喚ギミック、アクセサリーを中心に、改変に取り入れやすく、写真や交流のきっかけになるアイテムを制作しています。": "I create VRChat outfits, summon gimmicks, and accessories that are easy to add to avatar edits and fun to use in photos or social moments.",
@@ -75,7 +101,40 @@
     "Blogを見る": "View Blog",
     "レビュー記事は準備中です。公開後はこのエリアに、Tipsと同じカード形式で掲載します。": "Review articles are being prepared. Once published, they will appear here in the same card style as Tips.",
     "BOOTH作品一覧": "BOOTH Works",
+    "商品をサムネイルから確認できます。": "Browse products from their thumbnails.",
+    "商品情報": "Product information",
+    "商品画像": "Product image",
+    "商品画像ギャラリー": "Product image gallery",
+    "クリックして拡大できます。": "Click to enlarge.",
+    "前のサムネイルへ": "Previous thumbnails",
+    "次のサムネイルへ": "Next thumbnails",
+    "前の画像": "Previous image",
+    "次の画像": "Next image",
+    "作品カテゴリ": "Work category",
+    "商品キーワード": "Product keywords",
+    "商品画像はBOOTH掲載サムネイルを基にしています。": "Product images are based on BOOTH listing thumbnails.",
+    "BOOTHで確認する": "View on BOOTH",
+    "BOOTHで購入する": "Buy on BOOTH",
+    "利用規約を見る": "View Terms",
+    "対応": "Compatibility",
+    "内容": "Contents",
+    "用途": "Use",
+    "価格": "Price",
+    "商品概要": "Product Overview",
+    "商品詳細": "Product Details",
+    "導入方法": "Setup",
+    "同梱内容": "Included Files",
+    "チェックポイント": "Checkpoints",
+    "利用前の確認": "Before Use",
+    "FAQ": "FAQ",
+    "この商品のタグ": "Tags for this product",
+    "タグ": "Tags",
+    "通常タグ": "Main Tags",
+    "サブタグ": "Sub Tags",
+    "関連商品": "Related Products",
+    "BOOTH作品一覧へ": "Back to BOOTH Works",
     "掲載順": "Listed Order",
+    "通常順": "Default Order",
     "人気順": "Popular",
     "すべて": "All",
     "衣装": "Outfits",
@@ -128,7 +187,9 @@
     "当サイトでは、サイト改善や閲覧状況の把握のため、アクセス解析ツールを利用する場合があります。": "This site may use access analytics tools to improve the site and understand browsing activity.",
     "アクセス解析により、閲覧ページ、利用環境、アクセス日時などの情報が収集される場合があります。収集される情報は、個人を特定する目的では使用しません。": "Analytics may collect information such as viewed pages, usage environment, and access date and time. This information is not used to identify individuals.",
     "Google Analytics等の解析ツールを利用する場合、収集された情報は各提供元のプライバシーポリシーに基づいて管理されます。": "When analytics tools such as Google Analytics are used, collected information is managed according to each provider's privacy policy.",
-    "BOOTHで規約を確認": "Check Terms on BOOTH"
+    "BOOTHで規約を確認": "Check Terms on BOOTH",
+    "免責": "Disclaimer",
+    "当商品によって発生した損害、トラブル、各プラットフォームでの制限について、macanonは責任を負いません。必要に応じて規約内容を変更する場合があります。": "macanon is not responsible for damages, trouble, or platform restrictions caused by these products. Terms may be changed as needed."
   };
 
   const originalTextNodes = new WeakMap();
@@ -331,6 +392,51 @@
   languageButtons.forEach((button) => {
     button.addEventListener("click", () => applyLanguage(button.dataset.languageOption));
   });
+
+  const ensureFooterLinks = () => {
+    document.querySelectorAll(".footer-links").forEach((footerLinks) => {
+      if (footerLinks.querySelector('a[href="links.html"]')) {
+        return;
+      }
+      const link = document.createElement("a");
+      link.className = "footer-pill";
+      link.href = "links.html";
+      link.setAttribute("aria-label", "macanon 公式リンク集へ");
+      link.innerHTML = '<span class="footer-pill-icon" aria-hidden="true">L</span><span>Links</span>';
+      footerLinks.appendChild(link);
+    });
+  };
+
+  const applyFooterIcons = () => {
+    const icons = [
+      { match: "macanon.booth.pm", src: "images/link-icons/Booth_logo_footer.webp" },
+      { match: "x.com/MaCANoN_", src: "images/link-icons/x_logo-white_footer.webp" }
+    ];
+    document.querySelectorAll(".footer-pill").forEach((pill) => {
+      const iconData = icons.find((item) => pill.href.includes(item.match));
+      const icon = pill.querySelector(".footer-pill-icon");
+      if (!iconData || !icon) {
+        return;
+      }
+      icon.textContent = "";
+      let image = icon.querySelector("img");
+      if (!image) {
+        image = document.createElement("img");
+        image.alt = "";
+        image.width = 32;
+        image.height = 32;
+        image.loading = "lazy";
+        image.decoding = "async";
+        icon.appendChild(image);
+      }
+      if (!image.getAttribute("src")) {
+        image.setAttribute("src", iconData.src);
+      }
+    });
+  };
+
+  ensureFooterLinks();
+  applyFooterIcons();
 
   document.querySelectorAll("[data-slider]").forEach((slider) => {
     const cardSelector = slider.dataset.cardSelector || ".product-slide";
@@ -636,11 +742,563 @@
     loadCurrentSlideImages();
   });
 
+  document.querySelectorAll("[data-product-gallery]").forEach((gallery) => {
+    const dataElement = document.querySelector("#product-gallery-data");
+    const mainImage = gallery.querySelector("[data-product-main-image]");
+    const mainButton = gallery.querySelector("[data-gallery-open]");
+    const inlineThumbs = gallery.querySelector("[data-gallery-inline-thumbs]");
+    const inlinePrev = gallery.querySelector("[data-gallery-inline-prev]");
+    const inlineNext = gallery.querySelector("[data-gallery-inline-next]");
+    const productName = document.querySelector("#product-title")?.textContent?.trim() || "商品";
+
+    if (!dataElement || !mainImage || !inlineThumbs) {
+      return;
+    }
+
+    let images = [];
+    try {
+      images = JSON.parse(dataElement.textContent || "[]");
+    } catch {
+      images = [];
+    }
+
+    if (!images.length) {
+      return;
+    }
+
+    let currentIndex = 0;
+    const modal = document.createElement("div");
+    modal.className = "product-lightbox";
+    modal.hidden = true;
+    modal.tabIndex = -1;
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-label", "商品画像ギャラリー");
+    modal.innerHTML = `
+      <div class="product-lightbox-stage" data-gallery-stage>
+        <div class="product-lightbox-image-wrap">
+          <button class="product-lightbox-close" type="button" data-gallery-close aria-label="閉じる">×</button>
+          <button class="product-lightbox-nav" type="button" data-gallery-prev aria-label="前の画像">‹</button>
+          <img class="product-lightbox-image" data-gallery-modal-image alt="">
+          <button class="product-lightbox-nav" type="button" data-gallery-next aria-label="次の画像">›</button>
+        </div>
+      </div>
+      <aside class="product-lightbox-side">
+        <p class="product-lightbox-title">${productName}</p>
+        <p class="product-lightbox-count" data-gallery-count></p>
+        <div class="product-lightbox-thumbs" data-gallery-modal-thumbs></div>
+      </aside>
+    `;
+    document.body.append(modal);
+
+    const modalImage = modal.querySelector("[data-gallery-modal-image]");
+    const modalCount = modal.querySelector("[data-gallery-count]");
+    const modalThumbs = modal.querySelector("[data-gallery-modal-thumbs]");
+    const stage = modal.querySelector("[data-gallery-stage]");
+    const thumbButtons = [];
+    const modalThumbButtons = [];
+    let suppressThumbClick = false;
+    mainImage.draggable = false;
+
+    const imageSrcset = (image) => {
+      const width = image.width || 1200;
+      return image.thumb ? `${image.thumb} 420w, ${image.src} ${width}w` : "";
+    };
+
+    const scrollActiveThumb = (behavior = "smooth") => {
+      const activeThumb = thumbButtons.find((button) => Number(button.dataset.galleryIndex) === currentIndex);
+      activeThumb?.scrollIntoView({ behavior, block: "nearest", inline: "center" });
+    };
+
+    let hasMainImageSynced = false;
+    let mainImageLoadSequence = 0;
+    const mainImageCache = new Map();
+    let inlineScrollSelectionMuted = false;
+    let inlineScrollSelectionTimer = null;
+    let inlineScrollSelectionFrame = null;
+
+    const preloadMainImage = (image) => {
+      if (!image?.src) {
+        return Promise.resolve(false);
+      }
+
+      if (mainImage.getAttribute("src") === image.src && mainImage.complete) {
+        return Promise.resolve(true);
+      }
+
+      const cachedImage = mainImageCache.get(image.src);
+      if (cachedImage) {
+        return cachedImage;
+      }
+
+      const loader = new Image();
+      loader.decoding = "async";
+      loader.src = image.src;
+
+      const loadPromise = (loader.decode
+        ? loader.decode()
+        : new Promise((resolve, reject) => {
+          loader.addEventListener("load", resolve, { once: true });
+          loader.addEventListener("error", reject, { once: true });
+        }))
+        .then(() => true)
+        .catch(() => false);
+
+      mainImageCache.set(image.src, loadPromise);
+      return loadPromise;
+    };
+
+    const updateMainImageWhenReady = (image) => {
+      if (!image?.src) {
+        return;
+      }
+
+      const loadSequence = ++mainImageLoadSequence;
+
+      preloadMainImage(image).then((isReady) => {
+        if (!isReady || loadSequence !== mainImageLoadSequence) {
+          return;
+        }
+
+        mainImage.src = image.src;
+        mainImage.srcset = imageSrcset(image);
+        mainImage.alt = image.alt || productName;
+        hasMainImageSynced = true;
+      });
+    };
+
+    const muteInlineScrollSelection = () => {
+      inlineScrollSelectionMuted = true;
+      window.clearTimeout(inlineScrollSelectionTimer);
+      inlineScrollSelectionTimer = window.setTimeout(() => {
+        inlineScrollSelectionMuted = false;
+      }, 360);
+    };
+
+    const getLeadingInlineThumbIndex = () => {
+      if (!thumbButtons.length) {
+        return null;
+      }
+
+      const sliderRect = inlineThumbs.getBoundingClientRect();
+      let leadingThumb = null;
+      let leadingDistance = Number.POSITIVE_INFINITY;
+
+      thumbButtons.forEach((button) => {
+        const rect = button.getBoundingClientRect();
+        const isVisible = rect.right > sliderRect.left + 1 && rect.left < sliderRect.right - 1;
+        if (!isVisible) {
+          return;
+        }
+
+        const distance = Math.abs(rect.left - sliderRect.left);
+        if (distance < leadingDistance) {
+          leadingDistance = distance;
+          leadingThumb = button;
+        }
+      });
+
+      return leadingThumb ? Number(leadingThumb.dataset.galleryIndex) : null;
+    };
+
+    const syncMainImageToLeadingInlineThumb = () => {
+      if (inlineScrollSelectionMuted || inlineScrollSelectionFrame !== null) {
+        return;
+      }
+
+      inlineScrollSelectionFrame = window.requestAnimationFrame(() => {
+        inlineScrollSelectionFrame = null;
+
+        if (inlineScrollSelectionMuted) {
+          return;
+        }
+
+        const index = getLeadingInlineThumbIndex();
+        if (!Number.isFinite(index) || (index === currentIndex && hasMainImageSynced)) {
+          return;
+        }
+
+        setImage(index, true, false);
+      });
+    };
+
+    const setImage = (index, updateMain = true, syncInlineThumb = true) => {
+      currentIndex = (index + images.length) % images.length;
+      const image = images[currentIndex];
+      if (updateMain) {
+        updateMainImageWhenReady(image);
+      }
+      if (modalImage) {
+        modalImage.src = image.src;
+        modalImage.alt = image.alt || productName;
+      }
+      if (modalCount) {
+        modalCount.textContent = `${currentIndex + 1} / ${images.length}`;
+      }
+      [...thumbButtons, ...modalThumbButtons].forEach((button) => {
+        const isActive = Number(button.dataset.galleryIndex) === currentIndex;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+      if (syncInlineThumb) {
+        muteInlineScrollSelection();
+        scrollActiveThumb();
+      }
+      preloadMainImage(images[(currentIndex + 1) % images.length]);
+      preloadMainImage(images[(currentIndex - 1 + images.length) % images.length]);
+    };
+
+    const createThumb = (image, index, className) => {
+      const button = document.createElement("button");
+      const img = document.createElement("img");
+      button.className = className;
+      button.type = "button";
+      button.dataset.galleryIndex = String(index);
+      button.setAttribute("aria-label", `${productName} 商品画像 ${index + 1}枚目`);
+      img.src = image.thumb || image.src;
+      img.alt = image.alt || productName;
+      img.loading = index === 0 ? "eager" : "lazy";
+      img.decoding = "async";
+      button.append(img);
+      button.addEventListener("click", (event) => {
+        if (className === "product-thumbnail" && suppressThumbClick) {
+          event.preventDefault();
+          return;
+        }
+        setImage(index);
+      });
+      return button;
+    };
+
+    images.forEach((image, index) => {
+      const inlineButton = createThumb(image, index, "product-thumbnail");
+      const modalButton = createThumb(image, index, "product-lightbox-thumb");
+      inlineButton.dataset.galleryThumb = "";
+      modalButton.dataset.galleryModalThumb = "";
+      inlineThumbs.append(inlineButton);
+      modalThumbs?.append(modalButton);
+      thumbButtons.push(inlineButton);
+      modalThumbButtons.push(modalButton);
+    });
+
+    inlineThumbs.addEventListener(
+      "click",
+      (event) => {
+        if (!suppressThumbClick) {
+          return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+      },
+      true
+    );
+
+    let thumbPointerId = null;
+    let thumbStartX = 0;
+    let thumbStartY = 0;
+    let thumbStartScrollLeft = 0;
+    let thumbDragged = false;
+    let thumbPressTarget = null;
+    let thumbSuppressTimer = null;
+
+    const getInlineThumbIndex = (target) => {
+      const button = target?.closest?.("[data-gallery-thumb]");
+      if (!button || !inlineThumbs.contains(button)) {
+        return null;
+      }
+
+      return Number(button.dataset.galleryIndex);
+    };
+
+    const suppressNextThumbClick = () => {
+      suppressThumbClick = true;
+      window.clearTimeout(thumbSuppressTimer);
+      thumbSuppressTimer = window.setTimeout(() => {
+        suppressThumbClick = false;
+      }, 300);
+    };
+
+    const resetThumbDrag = (event) => {
+      inlineThumbs.classList.remove("is-dragging");
+      if (inlineThumbs.hasPointerCapture?.(event.pointerId)) {
+        inlineThumbs.releasePointerCapture(event.pointerId);
+      }
+
+      thumbPointerId = null;
+      thumbPressTarget = null;
+    };
+
+    inlineThumbs.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0 || event.isPrimary === false) {
+        return;
+      }
+      inlineScrollSelectionMuted = false;
+      window.clearTimeout(inlineScrollSelectionTimer);
+      thumbPointerId = event.pointerId;
+      thumbStartX = event.clientX;
+      thumbStartY = event.clientY;
+      thumbStartScrollLeft = inlineThumbs.scrollLeft;
+      thumbDragged = false;
+      thumbPressTarget = event.target.closest("[data-gallery-thumb]");
+      try {
+        inlineThumbs.setPointerCapture?.(event.pointerId);
+      } catch {
+        // Pointer capture can fail for interrupted synthetic events.
+      }
+      if (event.pointerType !== "touch") {
+        event.preventDefault();
+      }
+    });
+
+    inlineThumbs.addEventListener(
+      "pointermove",
+      (event) => {
+        if (thumbPointerId !== event.pointerId) {
+          return;
+        }
+        const movedX = event.clientX - thumbStartX;
+        const movedY = event.clientY - thumbStartY;
+
+        if (Math.abs(movedX) < 8 || Math.abs(movedX) < Math.abs(movedY) * 1.15) {
+          return;
+        }
+
+        thumbDragged = true;
+        inlineThumbs.classList.add("is-dragging");
+        inlineThumbs.scrollLeft = thumbStartScrollLeft - movedX;
+        syncMainImageToLeadingInlineThumb();
+        event.preventDefault();
+      },
+      { passive: false }
+    );
+
+    inlineThumbs.addEventListener("pointerup", (event) => {
+      if (thumbPointerId !== event.pointerId) {
+        return;
+      }
+
+      const pressedThumb = thumbPressTarget;
+      const shouldSelect = !thumbDragged && pressedThumb;
+      if (thumbDragged || shouldSelect) {
+        suppressNextThumbClick();
+      }
+
+      resetThumbDrag(event);
+
+      if (shouldSelect) {
+        const index = getInlineThumbIndex(pressedThumb);
+        if (Number.isFinite(index)) {
+          setImage(index);
+        }
+      }
+    });
+
+    inlineThumbs.addEventListener("pointercancel", resetThumbDrag);
+    inlineThumbs.addEventListener("lostpointercapture", () => {
+      inlineThumbs.classList.remove("is-dragging");
+      thumbPointerId = null;
+      thumbPressTarget = null;
+    });
+    inlineThumbs.addEventListener("scroll", syncMainImageToLeadingInlineThumb, { passive: true });
+
+    const shiftImage = (direction) => setImage(currentIndex + direction);
+    inlinePrev?.addEventListener("click", () => shiftImage(-1));
+    inlineNext?.addEventListener("click", () => shiftImage(1));
+    let suppressMainClick = false;
+    let mainSuppressTimer = null;
+    let mainPointerId = null;
+    let mainStartX = 0;
+    let mainStartY = 0;
+
+    const suppressNextMainClick = () => {
+      suppressMainClick = true;
+      window.clearTimeout(mainSuppressTimer);
+      mainSuppressTimer = window.setTimeout(() => {
+        suppressMainClick = false;
+      }, 300);
+    };
+
+    const resetMainDrag = (event) => {
+      mainButton?.classList.remove("is-dragging");
+      if (mainButton?.hasPointerCapture?.(event.pointerId)) {
+        mainButton.releasePointerCapture(event.pointerId);
+      }
+      mainPointerId = null;
+    };
+
+    const finishMainDrag = (event) => {
+      if (mainPointerId !== event.pointerId) {
+        return;
+      }
+
+      const movedX = event.clientX - mainStartX;
+      const movedY = event.clientY - mainStartY;
+      const isHorizontalSlide = Math.abs(movedX) >= 48 && Math.abs(movedX) > Math.abs(movedY) * 1.15;
+      resetMainDrag(event);
+
+      if (!isHorizontalSlide) {
+        return;
+      }
+
+      suppressNextMainClick();
+      shiftImage(movedX < 0 ? 1 : -1);
+    };
+
+    mainButton?.addEventListener("click", (event) => {
+      if (suppressMainClick) {
+        event.preventDefault();
+        suppressMainClick = false;
+        window.clearTimeout(mainSuppressTimer);
+        return;
+      }
+      modal.hidden = false;
+      document.body.classList.add("product-lightbox-open");
+      setImage(currentIndex, false, false);
+      modal.focus();
+    });
+
+    mainButton?.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0 || event.isPrimary === false) {
+        return;
+      }
+
+      mainPointerId = event.pointerId;
+      mainStartX = event.clientX;
+      mainStartY = event.clientY;
+      try {
+        mainButton.setPointerCapture?.(event.pointerId);
+      } catch {
+        // Pointer capture can fail for interrupted synthetic events.
+      }
+    });
+
+    mainButton?.addEventListener(
+      "pointermove",
+      (event) => {
+        if (mainPointerId !== event.pointerId) {
+          return;
+        }
+
+        const movedX = event.clientX - mainStartX;
+        const movedY = event.clientY - mainStartY;
+        if (Math.abs(movedX) > 8 && Math.abs(movedX) > Math.abs(movedY) * 1.15) {
+          mainButton.classList.add("is-dragging");
+          event.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+    mainButton?.addEventListener("pointerup", finishMainDrag);
+    mainButton?.addEventListener("pointercancel", resetMainDrag);
+    mainButton?.addEventListener("lostpointercapture", () => {
+      mainButton.classList.remove("is-dragging");
+      mainPointerId = null;
+    });
+
+    const closeModal = () => {
+      modal.hidden = true;
+      document.body.classList.remove("product-lightbox-open");
+    };
+
+    modal.querySelector("[data-gallery-close]")?.addEventListener("click", closeModal);
+    modal.querySelector("[data-gallery-prev]")?.addEventListener("click", () => shiftImage(-1));
+    modal.querySelector("[data-gallery-next]")?.addEventListener("click", () => shiftImage(1));
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal || event.target === stage) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (modal.hidden) {
+        return;
+      }
+      if (event.key === "Escape") {
+        closeModal();
+      }
+      if (event.key === "ArrowLeft") {
+        shiftImage(-1);
+      }
+      if (event.key === "ArrowRight") {
+        shiftImage(1);
+      }
+    });
+
+    let stagePointerId = null;
+    let stageStartX = 0;
+    let stageStartY = 0;
+
+    const resetStageDrag = (event) => {
+      stage?.classList.remove("is-dragging");
+      if (stage?.hasPointerCapture?.(event.pointerId)) {
+        stage.releasePointerCapture(event.pointerId);
+      }
+      stagePointerId = null;
+    };
+
+    const finishStageDrag = (event) => {
+      if (stagePointerId !== event.pointerId) {
+        return;
+      }
+
+      const movedX = event.clientX - stageStartX;
+      const movedY = event.clientY - stageStartY;
+      resetStageDrag(event);
+
+      if (Math.abs(movedX) >= 48 && Math.abs(movedX) > Math.abs(movedY) * 1.15) {
+        shiftImage(movedX < 0 ? 1 : -1);
+      }
+    };
+
+    stage?.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0 || event.target.closest("button")) {
+        return;
+      }
+
+      stagePointerId = event.pointerId;
+      stageStartX = event.clientX;
+      stageStartY = event.clientY;
+      try {
+        stage.setPointerCapture?.(event.pointerId);
+      } catch {
+        // Pointer capture can fail for interrupted synthetic events.
+      }
+    });
+
+    stage?.addEventListener(
+      "pointermove",
+      (event) => {
+        if (stagePointerId !== event.pointerId) {
+          return;
+        }
+
+        if (Math.abs(event.clientX - stageStartX) > 8) {
+          stage.classList.add("is-dragging");
+          event.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+    stage?.addEventListener("pointerup", finishStageDrag);
+    stage?.addEventListener("pointercancel", resetStageDrag);
+    stage?.addEventListener("lostpointercapture", () => {
+      stage.classList.remove("is-dragging");
+      stagePointerId = null;
+    });
+
+    setImage(0, true, false);
+  });
+
   document.querySelectorAll("[data-booth-filter]").forEach((filterPanel) => {
     const section = filterPanel.closest("section") || document;
     const list = section.querySelector("[data-booth-list]");
     const cards = list ? [...list.querySelectorAll("[data-booth-tags]")] : [];
     const filterButtons = [...filterPanel.querySelectorAll("[data-booth-filter-button]")];
+    const subtagPanel = section.querySelector("[data-booth-subtag-filter]");
+    const subtagButtons = subtagPanel ? [...subtagPanel.querySelectorAll("[data-booth-subtag-button]")] : [];
+    const subtagToggle = subtagPanel ? subtagPanel.querySelector("[data-booth-subtag-toggle]") : null;
+    const subtagRowToggle = subtagPanel ? subtagPanel.querySelector("[data-booth-subtag-row-toggle]") : null;
+    const subtagPicker = subtagPanel ? subtagPanel.querySelector("[data-booth-subtag-picker]") : null;
     const sortButtons = [...section.querySelectorAll("[data-booth-sort-button]")];
     const pagination = section.querySelector("[data-booth-pagination]");
     const pageButtons = pagination ? [...pagination.querySelectorAll("[data-booth-page-button]")] : [];
@@ -649,7 +1307,13 @@
     const pageSize = Number.parseInt(filterPanel.dataset.pageSize || "12", 10);
     const suffix = filterPanel.dataset.countSuffix || "件";
     const originalIndex = new Map(cards.map((card, index) => [card, index]));
-    let activeTag = "all";
+    const query = new URLSearchParams(window.location.search);
+    const requestedTag = query.get("tag");
+    const requestedSubtag = query.get("subtag");
+    const hasTag = (tag) => tag === "all" || filterButtons.some((button) => button.dataset.boothFilterButton === tag);
+    const hasSubtag = (subtag) => subtag === "all" || subtagButtons.some((button) => button.dataset.boothSubtagButton === subtag);
+    let activeTag = requestedTag && hasTag(requestedTag) ? requestedTag : "all";
+    let activeSubtag = requestedSubtag && hasSubtag(requestedSubtag) ? requestedSubtag : "all";
     let activeSort = "default";
     let currentPage = 1;
 
@@ -662,15 +1326,94 @@
 
     const compareOriginalOrder = (a, b) => originalIndex.get(a) - originalIndex.get(b);
 
+    const getSubtagLabel = (subtag) => {
+      const button = subtagButtons.find((item) => item.dataset.boothSubtagButton === subtag);
+      return button?.textContent?.trim() || subtag;
+    };
+
+    const updateSubtagToggleLabel = () => {
+      if (!subtagToggle) {
+        return;
+      }
+
+      const defaultLabel = subtagToggle.dataset.defaultLabel || "すべて";
+      subtagToggle.textContent = activeSubtag === "all" ? defaultLabel : getSubtagLabel(activeSubtag);
+      subtagToggle.classList.toggle("is-selected", activeSubtag !== "all");
+    };
+
+    const setSubtagPickerOpen = (isOpen) => {
+      if (!subtagToggle || !subtagPicker) {
+        return;
+      }
+
+      subtagPicker.classList.toggle("is-open", isOpen);
+      subtagToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    };
+
+    const setSubtagRowsExpanded = (isExpanded) => {
+      if (!subtagRowToggle || !subtagPicker) {
+        return;
+      }
+
+      subtagPicker.classList.toggle("is-expanded", isExpanded);
+      subtagRowToggle.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+      subtagRowToggle.textContent = isExpanded
+        ? (subtagRowToggle.dataset.closeLabel || "閉じる ▲")
+        : (subtagRowToggle.dataset.openLabel || "もっと見る ▼");
+      subtagRowToggle.setAttribute(
+        "aria-label",
+        isExpanded
+          ? (subtagRowToggle.dataset.closeAriaLabel || subtagRowToggle.textContent)
+          : (subtagRowToggle.dataset.openAriaLabel || subtagRowToggle.textContent),
+      );
+    };
+
     const getVisibleCards = () => {
       const filtered = cards.filter((card) => {
         const tags = (card.dataset.boothTags || "").split(/\s+/);
-        return activeTag === "all" || tags.includes(activeTag);
+        const subtags = (card.dataset.boothSubtags || "").split(/\s+/).filter(Boolean);
+        const isMatchingTag = activeTag === "all" || tags.includes(activeTag);
+        const isMatchingSubtag = activeSubtag === "all" || subtags.includes(activeSubtag);
+        return isMatchingTag && isMatchingSubtag;
       });
       if (activeSort === "popular") {
         return filtered.sort((a, b) => getLikeCount(b) - getLikeCount(a) || compareOriginalOrder(a, b));
       }
       return filtered.sort(compareOriginalOrder);
+    };
+
+    const syncFilterButtons = () => {
+      filterButtons.forEach((item) => {
+        const isActive = item.dataset.boothFilterButton === activeTag;
+        item.classList.toggle("is-active", isActive);
+        item.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+      subtagButtons.forEach((item) => {
+        const isActive = item.dataset.boothSubtagButton === activeSubtag;
+        item.classList.toggle("is-active", isActive);
+        item.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+      sortButtons.forEach((item) => {
+        const isActive = item.dataset.boothSortButton === activeSort;
+        item.classList.toggle("is-active", isActive);
+        item.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+      updateSubtagToggleLabel();
+    };
+
+    const syncFilterUrl = () => {
+      const url = new URL(window.location.href);
+      if (activeTag === "all") {
+        url.searchParams.delete("tag");
+      } else {
+        url.searchParams.set("tag", activeTag);
+      }
+      if (activeSubtag === "all") {
+        url.searchParams.delete("subtag");
+      } else {
+        url.searchParams.set("subtag", activeSubtag);
+      }
+      window.history.replaceState(null, "", url.href);
     };
 
     const render = () => {
@@ -684,6 +1427,7 @@
       cards.forEach((card) => {
         card.classList.toggle("is-filter-hidden", !pageCards.has(card));
       });
+      syncFilterButtons();
 
       if (status) {
         status.textContent = currentLanguage === "en" ? `${visibleCards.length} items` : `${visibleCards.length}${suffix}`;
@@ -696,7 +1440,7 @@
         button.disabled = isPrev ? currentPage <= 1 : currentPage >= totalPages;
       });
       if (pagination) {
-        pagination.hidden = visibleCards.length <= pageSize;
+        pagination.hidden = false;
       }
     };
 
@@ -704,14 +1448,35 @@
       button.addEventListener("click", () => {
         activeTag = button.dataset.boothFilterButton || "all";
         currentPage = 1;
-        filterButtons.forEach((item) => {
-          const isActive = item === button;
-          item.classList.toggle("is-active", isActive);
-          item.setAttribute("aria-pressed", isActive ? "true" : "false");
-        });
+        syncFilterUrl();
         render();
       });
     });
+
+    subtagButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeSubtag = button.dataset.boothSubtagButton || "all";
+        currentPage = 1;
+        syncFilterUrl();
+        render();
+        setSubtagPickerOpen(false);
+      });
+    });
+
+    if (subtagToggle) {
+      subtagToggle.addEventListener("click", () => {
+        const isOpen = subtagToggle.getAttribute("aria-expanded") === "true";
+        setSubtagPickerOpen(!isOpen);
+      });
+    }
+
+    if (subtagRowToggle) {
+      setSubtagRowsExpanded(false);
+      subtagRowToggle.addEventListener("click", () => {
+        const isExpanded = subtagRowToggle.getAttribute("aria-expanded") === "true";
+        setSubtagRowsExpanded(!isExpanded);
+      });
+    }
 
     sortButtons.forEach((button) => {
       button.addEventListener("click", () => {
@@ -767,8 +1532,8 @@
     const render = () => {
       const visibleCards = getFilteredCards();
       const visibleSet = new Set(visibleCards);
-      const totalPages = Math.ceil(visibleCards.length / pageSize);
-      if (!totalPages) {
+      const totalPages = Math.max(1, Math.ceil(visibleCards.length / pageSize));
+      if (!visibleCards.length) {
         cards.forEach((card) => {
           card.hidden = true;
         });
@@ -780,10 +1545,16 @@
           filterStatus.textContent = currentLanguage === "en" ? "0 items" : "0件";
         }
         if (status) {
-          status.textContent = "0 / 0";
+          status.textContent = "1 / 1";
+        }
+        if (previousButton) {
+          previousButton.disabled = true;
+        }
+        if (nextButton) {
+          nextButton.disabled = true;
         }
         if (controls) {
-          controls.hidden = true;
+          controls.hidden = false;
         }
         return;
       }
@@ -813,7 +1584,7 @@
         nextButton.disabled = currentPage >= totalPages;
       }
       if (controls) {
-        controls.hidden = totalPages <= 1;
+        controls.hidden = false;
       }
     };
 

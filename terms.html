@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
-    <title>利用規約 | macanon</title>
-    <meta name="description" content="macanonサイトの利用規約と、BOOTH商品ページの規約確認に関する案内です。">
+    <title>利用規約・ライセンス | macanon</title>
+    <meta name="description" content="macanonサイトの利用規約とBOOTH商品向けライセンスを確認できます。日本語版、英語版、韓国語版、中国語版のライセンス画像をタブで掲載しています。">
     <meta name="author" content="macanon">
     <meta name="robots" content="index,follow">
     <meta name="theme-color" content="#dff9ff">
+    <meta name="application-name" content="macanon">
+    <meta name="apple-mobile-web-app-title" content="macanon">
+    <link rel="icon" href="favicon.ico?v=20260516" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=20260516">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=20260516">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=20260516">
+    <link rel="manifest" href="site.webmanifest?v=20260516">
     <link rel="canonical" href="https://neku096.github.io/MacanonLab/terms.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="macanon">
     <meta property="og:url" content="https://neku096.github.io/MacanonLab/terms.html">
-    <meta property="og:title" content="利用規約 | macanon">
-    <meta property="og:description" content="macanonサイトの利用規約と、BOOTH商品ページの規約確認に関する案内です。">
+    <meta property="og:title" content="利用規約・ライセンス | macanon">
+    <meta property="og:description" content="macanonサイトの利用規約とBOOTH商品向けライセンスを確認できます。日本語版、英語版、韓国語版、中国語版のライセンス画像をタブで掲載しています。">
     <meta property="og:image" content="https://neku096.github.io/MacanonLab/Macanon_Samune/ogp-v2.png">
     <meta property="og:image:secure_url" content="https://neku096.github.io/MacanonLab/Macanon_Samune/ogp-v2.png">
     <meta property="og:image:width" content="1200">
@@ -23,8 +30,8 @@
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:alt" content="macanon">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="利用規約 | macanon">
-    <meta name="twitter:description" content="macanonサイトの利用規約と、BOOTH商品ページの規約確認に関する案内です。">
+    <meta name="twitter:title" content="利用規約・ライセンス | macanon">
+    <meta name="twitter:description" content="macanonサイトの利用規約とBOOTH商品向けライセンスを確認できます。日本語版、英語版、韓国語版、中国語版のライセンス画像をタブで掲載しています。">
     <meta name="twitter:image" content="https://neku096.github.io/MacanonLab/Macanon_Samune/ogp-v2.png">
     <meta name="twitter:image:alt" content="macanon">
     <link rel="stylesheet" href="styles.css">
@@ -57,19 +64,88 @@
 
     <main class="text-page">
       <section class="section text-section" aria-labelledby="terms-title">
-        <p class="eyebrow">Terms</p>
-        <h1 id="terms-title">利用規約</h1>
-        <div class="article-summary-list">
-          <p>各商品の利用条件、禁止事項、更新履歴、導入条件は、BOOTHの商品ページおよび商品に同梱された規約を優先します。</p>
-          <p>画像、文章、商品データの無断転載、再配布、販売、AI学習への利用は行わないでください。</p>
-          <p>案件のご相談や商品に関するお問い合わせは、BOOTHまたはXの案内からご連絡ください。</p>
-          <h2>アクセス解析について</h2>
-          <p>当サイトでは、サイト改善や閲覧状況の把握のため、アクセス解析ツールを利用する場合があります。</p>
-          <p>アクセス解析により、閲覧ページ、利用環境、アクセス日時などの情報が収集される場合があります。収集される情報は、個人を特定する目的では使用しません。</p>
-          <p>Google Analytics等の解析ツールを利用する場合、収集された情報は各提供元のプライバシーポリシーに基づいて管理されます。</p>
+        <h1 id="terms-title">利用規約・ライセンス</h1>
+        <div class="terms-tabs">
+          <input class="terms-tab-input" type="radio" name="terms-view" id="terms-site" checked>
+          <input class="terms-tab-input" type="radio" name="terms-view" id="terms-booth">
+          <div class="terms-tab-list" role="tablist" aria-label="利用規約の分類">
+            <label class="terms-tab-button" for="terms-site" role="tab" id="terms-site-tab">サイトの規約</label>
+            <label class="terms-tab-button" for="terms-booth" role="tab" id="terms-booth-tab">BOOTHの規約</label>
+          </div>
+          <div class="terms-tab-panels">
+            <section class="terms-tab-panel terms-tab-panel-site" role="tabpanel" aria-labelledby="terms-site-tab">
+              <div class="article-summary-list">
+                <p>各商品の利用条件、禁止事項、更新履歴、導入条件は、BOOTHの商品ページおよび商品に同梱された規約を優先します。</p>
+                <p>画像、文章、商品データの無断転載、再配布、販売、AI学習への利用は行わないでください。</p>
+                <p>案件のご相談や商品に関するお問い合わせは、BOOTHまたはXの案内からご連絡ください。</p>
+                <h2>アクセス解析について</h2>
+                <p>当サイトでは、サイト改善や閲覧状況の把握のため、アクセス解析ツールを利用する場合があります。</p>
+                <p>アクセス解析により、閲覧ページ、利用環境、アクセス日時などの情報が収集される場合があります。収集される情報は、個人を特定する目的では使用しません。</p>
+                <p>Google Analytics等の解析ツールを利用する場合、収集された情報は各提供元のプライバシーポリシーに基づいて管理されます。</p>
+              </div>
+            </section>
+            <section class="terms-tab-panel terms-tab-panel-booth" role="tabpanel" aria-labelledby="terms-booth-tab">
+              <input class="terms-license-input" type="radio" name="license-language" id="license-ja" checked>
+              <input class="terms-license-input" type="radio" name="license-language" id="license-en">
+              <input class="terms-license-input" type="radio" name="license-language" id="license-ko">
+              <input class="terms-license-input" type="radio" name="license-language" id="license-zh">
+              <div class="terms-license-switch" role="tablist" aria-label="BOOTH規約の言語">
+                <label class="terms-license-button" for="license-ja" role="tab" id="license-ja-tab">JA</label>
+                <label class="terms-license-button" for="license-en" role="tab" id="license-en-tab">EN</label>
+                <label class="terms-license-button" for="license-ko" role="tab" id="license-ko-tab">KO</label>
+                <label class="terms-license-button" for="license-zh" role="tab" id="license-zh-tab">ZH</label>
+              </div>
+              <div class="terms-license-panels">
+                <section class="terms-license-panel terms-license-panel-ja" role="tabpanel" aria-labelledby="license-ja-tab">
+                  <div class="terms-license-pages" aria-label="日本語BOOTH規約PDF">
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-01.webp" alt="macanon利用規約 日本語 1ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-02.webp" alt="macanon利用規約 日本語 2ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-03.webp" alt="macanon利用規約 日本語 3ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-04.webp" alt="macanon利用規約 日本語 4ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-05.webp" alt="macanon利用規約 日本語 5ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-06.webp" alt="macanon利用規約 日本語 6ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-07.webp" alt="macanon利用規約 日本語 7ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-08.webp" alt="macanon利用規約 日本語 8ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-09.webp" alt="macanon利用規約 日本語 9ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-10.webp" alt="macanon利用規約 日本語 10ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                  </div>
+                </section>
+                <section class="terms-license-panel terms-license-panel-en" role="tabpanel" aria-labelledby="license-en-tab">
+                  <div class="terms-license-pages" aria-label="英語BOOTH規約PDF">
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-01.webp" alt="macanon license terms English page 1" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-02.webp" alt="macanon license terms English page 2" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-03.webp" alt="macanon license terms English page 3" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-04.webp" alt="macanon license terms English page 4" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-05.webp" alt="macanon license terms English page 5" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-06.webp" alt="macanon license terms English page 6" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-07.webp" alt="macanon license terms English page 7" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-08.webp" alt="macanon license terms English page 8" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-09.webp" alt="macanon license terms English page 9" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-10.webp" alt="macanon license terms English page 10" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-en-11.webp" alt="macanon license terms English page 11" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                  </div>
+                </section>
+                <section class="terms-license-panel terms-license-panel-ko" role="tabpanel" aria-labelledby="license-ko-tab">
+                  <div class="terms-license-pages" aria-label="韓国語BOOTH規約PDF">
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ko-01.webp" alt="macanon 이용약관 한국어 1페이지" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-ko-02.webp" alt="macanon 이용약관 한국어 2페이지" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                  </div>
+                </section>
+                <section class="terms-license-panel terms-license-panel-zh" role="tabpanel" aria-labelledby="license-zh-tab">
+                  <div class="terms-license-pages" aria-label="中国語BOOTH規約PDF">
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-zh-01.webp" alt="macanon 使用条款 中文 1页" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-zh-02.webp" alt="macanon 使用条款 中文 2页" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-zh-03.webp" alt="macanon 使用条款 中文 3页" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                    <figure class="terms-license-page"><img src="images/terms/macanon-license-zh-04.webp" alt="macanon 使用条款 中文 4页" width="1192" height="1684" loading="lazy" decoding="async"></figure>
+                  </div>
+                </section>
+              </div>
+            </section>
+          </div>
         </div>
-        <div class="text-actions">
-          <a class="button primary" href="https://macanon.booth.pm/" target="_blank" rel="noopener noreferrer">BOOTHで規約を確認</a>
+        <div class="article-summary-list terms-disclaimer">
+          <h2>免責</h2>
+          <p>当商品によって発生した損害、トラブル、各プラットフォームでの制限について、macanonは責任を負いません。必要に応じて規約内容を変更する場合があります。</p>
         </div>
       </section>
     </main>

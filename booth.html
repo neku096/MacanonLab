@@ -10,6 +10,13 @@
     <meta name="author" content="macanon">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#dff9ff">
+    <meta name="application-name" content="macanon">
+    <meta name="apple-mobile-web-app-title" content="macanon">
+    <link rel="icon" href="favicon.ico?v=20260516" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=20260516">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=20260516">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=20260516">
+    <link rel="manifest" href="site.webmanifest?v=20260516">
     <link rel="canonical" href="https://neku096.github.io/MacanonLab/booth.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="macanon">
@@ -59,15 +66,16 @@
       <section class="section booth-list-section" aria-label="BOOTH作品一覧">
         <div class="section-heading booth-list-heading">
           <div>
-            <p class="eyebrow">BOOTH Products</p>
             <h1>BOOTH作品一覧</h1>
+            <p class="booth-list-lead">商品をサムネイルから確認できます。</p>
           </div>
         </div>
         <div class="booth-sort-tabs" role="group" aria-label="BOOTH作品表示順">
-          <button class="booth-sort-button is-active" type="button" data-booth-sort-button="default" aria-pressed="true">掲載順</button>
+          <button class="booth-sort-button is-active" type="button" data-booth-sort-button="default" aria-pressed="true">通常順</button>
           <button class="booth-sort-button" type="button" data-booth-sort-button="popular" aria-pressed="false">人気順</button>
         </div>
         <div class="booth-filter-panel" data-booth-filter data-count-suffix="件" data-page-size="12">
+          <p class="booth-filter-heading">通常タグ</p>
           <div class="booth-filter-tabs" role="group" aria-label="BOOTH作品タグ絞り込み">
             <button class="booth-filter-button is-active" type="button" data-booth-filter-button="all" aria-pressed="true">すべて</button>
             <button class="booth-filter-button" type="button" data-booth-filter-button="clothing" aria-pressed="false">衣装</button>
@@ -78,19 +86,48 @@
           </div>
           <span class="booth-filter-status" data-booth-filter-status aria-live="polite"></span>
         </div>
+        <div class="booth-subtag-panel" id="booth-subtags" data-booth-subtag-filter>
+          <p class="booth-subtag-heading">サブタグ</p>
+          <div class="booth-subtag-mobile-controls">
+            <span class="booth-subtag-mobile-label">サブタグ</span>
+            <button class="booth-subtag-picker-toggle" type="button" data-booth-subtag-toggle data-default-label="すべて" aria-expanded="false" aria-controls="booth-subtag-options">すべて</button>
+          </div>
+          <div class="booth-subtag-picker" id="booth-subtag-options" data-booth-subtag-picker>
+          <div class="booth-subtag-tabs" role="group" aria-label="BOOTH作品サブタグ絞り込み">
+            <button class="booth-subtag-button is-active" type="button" data-booth-subtag-button="all" aria-pressed="true">すべて</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="summon-gimmick" aria-pressed="false">召喚ギミック</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-lumina" aria-pressed="false">LUMINA</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-shinano" aria-pressed="false">しなの</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-milltina" aria-pressed="false">ミルティナ</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-kipfel" aria-pressed="false">キプフェル</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-manuka" aria-pressed="false">マヌカ</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-selestia" aria-pressed="false">セレスティア</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-shinra" aria-pressed="false">森羅</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-chocolat" aria-pressed="false">ショコラ</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-milfy" aria-pressed="false">ミルフィ</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-rurune" aria-pressed="false">ルルネ</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-sio" aria-pressed="false">しお</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="character-shiratsume" aria-pressed="false">しらつめ</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="chair-gimmick" aria-pressed="false">椅子ギミック</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="halo" aria-pressed="false">ヘイロー</button>
+            <button class="booth-subtag-button" type="button" data-booth-subtag-button="mask" aria-pressed="false">マスク</button>
+          </div>
+          </div>
+          <button class="booth-subtag-row-toggle" type="button" data-booth-subtag-row-toggle data-open-label="もっと見る ▼" data-close-label="閉じる ▲" data-open-aria-label="サブタグをもっと見る" data-close-aria-label="サブタグを閉じる" aria-expanded="false" aria-controls="booth-subtag-options" aria-label="サブタグをもっと見る">もっと見る ▼</button>
+        </div>
         <div class="booth-list-grid" data-booth-list>
-          <a class="booth-list-thumb" data-booth-tags="clothing" data-likes="186" href="https://macanon.booth.pm/items/7439310" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/LUMINA_CravingDance-600.webp" alt="〖ルミナ対応〗CravingDance" srcset="Macanon_Samune/LUMINA_CravingDance-400.webp 400w, Macanon_Samune/LUMINA_CravingDance-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" decoding="async" fetchpriority="high"></a>
-          <a class="booth-list-thumb" data-booth-tags="gimmick" data-likes="1321" href="https://macanon.booth.pm/items/7002971" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/1-600.webp" alt="〖召喚ギミック〗鮫召喚 Shark summon" srcset="Macanon_Samune/1-400.webp 400w, Macanon_Samune/1-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="gimmick" data-likes="365" href="https://macanon.booth.pm/items/6322284" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/whale-summon-600.webp" alt="鯨召喚 Whale summon" srcset="Macanon_Samune/whale-summon-400.webp 400w, Macanon_Samune/whale-summon-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="gimmick" data-likes="96" href="https://macanon.booth.pm/items/6768358" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/1_C-600.webp" alt="カピバラ召喚 Capybara summon" srcset="Macanon_Samune/1_C-400.webp 400w, Macanon_Samune/1_C-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="clothing" data-likes="771" href="https://macanon.booth.pm/items/6599351" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/1_M-600.webp" alt="ミリロリ制服 MiriLori Uniform" srcset="Macanon_Samune/1_M-400.webp 400w, Macanon_Samune/1_M-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="clothing" data-likes="193" href="https://macanon.booth.pm/items/7213010" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/1_S-600.webp" alt="スターガーディアン Star Guardian" srcset="Macanon_Samune/1_S-400.webp 400w, Macanon_Samune/1_S-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="accessory" data-likes="88" href="https://macanon.booth.pm/items/6867754" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/1_G-600.webp" alt="ギャルヘイロー GalHalo" srcset="Macanon_Samune/1_G-400.webp 400w, Macanon_Samune/1_G-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="avatar" data-likes="168" href="https://macanon.booth.pm/items/6421899" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/mini1-600.webp" alt="無料 ミニ クジラ" srcset="Macanon_Samune/mini1-400.webp 400w, Macanon_Samune/mini1-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="clothing" data-likes="613" href="https://macanon.booth.pm/items/6491880" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/1_D-600.webp" alt="Dark Knight 対応衣装" srcset="Macanon_Samune/1_D-400.webp 400w, Macanon_Samune/1_D-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="world-gimmick" data-likes="370" href="https://macanon.booth.pm/items/6981059" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/restraint-system-600.webp" alt="Restraint System" srcset="Macanon_Samune/restraint-system-400.webp 400w, Macanon_Samune/restraint-system-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="accessory" data-likes="406" href="https://macanon.booth.pm/items/6952703" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/CatMask-600.webp" alt="にゃんこお面 CatMask" srcset="Macanon_Samune/CatMask-400.webp 400w, Macanon_Samune/CatMask-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="338" loading="lazy" decoding="async"></a>
-          <a class="booth-list-thumb" data-booth-tags="gimmick" data-likes="50" href="https://macanon.booth.pm/items/6518994" target="_blank" rel="noopener noreferrer"><img src="Macanon_Samune/1_Mini-600.webp" alt="MonsterChair" srcset="Macanon_Samune/1_Mini-400.webp 400w, Macanon_Samune/1_Mini-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="clothing" data-booth-subtags="character-lumina" data-likes="186" href="product-cravingdance.html"><img src="Macanon_Samune/LUMINA_CravingDance-600.webp" alt="〖ルミナ対応〗CravingDance" srcset="Macanon_Samune/LUMINA_CravingDance-400.webp 400w, Macanon_Samune/LUMINA_CravingDance-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" decoding="async" fetchpriority="high"></a>
+          <a class="booth-list-thumb" data-booth-tags="gimmick" data-booth-subtags="summon-gimmick" data-likes="1321" href="product-shark-summon.html"><img src="Macanon_Samune/1-600.webp" alt="〖召喚ギミック〗鮫召喚 Shark summon" srcset="Macanon_Samune/1-400.webp 400w, Macanon_Samune/1-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="gimmick" data-booth-subtags="summon-gimmick" data-likes="365" href="product-whale-summon.html"><img src="Macanon_Samune/whale-summon-600.webp" alt="鯨召喚 Whale summon" srcset="Macanon_Samune/whale-summon-400.webp 400w, Macanon_Samune/whale-summon-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="gimmick" data-booth-subtags="summon-gimmick" data-likes="96" href="product-capybara-summon.html"><img src="Macanon_Samune/1_C-600.webp" alt="カピバラ召喚 Capybara summon" srcset="Macanon_Samune/1_C-400.webp 400w, Macanon_Samune/1_C-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="clothing" data-booth-subtags="character-shinano character-milltina character-kipfel character-manuka character-selestia character-shinra" data-likes="771" href="product-mirilori-uniform.html"><img src="Macanon_Samune/1_M-600.webp" alt="ミリロリ制服 MiriLori Uniform" srcset="Macanon_Samune/1_M-400.webp 400w, Macanon_Samune/1_M-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="clothing" data-booth-subtags="character-kipfel" data-likes="193" href="product-star-guardian.html"><img src="Macanon_Samune/1_S-600.webp" alt="スターガーディアン Star Guardian" srcset="Macanon_Samune/1_S-400.webp 400w, Macanon_Samune/1_S-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="accessory" data-booth-subtags="halo" data-likes="88" href="product-galhalo.html"><img src="Macanon_Samune/1_G-600.webp" alt="ギャルヘイロー GalHalo" srcset="Macanon_Samune/1_G-400.webp 400w, Macanon_Samune/1_G-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="avatar" data-booth-subtags="" data-likes="168" href="product-mini-whale.html"><img src="Macanon_Samune/mini1-600.webp" alt="無料 ミニ クジラ" srcset="Macanon_Samune/mini1-400.webp 400w, Macanon_Samune/mini1-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="clothing" data-booth-subtags="character-chocolat character-kipfel character-manuka character-milltina character-milfy character-rurune character-selestia character-shinano character-shinra character-sio character-shiratsume" data-likes="613" href="product-dark-knight.html"><img src="Macanon_Samune/1_D-600.webp" alt="Dark Knight" srcset="Macanon_Samune/1_D-400.webp 400w, Macanon_Samune/1_D-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="world-gimmick" data-booth-subtags="" data-likes="370" href="product-restraint-system.html"><img src="Macanon_Samune/restraint-system-600.webp" alt="Restraint System" srcset="Macanon_Samune/restraint-system-400.webp 400w, Macanon_Samune/restraint-system-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="accessory" data-booth-subtags="mask" data-likes="406" href="product-catmask.html"><img src="Macanon_Samune/CatMask-600.webp" alt="にゃんこお面 CatMask" srcset="Macanon_Samune/CatMask-400.webp 400w, Macanon_Samune/CatMask-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="338" loading="lazy" decoding="async"></a>
+          <a class="booth-list-thumb" data-booth-tags="gimmick" data-booth-subtags="chair-gimmick" data-likes="50" href="product-monsterchair.html"><img src="Macanon_Samune/1_Mini-600.webp" alt="MonsterChair" srcset="Macanon_Samune/1_Mini-400.webp 400w, Macanon_Samune/1_Mini-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" loading="lazy" decoding="async"></a>
         </div>
         <nav class="booth-pagination" data-booth-pagination aria-label="BOOTH作品ページ切り替え">
           <button class="booth-page-button" type="button" data-booth-page-button="prev">前へ</button>
