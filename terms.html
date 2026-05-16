@@ -36,7 +36,7 @@
     <meta name="twitter:image:alt" content="macanon">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
+  <body class="terms-body">
     <header class="site-header">
       <a class="brand brand-text" href="index.html" aria-label="トップへ">
         <img class="brand-ocean-logo" src="Macanon_Samune/macanon_Logo_transparent.webp" alt="macanon" width="1370" height="408" decoding="async">
@@ -62,18 +62,18 @@
       </nav>
     </header>
 
-    <main class="text-page">
+    <main class="text-page terms-page">
       <section class="section text-section" aria-labelledby="terms-title">
         <h1 id="terms-title">利用規約・ライセンス</h1>
         <div class="terms-tabs">
           <input class="terms-tab-input" type="radio" name="terms-view" id="terms-site" checked>
           <input class="terms-tab-input" type="radio" name="terms-view" id="terms-booth">
           <div class="terms-tab-list" role="tablist" aria-label="利用規約の分類">
-            <label class="terms-tab-button" for="terms-site" role="tab" id="terms-site-tab">サイトの規約</label>
-            <label class="terms-tab-button" for="terms-booth" role="tab" id="terms-booth-tab">BOOTHの規約</label>
+            <label class="terms-tab-button" for="terms-site" role="tab" id="terms-site-tab" aria-controls="terms-site-panel" aria-selected="true" tabindex="0">サイトの規約</label>
+            <label class="terms-tab-button" for="terms-booth" role="tab" id="terms-booth-tab" aria-controls="terms-booth-panel" aria-selected="false" tabindex="-1">BOOTHの規約</label>
           </div>
           <div class="terms-tab-panels">
-            <section class="terms-tab-panel terms-tab-panel-site" role="tabpanel" aria-labelledby="terms-site-tab">
+            <section class="terms-tab-panel terms-tab-panel-site" role="tabpanel" id="terms-site-panel" aria-labelledby="terms-site-tab" tabindex="0">
               <div class="article-summary-list">
                 <p>各商品の利用条件、禁止事項、更新履歴、導入条件は、BOOTHの商品ページおよび商品に同梱された規約を優先します。</p>
                 <p>画像、文章、商品データの無断転載、再配布、販売、AI学習への利用は行わないでください。</p>
@@ -84,19 +84,19 @@
                 <p>Google Analytics等の解析ツールを利用する場合、収集された情報は各提供元のプライバシーポリシーに基づいて管理されます。</p>
               </div>
             </section>
-            <section class="terms-tab-panel terms-tab-panel-booth" role="tabpanel" aria-labelledby="terms-booth-tab">
+            <section class="terms-tab-panel terms-tab-panel-booth" role="tabpanel" id="terms-booth-panel" aria-labelledby="terms-booth-tab" tabindex="0">
               <input class="terms-license-input" type="radio" name="license-language" id="license-ja" checked>
               <input class="terms-license-input" type="radio" name="license-language" id="license-en">
               <input class="terms-license-input" type="radio" name="license-language" id="license-ko">
               <input class="terms-license-input" type="radio" name="license-language" id="license-zh">
               <div class="terms-license-switch" role="tablist" aria-label="BOOTH規約の言語">
-                <label class="terms-license-button" for="license-ja" role="tab" id="license-ja-tab">JA</label>
-                <label class="terms-license-button" for="license-en" role="tab" id="license-en-tab">EN</label>
-                <label class="terms-license-button" for="license-ko" role="tab" id="license-ko-tab">KO</label>
-                <label class="terms-license-button" for="license-zh" role="tab" id="license-zh-tab">ZH</label>
+                <label class="terms-license-button" for="license-ja" role="tab" id="license-ja-tab" aria-controls="license-ja-panel" aria-selected="true" tabindex="0">JA</label>
+                <label class="terms-license-button" for="license-en" role="tab" id="license-en-tab" aria-controls="license-en-panel" aria-selected="false" tabindex="-1">EN</label>
+                <label class="terms-license-button" for="license-ko" role="tab" id="license-ko-tab" aria-controls="license-ko-panel" aria-selected="false" tabindex="-1">KO</label>
+                <label class="terms-license-button" for="license-zh" role="tab" id="license-zh-tab" aria-controls="license-zh-panel" aria-selected="false" tabindex="-1">ZH</label>
               </div>
               <div class="terms-license-panels">
-                <section class="terms-license-panel terms-license-panel-ja" role="tabpanel" aria-labelledby="license-ja-tab">
+                <section class="terms-license-panel terms-license-panel-ja" role="tabpanel" id="license-ja-panel" aria-labelledby="license-ja-tab" tabindex="0">
                   <div class="terms-license-pages" aria-label="日本語BOOTH規約PDF">
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-01.webp" alt="macanon利用規約 日本語 1ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-02.webp" alt="macanon利用規約 日本語 2ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
@@ -110,7 +110,7 @@
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-ja-10.webp" alt="macanon利用規約 日本語 10ページ目" width="1192" height="1684" loading="lazy" decoding="async"></figure>
                   </div>
                 </section>
-                <section class="terms-license-panel terms-license-panel-en" role="tabpanel" aria-labelledby="license-en-tab">
+                <section class="terms-license-panel terms-license-panel-en" role="tabpanel" id="license-en-panel" aria-labelledby="license-en-tab" tabindex="0">
                   <div class="terms-license-pages" aria-label="英語BOOTH規約PDF">
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-en-01.webp" alt="macanon license terms English page 1" width="1192" height="1684" loading="lazy" decoding="async"></figure>
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-en-02.webp" alt="macanon license terms English page 2" width="1192" height="1684" loading="lazy" decoding="async"></figure>
@@ -125,13 +125,13 @@
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-en-11.webp" alt="macanon license terms English page 11" width="1192" height="1684" loading="lazy" decoding="async"></figure>
                   </div>
                 </section>
-                <section class="terms-license-panel terms-license-panel-ko" role="tabpanel" aria-labelledby="license-ko-tab">
+                <section class="terms-license-panel terms-license-panel-ko" role="tabpanel" id="license-ko-panel" aria-labelledby="license-ko-tab" tabindex="0">
                   <div class="terms-license-pages" aria-label="韓国語BOOTH規約PDF">
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-ko-01.webp" alt="macanon 이용약관 한국어 1페이지" width="1192" height="1684" loading="lazy" decoding="async"></figure>
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-ko-02.webp" alt="macanon 이용약관 한국어 2페이지" width="1192" height="1684" loading="lazy" decoding="async"></figure>
                   </div>
                 </section>
-                <section class="terms-license-panel terms-license-panel-zh" role="tabpanel" aria-labelledby="license-zh-tab">
+                <section class="terms-license-panel terms-license-panel-zh" role="tabpanel" id="license-zh-panel" aria-labelledby="license-zh-tab" tabindex="0">
                   <div class="terms-license-pages" aria-label="中国語BOOTH規約PDF">
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-zh-01.webp" alt="macanon 使用条款 中文 1页" width="1192" height="1684" loading="lazy" decoding="async"></figure>
                     <figure class="terms-license-page"><img src="images/terms/macanon-license-zh-02.webp" alt="macanon 使用条款 中文 2页" width="1192" height="1684" loading="lazy" decoding="async"></figure>

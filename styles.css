@@ -4696,6 +4696,12 @@ p {
   color: var(--accent-3);
 }
 
+.terms-tab-button:focus-visible,
+.terms-license-button:focus-visible {
+  outline: 3px solid rgba(0, 185, 225, 0.34);
+  outline-offset: 3px;
+}
+
 #terms-site:checked ~ .terms-tab-list label[for="terms-site"],
 #terms-booth:checked ~ .terms-tab-list label[for="terms-booth"],
 #license-ja:checked ~ .terms-license-switch label[for="license-ja"],
@@ -4742,13 +4748,117 @@ p {
 }
 
 .terms-disclaimer {
-  margin-top: clamp(24px, 4vw, 42px);
+  margin-top: clamp(24px, 4vw, 36px);
 }
 
 .terms-disclaimer h2 {
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.terms-page {
+  background: transparent;
+  padding-bottom: clamp(30px, 4vw, 54px);
+}
+
+.terms-body .site-header {
+  border-bottom-color: rgba(0, 185, 225, 0.08);
+  box-shadow: 0 18px 46px rgba(13, 123, 155, 0.06);
+}
+
+.terms-page .text-section {
+  width: min(calc(100% - 96px), 1060px);
+  max-width: 1060px;
+  margin: clamp(34px, 5vw, 64px) auto 0;
+  border: 1px solid rgba(0, 185, 225, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 18px 50px rgba(13, 123, 155, 0.1);
+  padding: clamp(24px, 5vw, 54px);
+  backdrop-filter: blur(18px);
+}
+
+.terms-page .article-summary-list {
+  gap: 14px;
+  padding-left: 0;
+  font-size: clamp(18px, 1.35vw, 19px);
+  line-height: 1.78;
+}
+
+.terms-page .article-summary-list p {
+  max-width: none;
   margin: 0;
-  color: var(--accent-3);
-  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: inherit;
+}
+
+.terms-page .text-section > h1 {
+  margin-bottom: 18px;
+  font-size: clamp(34px, 5vw, 58px);
+}
+
+.terms-page .terms-tabs {
+  margin-top: clamp(24px, 4vw, 36px);
+}
+
+.terms-page .terms-tab-list {
+  align-items: center;
+  border: 1px solid rgba(0, 185, 225, 0.22);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.58);
+  margin-bottom: clamp(22px, 4vw, 34px);
+  padding: 8px;
+}
+
+.terms-page .terms-tab-button,
+.terms-page .terms-license-button {
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.terms-page .article-summary-list h2 {
+  margin: clamp(28px, 4vw, 42px) 0 14px;
+  color: var(--text);
+  font-size: clamp(26px, 3.4vw, 36px);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.terms-page .terms-disclaimer h2 {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .terms-page .text-section {
+    width: calc(100% - 28px);
+    margin-block: 22px 0;
+    padding: 16px;
+  }
+
+  .terms-page .article-summary-list {
+    gap: 12px;
+    font-size: 16px;
+    line-height: 1.74;
+  }
+
+  .terms-page .text-section > h1 {
+    margin-bottom: 14px;
+    font-size: clamp(25px, 7.4vw, 33px);
+    line-height: 1.08;
+    white-space: nowrap;
+  }
+
+  .terms-page .article-summary-list h2 {
+    margin-top: 28px;
+    margin-bottom: 10px;
+    font-size: clamp(23px, 6.6vw, 30px);
+    line-height: 1.22;
+  }
+
+  .terms-page .terms-disclaimer h2 {
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 1180px) {

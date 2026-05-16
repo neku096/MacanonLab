@@ -4,5 +4,7 @@ node_modules/
 dist/
 build/
 snapshots/
+.playwright-mcp/
 archive/
 backups/
+codex-backups/

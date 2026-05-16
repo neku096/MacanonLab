@@ -1,5 +1,19 @@
 (() => {
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const safeLocalStorageGet = (key) => {
+    try {
+      return window.localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  };
+  const safeLocalStorageSet = (key, value) => {
+    try {
+      window.localStorage.setItem(key, value);
+    } catch {
+      // Storage can be unavailable in restricted browser modes.
+    }
+  };
   const translations = {
     "VRChat 3D衣装・ギミック制作": "VRChat 3D Outfit & Gimmick",
     "macanon | VRChat向け3D衣装・ギミック": "macanon | VRChat 3D Outfits & Gimmicks",
@@ -196,7 +210,7 @@
   const originalDocumentTitle = document.title;
   const originalAttributes = new WeakMap();
   const languageButtons = [...document.querySelectorAll("[data-language-option]")];
-  let currentLanguage = localStorage.getItem("macanon-language") === "en" ? "en" : "ja";
+  let currentLanguage = safeLocalStorageGet("macanon-language") === "en" ? "en" : "ja";
 
   const translateText = (text) => (currentLanguage === "en" ? translations[text] || text : text);
 
@@ -231,7 +245,7 @@
 
   const applyLanguage = (language) => {
     currentLanguage = language === "en" ? "en" : "ja";
-    localStorage.setItem("macanon-language", currentLanguage);
+    safeLocalStorageSet("macanon-language", currentLanguage);
     document.documentElement.lang = currentLanguage;
     translateAttributes();
     updateLocalizedImages();
@@ -283,20 +297,20 @@
     modal.innerHTML = `
       <div class="share-backdrop" data-share-close></div>
       <div class="share-panel">
-        <button class="share-close" type="button" data-share-close aria-label="閉じる">×</button>
+        <button class="share-close" type="button" data-share-close data-share-close-button aria-label="閉じる">×</button>
         <h2 id="share-modal-title" class="share-title">現在のページを共有</h2>
         <p class="share-page-title" data-share-title></p>
         <p class="share-page-url" data-share-url></p>
-        <div class="share-options" role="list">
-          <button class="share-option" type="button" data-share-action="x" role="listitem">
+        <div class="share-options">
+          <button class="share-option" type="button" data-share-action="x">
             <span class="share-option-icon share-option-x" aria-hidden="true">X</span>
             <span>Xでシェア</span>
           </button>
-          <button class="share-option" type="button" data-share-action="line" role="listitem">
+          <button class="share-option" type="button" data-share-action="line">
             <span class="share-option-icon share-option-line" aria-hidden="true">LINE</span>
             <span>LINEでシェア</span>
           </button>
-          <button class="share-option" type="button" data-share-action="copy" role="listitem">
+          <button class="share-option" type="button" data-share-action="copy">
             <span class="share-option-icon share-option-copy" aria-hidden="true">
               <svg viewBox="0 0 24 24" focusable="false"><path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.9-3.9a3 3 0 0 1 4.2 4.2l-3 3a3 3 0 0 1-4.25 0 1 1 0 1 1 1.42-1.42 1 1 0 0 0 1.41 0l3-3a1 1 0 0 0-1.41-1.41L12 13.4a1 1 0 0 1-1.4 0Zm2.8-2.8a1 1 0 0 1 0 1.4l-3.9 3.9a3 3 0 1 1-4.2-4.2l3-3a3 3 0 0 1 4.25 0 1 1 0 0 1-1.42 1.42 1 1 0 0 0-1.41 0l-3 3a1 1 0 1 0 1.41 1.41L12 10.6a1 1 0 0 1 1.4 0Z"></path></svg>
             </span>
@@ -335,7 +349,9 @@
     shareModal.hidden = false;
     document.body.classList.add("is-share-modal-open");
     translateAttributes();
-    shareModal.querySelector("[data-share-close]")?.focus();
+    window.requestAnimationFrame(() => {
+      shareModal.querySelector("[data-share-close-button]")?.focus({ preventScroll: true });
+    });
   };
 
   document.addEventListener("click", async (event) => {
@@ -384,6 +400,23 @@
   });
 
   document.addEventListener("keydown", (event) => {
+    if (shareModal && !shareModal.hidden && event.key === "Tab") {
+      const focusableElements = [...shareModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+        .filter((element) => !element.disabled && element.getAttribute("aria-hidden") !== "true");
+      if (!focusableElements.length) {
+        return;
+      }
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+      return;
+    }
     if (event.key === "Escape") {
       closeShareModal();
     }
@@ -392,6 +425,67 @@
   languageButtons.forEach((button) => {
     button.addEventListener("click", () => applyLanguage(button.dataset.languageOption));
   });
+
+  const setupRadioTabList = (tabList) => {
+    const tabs = [...tabList.querySelectorAll('[role="tab"][for]')];
+    if (!tabs.length) {
+      return;
+    }
+    const getInput = (tab) => document.getElementById(tab.getAttribute("for"));
+    const getPanel = (tab) => document.getElementById(tab.getAttribute("aria-controls"));
+    const updateTabs = () => {
+      tabs.forEach((tab) => {
+        const isSelected = Boolean(getInput(tab)?.checked);
+        tab.setAttribute("aria-selected", isSelected ? "true" : "false");
+        tab.tabIndex = isSelected ? 0 : -1;
+        const panel = getPanel(tab);
+        if (panel) {
+          panel.hidden = !isSelected;
+        }
+      });
+    };
+    const selectTab = (tab, shouldFocus = false) => {
+      const input = getInput(tab);
+      if (!input) {
+        return;
+      }
+      input.checked = true;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+      updateTabs();
+      if (shouldFocus) {
+        tab.focus();
+      }
+    };
+
+    tabs.forEach((tab) => {
+      getInput(tab)?.addEventListener("change", updateTabs);
+      tab.addEventListener("click", () => window.requestAnimationFrame(updateTabs));
+      tab.addEventListener("keydown", (event) => {
+        const currentIndex = tabs.indexOf(tab);
+        let nextIndex = null;
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+          nextIndex = (currentIndex + 1) % tabs.length;
+        } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+          nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        } else if (event.key === "Home") {
+          nextIndex = 0;
+        } else if (event.key === "End") {
+          nextIndex = tabs.length - 1;
+        } else if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          selectTab(tab);
+          return;
+        } else {
+          return;
+        }
+        event.preventDefault();
+        selectTab(tabs[nextIndex], true);
+      });
+    });
+    updateTabs();
+  };
+
+  document.querySelectorAll(".terms-tab-list, .terms-license-switch").forEach(setupRadioTabList);
 
   const ensureFooterLinks = () => {
     document.querySelectorAll(".footer-links").forEach((footerLinks) => {
