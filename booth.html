@@ -90,7 +90,7 @@
           <p class="booth-subtag-heading">サブタグ</p>
           <div class="booth-subtag-mobile-controls">
             <span class="booth-subtag-mobile-label">サブタグ</span>
-            <button class="booth-subtag-picker-toggle" type="button" data-booth-subtag-toggle data-default-label="すべて" aria-expanded="false" aria-controls="booth-subtag-options">すべて</button>
+            <button class="booth-subtag-picker-toggle" type="button" data-booth-subtag-toggle data-booth-subtag-search-toggle data-default-label="すべて" aria-expanded="false" aria-controls="booth-subtag-search-popover">すべて</button>
           </div>
           <div class="booth-subtag-picker" id="booth-subtag-options" data-booth-subtag-picker>
           <div class="booth-subtag-tabs" role="group" aria-label="BOOTH作品サブタグ絞り込み">
@@ -113,7 +113,16 @@
             <button class="booth-subtag-button" type="button" data-booth-subtag-button="mask" aria-pressed="false">マスク</button>
           </div>
           </div>
-          <button class="booth-subtag-row-toggle" type="button" data-booth-subtag-row-toggle data-open-label="もっと見る ▼" data-close-label="閉じる ▲" data-open-aria-label="サブタグをもっと見る" data-close-aria-label="サブタグを閉じる" aria-expanded="false" aria-controls="booth-subtag-options" aria-label="サブタグをもっと見る">もっと見る ▼</button>
+          <button class="booth-subtag-row-toggle" type="button" data-booth-subtag-row-toggle data-booth-subtag-search-toggle data-open-label="サブタグを検索▼" data-close-label="サブタグを検索▲" data-open-aria-label="サブタグを検索する" data-close-aria-label="サブタグ検索を閉じる" aria-expanded="false" aria-controls="booth-subtag-search-popover" aria-label="サブタグを検索する">サブタグを検索▼</button>
+          <div class="booth-subtag-search-popover" id="booth-subtag-search-popover" data-booth-subtag-search-popover hidden>
+            <div class="booth-subtag-search-field">
+              <span class="booth-subtag-search-icon" aria-hidden="true"></span>
+              <input type="search" data-booth-subtag-search-input placeholder="サブタグで検索…" aria-label="サブタグで検索" autocomplete="off">
+              <button class="booth-subtag-search-clear" type="button" data-booth-subtag-search-clear aria-label="検索文字列をクリア">×</button>
+            </div>
+            <div class="booth-subtag-search-results" data-booth-subtag-search-results role="group" aria-label="検索できるサブタグ"></div>
+            <p class="booth-subtag-search-empty" data-booth-subtag-search-empty hidden>該当するサブタグがありません</p>
+          </div>
         </div>
         <div class="booth-list-grid" data-booth-list>
           <a class="booth-list-thumb" data-booth-tags="clothing" data-booth-subtags="character-lumina" data-likes="186" href="product-cravingdance.html"><img src="Macanon_Samune/LUMINA_CravingDance-600.webp" alt="〖ルミナ対応〗CravingDance" srcset="Macanon_Samune/LUMINA_CravingDance-400.webp 400w, Macanon_Samune/LUMINA_CravingDance-600.webp 600w" sizes="(max-width: 860px) 50vw, 430px" width="600" height="600" decoding="async" fetchpriority="high"></a>
