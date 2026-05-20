@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://va.vercel-scripts.com; media-src 'self'; frame-src 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <title>Dark Knight | macanon</title>
     <meta name="description" content="Dark Knightは、Dark Knightの印象を取り入れた、VRChat向け衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。">
@@ -56,6 +56,10 @@
 }
     </script>
     <link rel="stylesheet" href="styles.css">
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
     <header class="site-header">
@@ -249,7 +253,7 @@
             <p>Unity上で扱える<strong>3D衣装</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>
             <h3>対応アバター本体は含まれますか？</h3>
             <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>
-            <h3>購入前に何を確認すればいいですか？</h3>
+            <h3>購入前に何を確��すればいいですか？</h3>
             <p>自分が使用する<strong>アバターが対象か</strong>、同梱ファイル、価格、利用条件、導入上の注意事項を<strong>BOOTHの商品ページ</strong>で確認してください。</p>
           </article>
         </div>

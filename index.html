@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://va.vercel-scripts.com; media-src 'self'; frame-src 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <title>macanon | VRChat向け3D衣装・ギミック制作</title>
     <meta name="description" content="macanonはVRChat向けの3D衣装、召喚ギミック、アクセサリーを制作しています。BOOTH作品、制作相談、ブログ記事への導線をまとめた公式サイトです。">
@@ -59,6 +59,10 @@
 }
     </script>
     <link rel="stylesheet" href="styles.css">
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
     <header class="site-header">

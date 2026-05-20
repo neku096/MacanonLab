@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://va.vercel-scripts.com; media-src 'self'; frame-src 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <title>Tips | macanon</title>
     <meta name="description" content="macanonのVRChat、Unity、Modular Avatar向けTips記事一覧です。記事は今後追加予定です。">
@@ -35,6 +35,10 @@
     <meta name="twitter:image" content="https://neku096.github.io/MacanonLab/Macanon_Samune/ogp-v2.png">
     <meta name="twitter:image:alt" content="macanon Tips">
     <link rel="stylesheet" href="styles.css">
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
     <header class="site-header">

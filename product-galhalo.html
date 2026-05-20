@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://va.vercel-scripts.com; media-src 'self'; frame-src 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <title>ギャルヘイロー GalHalo | macanon</title>
     <meta name="description" content="ギャルヘイロー GalHaloは、アバターの印象づけや撮影アクセントに使いやすい、ヘイロー系の3D装飾品です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。">
@@ -56,6 +56,10 @@
 }
     </script>
     <link rel="stylesheet" href="styles.css">
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
     <header class="site-header">
@@ -100,7 +104,7 @@
         </div>
 
         <aside class="product-summary" aria-label="商品情報">
-          <nav class="product-summary-breadcrumb" aria-label="作品カテゴリ">
+          <nav class="product-summary-breadcrumb" aria-label="作品カテ��リ">
             <a href="booth.html" aria-label="BOOTH">BOOTH作品一覧</a>
             <span aria-hidden="true">›</span>
             <a href="booth.html?tag=accessory">装飾品</a>

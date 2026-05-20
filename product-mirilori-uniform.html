@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://va.vercel-scripts.com; media-src 'self'; frame-src 'none'; form-action 'none'">
     <meta name="referrer" content="no-referrer">
     <title>ミリロリ制服 MiriLori Uniform | macanon</title>
     <meta name="description" content="ミリロリ制服 MiriLori Uniformは、ミリタリー感とロリータ風の印象を組み合わせた、VRChat向け3D衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。">
@@ -56,6 +56,10 @@
 }
     </script>
     <link rel="stylesheet" href="styles.css">
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
     <header class="site-header">
@@ -259,7 +263,7 @@
             <ol>
               <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>
               <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>
-              <li><strong>BOOTHの商品説明</strong>に従い、<strong>対象アバター用Prefab</strong>をHierarchy内のアバター直下に配置します。</li>
+              <li><strong>BOOTHの商品説明</strong>に従い、<strong>対象アバター用Prefab</strong>をHierarchy内��アバター直下に配置します。</li>
               <li><strong>改変済みアバター</strong>や別衣装を併用する場合は、アップロード前に<strong>BOOTHの注意事項</strong>を確認してください。</li>
             </ol>
             <p><strong>改変済みアバター</strong>、衣装、スケール変更の内容によっては、<strong>位置、貫通、揺れものの調整</strong>が必要になる場合があります。</p>
