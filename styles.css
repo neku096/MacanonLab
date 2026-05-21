@@ -1598,6 +1598,15 @@ p {
   margin: 0 auto;
 }
 
+.blog-list-page > .text-section {
+  width: calc(100% - clamp(20px, 4vw, 88px));
+}
+
+.blog-list-page > .text-section,
+.terms-page > .text-section {
+  transform: translateX(clamp(10px, 2vw, 44px));
+}
+
 .text-panel {
   border: 1px solid rgba(255, 255, 255, 0.86);
   border-radius: 8px;
