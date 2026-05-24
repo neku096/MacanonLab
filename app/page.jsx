@@ -176,6 +176,8 @@ export default function HomePage() {
             <img
               className="diagram-image"
               src="/Macanon_Samune/soudan1.webp"
+              data-ja-src="/Macanon_Samune/soudan1.webp"
+              data-en-src="/Macanon_Samune/samune_eg1.webp"
               alt="相談時に必要なもの: ご希望アバター、作りたい内容、参考画像、希望納期、予算感"
               width="1536"
               height="1024"
@@ -187,6 +189,8 @@ export default function HomePage() {
             <img
               className="diagram-image"
               src="/Macanon_Samune/soudan2.webp"
+              data-ja-src="/Macanon_Samune/soudan2.webp"
+              data-en-src="/Macanon_Samune/samune_eg2.webp"
               alt="制作の流れ: 相談、見積もり、制作、確認、納品"
               width="1536"
               height="1024"

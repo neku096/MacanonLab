@@ -25,6 +25,7 @@ export default function ProductGallery({ images, title }) {
         <button className="product-main-button" type="button" onClick={() => move(1)} aria-label={`${title}の商品画像を切り替え`}>
           <Image
             className="product-main-image"
+            data-product-main-image
             src={current.src}
             alt={current.alt || title}
             width={current.width || 1000}

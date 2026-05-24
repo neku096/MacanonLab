@@ -26,10 +26,10 @@ export default function Header() {
       </Link>
       <div className="header-actions">
         <div className="language-switch" aria-label="Language">
-          <button className="language-option" type="button" aria-pressed="true">
+          <button className="language-option" type="button" data-language-option="ja" aria-pressed="true">
             JP
           </button>
-          <button className="language-option" type="button" aria-pressed="false">
+          <button className="language-option" type="button" data-language-option="en" aria-pressed="false">
             EN
           </button>
         </div>

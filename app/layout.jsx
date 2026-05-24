@@ -2,6 +2,7 @@ import "../styles.css";
 import "./next.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LegacyLanguageBridge from "@/components/LegacyLanguageBridge";
 import { SITE } from "@/lib/site";
 
 export const metadata = {
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Footer />
+        <LegacyLanguageBridge />
       </body>
     </html>
   );

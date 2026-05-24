@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import { getTagLabel } from "@/lib/site";
@@ -48,6 +48,17 @@ export default function ProductCatalog({ products, options, initialFilters }) {
   const [page, setPage] = useState(1);
   const [isSubtagSearchOpen, setSubtagSearchOpen] = useState(false);
   const [subtagSearch, setSubtagSearch] = useState("");
+  const [language, setLanguage] = useState("ja");
+
+  useEffect(() => {
+    const syncLanguage = () => {
+      setLanguage(document.documentElement.lang === "en" ? "en" : "ja");
+    };
+
+    syncLanguage();
+    window.addEventListener("macanon:languagechange", syncLanguage);
+    return () => window.removeEventListener("macanon:languagechange", syncLanguage);
+  }, []);
 
   const subtagOptions = useMemo(
     () => [ALL, ...options.subtags].map((value) => ({ value, label: value === ALL ? "すべて" : getTagLabel(value) })),
@@ -124,6 +135,7 @@ export default function ProductCatalog({ products, options, initialFilters }) {
   const currentPage = Math.min(page, totalPages);
   const visibleProducts = filteredProducts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
   const selectedSubtagLabel = filters.subtag === ALL ? "すべて" : getTagLabel(filters.subtag);
+  const countLabel = language === "en" ? `${filteredProducts.length} items` : `${filteredProducts.length}件`;
 
   return (
     <>
@@ -161,7 +173,7 @@ export default function ProductCatalog({ products, options, initialFilters }) {
           ))}
         </div>
         <span className="booth-filter-status" data-booth-filter-status aria-live="polite">
-          {filteredProducts.length}件
+          {countLabel}
         </span>
       </div>
 
