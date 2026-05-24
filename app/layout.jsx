@@ -2,6 +2,7 @@ import "../styles.css";
 import "./next.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LegacyLanguageBridge from "@/components/LegacyLanguageBridge";
 import { SITE } from "@/lib/site";
 
 export const metadata = {
@@ -49,11 +50,12 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ja">
+    <html lang="ja" data-scroll-behavior="smooth">
       <body>
         <Header />
         {children}
         <Footer />
+        <LegacyLanguageBridge />
       </body>
     </html>
   );

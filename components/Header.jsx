@@ -1,7 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import ShareButton from "@/components/ShareButton";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isActive = (href) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
   return (
     <header className="site-header">
       <Link className="brand brand-text" href="/" aria-label="トップへ">
@@ -17,20 +26,28 @@ export default function Header() {
       </Link>
       <div className="header-actions">
         <div className="language-switch" aria-label="Language">
-          <button className="language-option" type="button" aria-pressed="true">
+          <button className="language-option" type="button" data-language-option="ja" aria-pressed="true">
             JP
           </button>
-          <button className="language-option" type="button" aria-pressed="false">
+          <button className="language-option" type="button" data-language-option="en" aria-pressed="false">
             EN
           </button>
         </div>
         <ShareButton />
       </div>
       <nav className="nav" aria-label="メインナビゲーション">
-        <Link href="/">トップ</Link>
-        <Link href="/products">BOOTH作品</Link>
-        <Link href="/blog">ブログ</Link>
-        <Link href="/terms">利用規約</Link>
+        <Link href="/" aria-current={isActive("/") ? "page" : undefined}>
+          トップ
+        </Link>
+        <Link href="/products" aria-current={isActive("/products") ? "page" : undefined}>
+          BOOTH作品
+        </Link>
+        <Link href="/blog" aria-current={isActive("/blog") ? "page" : undefined}>
+          ブログ
+        </Link>
+        <Link href="/terms" aria-current={isActive("/terms") ? "page" : undefined}>
+          利用規約
+        </Link>
       </nav>
     </header>
   );
