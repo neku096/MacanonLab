@@ -1,0 +1,1059 @@
+[
+  {
+    "id": "cravingdance",
+    "slug": "cravingdance",
+    "published": true,
+    "sortOrder": 0,
+    "title": "〖ルミナ対応〗CravingDance",
+    "description": "〖ルミナ対応〗CravingDanceは、ルミナ向けに調整した、雰囲気づくりと撮影に使いやすい3D衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "clothing",
+    "categoryLabel": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "subtags": [
+      "character-lumina"
+    ],
+    "tagLabels": [
+      "衣装"
+    ],
+    "subtagLabels": [
+      "LUMINA"
+    ],
+    "avatars": [
+      "LUMINA"
+    ],
+    "likes": 186,
+    "price": "¥1,000",
+    "support": "ルミナ向け",
+    "content": "ルミナ対応衣装、Prefab、Material、Texture、unitypackage",
+    "usage": "VRChat、Unity 2022、Modular Avatar、アバター改変、撮影向け",
+    "summaryTags": [
+      "ルミナ対応",
+      "3D衣装",
+      "VRChat",
+      "Unity",
+      "Modular Avatar"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/cravingdance/cover.webp",
+    "coverAlt": "〖ルミナ対応〗CravingDance",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/cravingdance/cravingdance-01.webp",
+        "thumb": "/products/cravingdance/cravingdance-01-thumb.webp",
+        "alt": "〖ルミナ対応〗CravingDance",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/cravingdance/cravingdance-02.webp",
+        "thumb": "/products/cravingdance/cravingdance-02-thumb.webp",
+        "alt": "〖ルミナ対応〗CravingDance",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/cravingdance/cravingdance-03.webp",
+        "thumb": "/products/cravingdance/cravingdance-03-thumb.webp",
+        "alt": "〖ルミナ対応〗CravingDance",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/cravingdance/cravingdance-04.webp",
+        "thumb": "/products/cravingdance/cravingdance-04-thumb.webp",
+        "alt": "〖ルミナ対応〗CravingDance",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/cravingdance/cravingdance-05.webp",
+        "thumb": "/products/cravingdance/cravingdance-05-thumb.webp",
+        "alt": "〖ルミナ対応〗CravingDance",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/cravingdance/cravingdance-06.webp",
+        "thumb": "/products/cravingdance/cravingdance-06-thumb.webp",
+        "alt": "〖ルミナ対応〗CravingDance",
+        "width": 1000,
+        "height": 1000
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/7439310",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "mirilori-uniform",
+      "dark-knight",
+      "star-guardian",
+      "galhalo"
+    ],
+    "legacyPath": "/product-cravingdance.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p>光をまとって、視線を奪う。<br><strong>ルミナ向けサイバー衣装「CravingDance」</strong>。</p>\n            <p><strong>VRChat</strong>での着用を想定した、<strong>ルミナ対応3D衣装</strong>です。発光感のあるラインとサイバー寄りの雰囲気で、<strong>ダンス・ポーズ撮影・動画制作</strong>など、動きのあるシーンに映える印象を目指した衣装です</p>\n            <p><strong>発光感を活かした撮影</strong>や、<strong>ルミナ</strong>の雰囲気をより印象的に見せたい改変におすすめです。</p>\n            <ul>\n              <li>ルミナをサイバー風に改変したい</li>\n              <li>ダンスやポーズ撮影で映える衣装がほしい</li>\n              <li>ネオン系・近未来系のサムネイルを作りたい</li>\n            </ul>\n            <p>そんな方におすすめの、VRChat向け3D衣装です。</p>\n            <p>本商品は<strong>衣装のみの販売</strong>です。<strong>オリジナル3Dモデル本体は同梱されません</strong>。対応アバター、シェイプキー、導入方法、利用条件、最新版の注意事項は、<strong>購入前に必ずBOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>対象アバター用Prefab</strong>をHierarchy内のアバター直下に配置します。</li>\n              <li><strong>改変済みアバター</strong>や別衣装を併用する場合は、アップロード前に<strong>BOOTHの注意事項</strong>を確認してください。</li>\n            </ol>\n            <p>この商品は、<strong>Modular Avatar</strong>を使った導入を想定しています。<strong>改変済みアバター</strong>、衣装、スケール変更の内容によっては、<strong>位置、貫通、揺れものの調整</strong>が必要になる場合があります。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆対応シェイプキー</h3>\n            <ul>\n              <li><strong>Big_Breast</strong></li>\n            </ul>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>66,095</strong></li>\n              <li>マテリアル数：<strong>3</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>改変済みアバターでも使えますか？</h3>\n            <p><strong>対応アバター</strong>でしたら使えます。ただし、体型、衣装、スケール、ボーン変更などの改変量によっては<strong>調整が必要</strong>です。</p>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3D衣装</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p>自分が使用する<strong>アバターが対象か</strong>、同梱ファイル、価格、利用条件、導入上の注意事項を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "shark-summon",
+    "slug": "shark-summon",
+    "published": true,
+    "sortOrder": 1,
+    "title": "〖召喚ギミック〗鮫召喚 Shark summon",
+    "description": "〖召喚ギミック〗鮫召喚 Shark summonは、VRChat上で鮫を召喚する演出を楽しめる、アバター向け召喚ギミックです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "gimmick",
+    "categoryLabel": "ギミック",
+    "tags": [
+      "gimmick"
+    ],
+    "subtags": [
+      "summon-gimmick"
+    ],
+    "tagLabels": [
+      "ギミック"
+    ],
+    "subtagLabels": [
+      "召喚ギミック"
+    ],
+    "avatars": [],
+    "likes": 1321,
+    "price": "¥700",
+    "support": "VRChatアバター向け",
+    "content": "鮫召喚ギミック、Prefab、Animation、ExMenu、unitypackage",
+    "usage": "VRChat、Unity 2022、Modular Avatar、演出、撮影向け",
+    "summaryTags": [
+      "召喚ギミック",
+      "鮫",
+      "VRChat",
+      "Unity",
+      "Modular Avatar"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/shark-summon/cover.webp",
+    "coverAlt": "〖召喚ギミック〗鮫召喚 Shark summon",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/shark-summon/shark-summon-01.webp",
+        "thumb": "/products/shark-summon/shark-summon-01-thumb.webp",
+        "alt": "〖召喚ギミック〗鮫召喚 Shark summon",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/shark-summon/shark-summon-02.webp",
+        "thumb": "/products/shark-summon/shark-summon-02-thumb.webp",
+        "alt": "〖召喚ギミック〗鮫召喚 Shark summon",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/shark-summon/shark-summon-03.webp",
+        "thumb": "/products/shark-summon/shark-summon-03-thumb.webp",
+        "alt": "〖召喚ギミック〗鮫召喚 Shark summon",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/shark-summon/shark-summon-04.webp",
+        "thumb": "/products/shark-summon/shark-summon-04-thumb.webp",
+        "alt": "〖召喚ギミック〗鮫召喚 Shark summon",
+        "width": 1000,
+        "height": 1000
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/7002971",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "whale-summon",
+      "capybara-summon",
+      "monsterchair"
+    ],
+    "legacyPath": "/product-shark-summon.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p><strong>VRChat</strong>で“<strong>鮫を召喚する</strong>”インパクト抜群の<strong>アバターギミック</strong>です。</p>\n            <p>海から飛び出すような鮫の演出で、<strong>写真撮影・動画制作・フレンドとの交流</strong>を一気に派手に演出できます。ただ出すだけではなく、<strong>追従・ライド・ワールド固定・サイズ変更</strong>など、シーンに合わせて使い分けやすい機能を搭載。</p>\n            <p>鮫を呼び出して<strong>迫力あるワンシーン</strong>を作ったり、フレンドの横で泳がせたり、<strong>ライドポーズ</strong>で遊んだりできます。</p>\n            <ul>\n              <li>撮影で目立ちたい</li>\n              <li>動画に使える分かりやすい演出がほしい</li>\n              <li>フレンドと遊べるネタギミックを入れたい</li>\n            </ul>\n            <p>そんな方におすすめの、鮫召喚ギミックです。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>同梱Prefab</strong>をヒエラルキーに配置します。</li>\n            </ol>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                  <li>Shader</li>\n                  <li>Animation</li>\n                </ul>\n              </li>\n              <li>当モデルの<strong>blend</strong></li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>鮫：2,902 / 波：5102</strong></li>\n              <li>マテリアル数：<strong>2</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>座るアニメーションがうまく作動しません</h3>\n            <p>アバターの<strong>ボーン構造名</strong>が大きく異なるとアニメーションを拾えない場合があります。その際は<strong>ボーン名を日本ベースの名前</strong>に変更してください。</p>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3Dデータ</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p><strong>同梱ファイル、価格、利用条件、導入上の注意事項</strong>を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "whale-summon",
+    "slug": "whale-summon",
+    "published": true,
+    "sortOrder": 2,
+    "title": "鯨召喚 Whale summon",
+    "description": "鯨召喚 Whale summonは、VRChatで鯨を呼び出す演出を加えられる、アバター向け召喚ギミックです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "gimmick",
+    "categoryLabel": "ギミック",
+    "tags": [
+      "gimmick"
+    ],
+    "subtags": [
+      "summon-gimmick"
+    ],
+    "tagLabels": [
+      "ギミック"
+    ],
+    "subtagLabels": [
+      "召喚ギミック"
+    ],
+    "avatars": [],
+    "likes": 365,
+    "price": "¥300",
+    "support": "VRChatアバター向け",
+    "content": "鯨召喚ギミック、Prefab、Animation、ExMenu、unitypackage",
+    "usage": "VRChat、Unity 2022、Modular Avatar、演出、撮影向け",
+    "summaryTags": [
+      "召喚ギミック",
+      "鯨",
+      "VRChat",
+      "Unity",
+      "Modular Avatar"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/whale-summon/cover.webp",
+    "coverAlt": "鯨召喚 Whale summon",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/whale-summon/whale-summon-01.webp",
+        "thumb": "/products/whale-summon/whale-summon-01-thumb.webp",
+        "alt": "鯨召喚 Whale summon",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/whale-summon/whale-summon-02.webp",
+        "thumb": "/products/whale-summon/whale-summon-02-thumb.webp",
+        "alt": "鯨召喚 Whale summon",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "/products/whale-summon/whale-summon-03.webp",
+        "thumb": "/products/whale-summon/whale-summon-03-thumb.webp",
+        "alt": "鯨召喚 Whale summon",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/whale-summon/whale-summon-04.webp",
+        "thumb": "/products/whale-summon/whale-summon-04-thumb.webp",
+        "alt": "鯨召喚 Whale summon",
+        "width": 1000,
+        "height": 1000
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6322284",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "shark-summon",
+      "capybara-summon",
+      "mini-whale"
+    ],
+    "legacyPath": "/product-whale-summon.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p><strong>大きなシルエットの鯨</strong>が現れる、アバター向けの<strong>召喚ギミック</strong>です。写真撮影や動画制作のワンシーン、フレンドとの交流、ワールド内でのちょっとしたサプライズ演出などに使いやすいよう、見た瞬間に伝わるインパクトと扱いやすさを意識して制作しています。</p>\n            <p>鯨のモデルデータに加えて、<strong>アニメーション、パーティクル</strong>、男女別の<strong>「乗っている風」ポーズ</strong>を同梱。空間に大きく映える鯨の存在感と、パーティクルによる演出で、いつものVRChatの景色に幻想的なアクセントを加えられます。</p>\n            <ul>\n              <li>大きくて目を引く演出がほしい</li>\n              <li>幻想的な写真を撮りたい</li>\n              <li>動画や交流で使える分かりやすいギミックを入れたい</li>\n            </ul>\n            <p>そんな方におすすめの、VRChat向け鯨召喚ギミックです。</p>\n            <p><strong>最新版の同梱内容、導入手順、注意事項、利用規約</strong>については、必ず<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>同梱Prefab</strong>をヒエラルキーに配置します。</li>\n            </ol>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                  <li>Animation</li>\n                </ul>\n              </li>\n              <li>当モデルの<strong>blend</strong></li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>31,456</strong></li>\n              <li>マテリアル数：<strong>1</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3Dデータ</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p><strong>同梱ファイル、価格、利用条件、導入上の注意事項</strong>を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "capybara-summon",
+    "slug": "capybara-summon",
+    "published": true,
+    "sortOrder": 3,
+    "title": "カピバラ召喚 Capybara summon",
+    "description": "カピバラ召喚 Capybara summonは、VRChat内でカピバラを呼び出して、写真や交流のワンポイントに使える召喚ギミックです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "gimmick",
+    "categoryLabel": "ギミック",
+    "tags": [
+      "gimmick"
+    ],
+    "subtags": [
+      "summon-gimmick"
+    ],
+    "tagLabels": [
+      "ギミック"
+    ],
+    "subtagLabels": [
+      "召喚ギミック"
+    ],
+    "avatars": [],
+    "likes": 96,
+    "price": "¥300",
+    "support": "VRChatアバター向け",
+    "content": "カピバラ召喚ギミック、Prefab、Animation、ExMenu、unitypackage",
+    "usage": "VRChat、Unity 2022、Modular Avatar、演出、撮影向け",
+    "summaryTags": [
+      "召喚ギミック",
+      "カピバラ",
+      "VRChat",
+      "Unity",
+      "Modular Avatar"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/capybara-summon/cover.webp",
+    "coverAlt": "カピバラ召喚 Capybara summon",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/capybara-summon/capybara-summon-01.webp",
+        "thumb": "/products/capybara-summon/capybara-summon-01-thumb.webp",
+        "alt": "カピバラ召喚 Capybara summon",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/capybara-summon/capybara-summon-02.webp",
+        "thumb": "/products/capybara-summon/capybara-summon-02-thumb.webp",
+        "alt": "カピバラ召喚 Capybara summon",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/capybara-summon/capybara-summon-03.webp",
+        "thumb": "/products/capybara-summon/capybara-summon-03-thumb.webp",
+        "alt": "カピバラ召喚 Capybara summon",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/capybara-summon/capybara-summon-04.webp",
+        "thumb": "/products/capybara-summon/capybara-summon-04-thumb.webp",
+        "alt": "カピバラ召喚 Capybara summon",
+        "width": 1000,
+        "height": 1000
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6768358",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "shark-summon",
+      "whale-summon",
+      "monsterchair"
+    ],
+    "legacyPath": "/product-capybara-summon.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p><strong>VRChat</strong>に、ゆるくてかわいい<strong>カピバラ</strong>を召喚。</p>\n            <p>アバターからカピバラを呼び出して、<strong>写真撮影</strong>や<strong>フレンドとの交流</strong>に癒しのワンポイントを加えられる<strong>召喚ギミック</strong>です。</p>\n            <p>カピバラらしいのんびりした雰囲気と、見てすぐ伝わるかわいいモチーフで、<strong>スクリーンショット・動画制作・サムネイル撮影</strong>にも使いやすい演出になっています。アバター改変後のお披露目シーンや、ワールド内でのちょっとした小ネタ、フレンドとの会話のきっかけにもぴったりです。</p>\n            <ul>\n              <li>かわいい召喚ギミックを入れたい</li>\n              <li>写真や動画にゆるいアクセントがほしい</li>\n              <li>フレンドと遊べる癒し系の小ネタがほしい</li>\n            </ul>\n            <p>そんな方におすすめの、VRChat向けカピバラ召喚ギミックです。</p>\n            <p><strong>最新版の同梱内容、導入方法、注意事項、利用規約</strong>については、必ず<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>同梱Prefab</strong>をヒエラルキーに配置します。</li>\n            </ol>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material　※内6個使用</li>\n                  <li>Texture 　※内パーティクル2個使用</li>\n                  <li>Animation</li>\n                </ul>\n              </li>\n              <li>当モデルの<strong>blend</strong></li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>9,712</strong></li>\n              <li>マテリアル数：<strong>2</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3Dデータ</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p><strong>同梱ファイル、価格、利用条件、導入上の注意事項</strong>を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "mirilori-uniform",
+    "slug": "mirilori-uniform",
+    "published": true,
+    "sortOrder": 4,
+    "title": "ミリロリ制服 MiriLori Uniform",
+    "description": "ミリロリ制服 MiriLori Uniformは、ミリタリー感とロリータ風の印象を組み合わせた、VRChat向け3D衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "clothing",
+    "categoryLabel": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "subtags": [
+      "character-shinano",
+      "character-milltina",
+      "character-kipfel",
+      "character-manuka",
+      "character-selestia",
+      "character-shinra"
+    ],
+    "tagLabels": [
+      "衣装"
+    ],
+    "subtagLabels": [
+      "しなの",
+      "ミルティナ",
+      "キプフェル",
+      "マヌカ",
+      "セレスティア",
+      "森羅"
+    ],
+    "avatars": [
+      "しなの",
+      "ミルティナ",
+      "キプフェル",
+      "マヌカ",
+      "セレスティア",
+      "森羅"
+    ],
+    "likes": 771,
+    "price": "¥1,000〜 / フルパック ¥2,500",
+    "support": "しなの / ミルティナ / キプフェル / マヌカ / セレスティア / 森羅",
+    "content": "対応衣装データ、Prefab、Material、Texture、unitypackage",
+    "usage": "VRChat、Unity 2022、Modular Avatar、アバター改変、撮影向け",
+    "summaryTags": [
+      "3D衣装",
+      "制服",
+      "VRChat",
+      "Unity",
+      "Modular Avatar"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/mirilori-uniform/cover.webp",
+    "coverAlt": "ミリロリ制服 MiriLori Uniform",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-01.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-01-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-02.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-02-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-03.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-03-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-04.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-04-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-05.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-05-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-06.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-06-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-07.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-07-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-08.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-08-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-09.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-09-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-10.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-10-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-11.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-11-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mirilori-uniform/mirilori-uniform-12.webp",
+        "thumb": "/products/mirilori-uniform/mirilori-uniform-12-thumb.webp",
+        "alt": "ミリロリ制服 MiriLori Uniform",
+        "width": 1000,
+        "height": 1000
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6599351",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "dark-knight",
+      "star-guardian",
+      "cravingdance"
+    ],
+    "legacyPath": "/product-mirilori-uniform.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p><strong>VRChat</strong>での着用を想定した、<strong>アバター向け3D衣装</strong><br><strong>「ミリロリ制服 - MiriLori Uniform -」</strong>です。</p>\n            <p>きちんと感のある制服シルエットに、<strong>ミリタリー風</strong>の印象と<strong>ロリータらしいかわいさ</strong>を組み合わせたデザイン。甘すぎず、強すぎず、かわいいのに少しカッコいい雰囲気を作りやすい衣装です。</p>\n            <p>おまけとして<strong>敬礼ポーズ</strong>も付属。ミリタリー風の世界観を活かした撮影や、<strong>SNS投稿用の一枚づくり</strong>にも活用できます。</p>\n            <ul>\n              <li>かわいい制服系の衣装がほしい</li>\n              <li>少し強めで印象に残るコーデにしたい</li>\n              <li>撮影映えするミリタリー×ロリータ風の衣装を探している</li>\n            </ul>\n            <p>そんな方におすすめのVRChat向け3D衣装です。</p>\n            <p><strong>対応アバター、シェイプキー、同梱内容</strong>、利用条件、導入上の注意事項は、購入前に必ず<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>対象アバター用Prefab</strong>をHierarchy内のアバター直下に配置します。</li>\n              <li><strong>改変済みアバター</strong>や別衣装を併用する場合は、アップロード前に<strong>BOOTHの注意事項</strong>を確認してください。</li>\n            </ol>\n            <p><strong>改変済みアバター</strong>、衣装、スケール変更の内容によっては、<strong>位置、貫通、揺れものの調整</strong>が必要になる場合があります。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>Anim　※おまけの敬礼ポーズが付属します</li>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>134,358～</strong></li>\n              <li>マテリアル数：<strong>4</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>改変済みアバターでも使えますか？</h3>\n            <p><strong>対応アバター</strong>でしたら使えます。ただし、体型、衣装、スケール、ボーン変更などの改変量によっては<strong>調整が必要</strong>です。</p>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3D衣装</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p>自分が使用する<strong>アバターが対象か</strong>、同梱ファイル、価格、利用条件、導入上の注意事項を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "star-guardian",
+    "slug": "star-guardian",
+    "published": true,
+    "sortOrder": 5,
+    "title": "スターガーディアン Star Guardian",
+    "description": "スターガーディアン Star Guardianは、星や守護者のイメージを取り入れた、VRChat向け3D衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "clothing",
+    "categoryLabel": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "subtags": [
+      "character-kipfel"
+    ],
+    "tagLabels": [
+      "衣装"
+    ],
+    "subtagLabels": [
+      "キプフェル"
+    ],
+    "avatars": [
+      "キプフェル"
+    ],
+    "likes": 193,
+    "price": "¥1,200",
+    "support": "対応アバターはBOOTH商品ページで確認",
+    "content": "対応衣装データ、Prefab、Material、Texture、unitypackage",
+    "usage": "VRChat、Unity 2022、Modular Avatar、アバター改変、撮影向け",
+    "summaryTags": [
+      "3D衣装",
+      "星",
+      "VRChat",
+      "Unity",
+      "Modular Avatar"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/star-guardian/cover.webp",
+    "coverAlt": "スターガーディアン Star Guardian",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/star-guardian/star-guardian-01.webp",
+        "thumb": "/products/star-guardian/star-guardian-01-thumb.webp",
+        "alt": "スターガーディアン Star Guardian",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/star-guardian/star-guardian-02.webp",
+        "thumb": "/products/star-guardian/star-guardian-02-thumb.webp",
+        "alt": "スターガーディアン Star Guardian",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/star-guardian/star-guardian-03.webp",
+        "thumb": "/products/star-guardian/star-guardian-03-thumb.webp",
+        "alt": "スターガーディアン Star Guardian",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/star-guardian/star-guardian-04.webp",
+        "thumb": "/products/star-guardian/star-guardian-04-thumb.webp",
+        "alt": "スターガーディアン Star Guardian",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/star-guardian/star-guardian-05.webp",
+        "thumb": "/products/star-guardian/star-guardian-05-thumb.webp",
+        "alt": "スターガーディアン Star Guardian",
+        "width": 1600,
+        "height": 900
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/7213010",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "mirilori-uniform",
+      "dark-knight",
+      "cravingdance"
+    ],
+    "legacyPath": "/product-star-guardian.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p>星の輝きと守護者の気高さをまとえる、<strong>VRChat向け3D衣装</strong>。</p>\n            <p><strong>「スターガーディアン - Star Guardian -」</strong>は、<strong>星・光・守護者</strong>をイメージした、ファンタジー感のある3D衣装です。</p>\n            <p>きらめく星のモチーフと、凛としたシルエットを組み合わせることで、かわいさの中にも特別感のある雰囲気を演出できます。<strong>発光感のあるワールド</strong>や幻想的な撮影シーン、<strong>アバター改変</strong>に合わせやすい衣装です。</p>\n            <p>華やかな立ち姿でのスクリーンショットはもちろん、<strong>動画制作やSNS用サムネイル</strong>、改変後のお披露目にもおすすめ。星空・魔法・守護者・アイドル風・ファンタジー寄りの世界観など、さまざまなテーマのコーディネートに活用できます。</p>\n            <ul>\n              <li>幻想的な衣装で撮影したい</li>\n              <li>星モチーフのかわいいコーデを作りたい</li>\n              <li>守護者のような特別感のある改変にしたい</li>\n            </ul>\n            <p>そんな方におすすめのVRChat向け3D衣装です。</p>\n            <p><strong>対応アバター、導入方法、利用規約</strong>、最新版の注意事項は、購入前に必ず<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>対象アバター用Prefab</strong>をHierarchy内のアバター直下に配置します。</li>\n              <li><strong>改変済みアバター</strong>や別衣装を併用する場合は、アップロード前に<strong>BOOTHの注意事項</strong>を確認してください。</li>\n            </ol>\n            <p><strong>改変済みアバター</strong>、衣装、スケール変更の内容によっては、<strong>位置、貫通、揺れものの調整</strong>が必要になる場合があります。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>Anim ※Poseがおまけでついています。</li>\n                  <li>FBX</li>\n                  <li>Prefab　(カラーバリエーション3種類)</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>112,927</strong></li>\n              <li>マテリアル数：<strong>4</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>改変済みアバターでも使えますか？</h3>\n            <p><strong>対応アバター</strong>でしたら使えます。ただし、体型、衣装、スケール、ボーン変更などの改変量によっては<strong>調整が必要</strong>です。</p>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3D衣装</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p>自分が使用する<strong>アバターが対象か</strong>、同梱ファイル、価格、利用条件、導入上の注意事項を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "galhalo",
+    "slug": "galhalo",
+    "published": true,
+    "sortOrder": 6,
+    "title": "ギャルヘイロー GalHalo",
+    "description": "ギャルヘイロー GalHaloは、アバターの印象づけや撮影アクセントに使いやすい、ヘイロー系の3D装飾品です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "accessory",
+    "categoryLabel": "装飾品",
+    "tags": [
+      "accessory"
+    ],
+    "subtags": [
+      "halo"
+    ],
+    "tagLabels": [
+      "装飾品"
+    ],
+    "subtagLabels": [
+      "ヘイロー"
+    ],
+    "avatars": [],
+    "likes": 88,
+    "price": "¥300",
+    "support": "VRChatアバター向け",
+    "content": "ヘイロー装飾、Prefab、Material、Texture、unitypackage",
+    "usage": "VRChat、Unity 2022、Modular Avatar、アバター装飾、撮影向け",
+    "summaryTags": [
+      "3D装飾品",
+      "ヘイロー",
+      "VRChat",
+      "Unity",
+      "Modular Avatar"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/galhalo/cover.webp",
+    "coverAlt": "ギャルヘイロー GalHalo",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/galhalo/galhalo-01.webp",
+        "thumb": "/products/galhalo/galhalo-01-thumb.webp",
+        "alt": "ギャルヘイロー GalHalo",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/galhalo/galhalo-02.webp",
+        "thumb": "/products/galhalo/galhalo-02-thumb.webp",
+        "alt": "ギャルヘイロー GalHalo",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "/products/galhalo/galhalo-03.webp",
+        "thumb": "/products/galhalo/galhalo-03-thumb.webp",
+        "alt": "ギャルヘイロー GalHalo",
+        "width": 1600,
+        "height": 900
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6867754",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "catmask",
+      "cravingdance",
+      "mirilori-uniform"
+    ],
+    "legacyPath": "/product-galhalo.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p>平成ギャルのきらめきを、頭上にオン。<br><strong>VRChat向け3D装飾「ギャルヘイロー / GalHalo」</strong>。</p>\n            <p>アバターの頭上に存在感をプラスできる、<strong>ギャル風デザインのヘイローアクセサリー</strong>です。ポップで目を引くシルエットと、発光感のある雰囲気で、<strong>写真撮影・動画制作・サムネイル作成</strong>のアクセントとして使いやすい装飾品になっています。</p>\n            <p>ヘイローは<strong>アニメーション付きで360°常時回転</strong>。静止画では頭まわりのシルエットを華やかに、動画やダンスシーンでは<strong>動きのあるワンポイント</strong>として映えます。</p>\n            <p><strong>ギャル風改変</strong>はもちろん、ポップ系・サイバー系・ネオン系・かわいい系のコーデにも合わせやすく、アバターの印象を手軽に変えたいときにおすすめです。髪型や衣装に合わせて<strong>位置やサイズを調整</strong>することで、自分のアバターにぴったりのバランスで楽しめます。</p>\n            <ul>\n              <li>頭まわりに目立つアクセントがほしい</li>\n              <li>ギャル風・ポップ系の改変をしたい</li>\n              <li>撮影や動画で映える動く装飾を追加したい</li>\n            </ul>\n            <p>そんな方におすすめの、VRChat向けヘイローアクセサリーです。</p>\n            <p><strong>同梱内容、利用条件、導入上の注意事項</strong>、最新版の更新内容については、購入前に必ず<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>同梱Prefab</strong>をヒエラルキーに配置します。</li>\n            </ol>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>43,131</strong></li>\n              <li>マテリアル数：<strong>1</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3Dデータ</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p><strong>同梱ファイル、価格、利用条件、導入上の注意事項</strong>を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "mini-whale",
+    "slug": "mini-whale",
+    "published": true,
+    "sortOrder": 7,
+    "title": "無料 ミニ クジラ",
+    "description": "無料 ミニ クジラは、小物や撮影アクセントとして使いやすい、ミニクジラの3Dモデルです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "avatar",
+    "categoryLabel": "3Dモデル",
+    "tags": [
+      "avatar"
+    ],
+    "subtags": [],
+    "tagLabels": [
+      "3Dモデル"
+    ],
+    "subtagLabels": [],
+    "avatars": [],
+    "likes": 168,
+    "price": "無料",
+    "support": "Unity / VRChat向け",
+    "content": "ミニクジラ3Dモデル、Prefab、Material、Texture、unitypackage",
+    "usage": "VRChat、Unity 2022、小物、撮影、ワールド装飾向け",
+    "summaryTags": [
+      "3Dモデル",
+      "無料",
+      "ミニクジラ",
+      "VRChat",
+      "Unity"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/mini-whale/cover.webp",
+    "coverAlt": "無料 ミニ クジラ",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/mini-whale/mini-whale-01.webp",
+        "thumb": "/products/mini-whale/mini-whale-01-thumb.webp",
+        "alt": "無料 ミニ クジラ",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mini-whale/mini-whale-02.webp",
+        "thumb": "/products/mini-whale/mini-whale-02-thumb.webp",
+        "alt": "無料 ミニ クジラ",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/mini-whale/mini-whale-03.webp",
+        "thumb": "/products/mini-whale/mini-whale-03-thumb.webp",
+        "alt": "無料 ミニ クジラ",
+        "width": 1000,
+        "height": 1000
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6421899",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "whale-summon",
+      "shark-summon",
+      "capybara-summon"
+    ],
+    "legacyPath": "/product-mini-whale.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p><strong>小さくてかわいいクジラ</strong>を、撮影やワールドのアクセントに。</p>\n            <p><strong>無料で使いやすい</strong>、ミニクジラの<strong>3Dモデル</strong>です。アバターのそばに置いたり、ワールドや撮影シーンの小さな飾りとして配置したり、<strong>サムネイル制作</strong>のワンポイントとして活用できます。</p>\n            <p>シンプルな構成なので、<strong>Unity上で配置やサイズを調整</strong>しながら使いやすさ◎</p>\n            <ul>\n              <li>無料で試せる3Dモデルがほしい</li>\n              <li>写真や動画に小さなかわいいアクセントを足したい</li>\n              <li>ワールドや撮影セットに海モチーフを置きたい</li>\n            </ul>\n            <p>そんな方におすすめの、ミニクジラ3Dモデルです。</p>\n            <p><strong>配布内容、利用条件、更新情報</strong>は<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Unity 2022</strong>の<strong>VRChatアバタープロジェクト</strong>を用意します。</li>\n              <li>入手した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>同梱Prefabまたはモデル</strong>をアバターやシーンへ配置します。</li>\n              <li>撮影や使用環境に合わせて<strong>位置、大きさ、向き</strong>を調整します。</li>\n              <li>調整を終えたらアップロードに進みます。</li>\n            </ol>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Shader</li>\n                  <li>Texture</li>\n                  <li>Animation</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>9,120</strong></li>\n              <li>マテリアル数：<strong>2</strong></li>\n            </ul>\n            <p><strong>モデル情報や最新版の同梱内容</strong>は、<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3Dデータ</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先や関係する素材の規約もあわせて確認してください。</p>\n            <h3>アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体や必要な外部ツール</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p><strong>同梱ファイル、利用条件、導入上の注意事項</strong>を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "dark-knight",
+    "slug": "dark-knight",
+    "published": true,
+    "sortOrder": 8,
+    "title": "Dark Knight",
+    "description": "Dark Knightは、Dark Knightの印象を取り入れた、VRChat向け衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "clothing",
+    "categoryLabel": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "subtags": [
+      "character-chocolat",
+      "character-kipfel",
+      "character-manuka",
+      "character-milltina",
+      "character-milfy",
+      "character-rurune",
+      "character-selestia",
+      "character-shinano",
+      "character-shinra",
+      "character-sio",
+      "character-shiratsume"
+    ],
+    "tagLabels": [
+      "衣装"
+    ],
+    "subtagLabels": [
+      "ショコラ",
+      "キプフェル",
+      "マヌカ",
+      "ミルティナ",
+      "ミルフィ",
+      "ルルネ",
+      "セレスティア",
+      "しなの",
+      "森羅",
+      "しお",
+      "しらつめ"
+    ],
+    "avatars": [
+      "ショコラ",
+      "キプフェル",
+      "マヌカ",
+      "ミルティナ",
+      "ミルフィ",
+      "ルルネ",
+      "セレスティア",
+      "しなの",
+      "森羅",
+      "しお",
+      "しらつめ"
+    ],
+    "likes": 613,
+    "price": "¥500〜 / Fullset ¥2,500",
+    "support": "ショコラ / キプフェル / マヌカ / ミルティナ / ミルフィ / ルルネ / セレスティア / しなの / 森羅 / しお / しらつめ",
+    "content": "対応衣装データ、Prefab、Material、Texture、unitypackage",
+    "usage": "VRChat、Unity 2022、Modular Avatar、アバター改変、撮影向け",
+    "summaryTags": [
+      "3D衣装",
+      "Dark Knight",
+      "VRChat",
+      "Unity",
+      "Modular Avatar"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/dark-knight/cover.webp",
+    "coverAlt": "Dark Knight",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/dark-knight/dark-knight-01.webp",
+        "thumb": "/products/dark-knight/dark-knight-01-thumb.webp",
+        "alt": "Dark Knight",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/dark-knight/dark-knight-02.webp",
+        "thumb": "/products/dark-knight/dark-knight-02-thumb.webp",
+        "alt": "Dark Knight",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/dark-knight/dark-knight-03.webp",
+        "thumb": "/products/dark-knight/dark-knight-03-thumb.webp",
+        "alt": "Dark Knight",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "/products/dark-knight/dark-knight-04.webp",
+        "thumb": "/products/dark-knight/dark-knight-04-thumb.webp",
+        "alt": "Dark Knight",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "/products/dark-knight/dark-knight-05.webp",
+        "thumb": "/products/dark-knight/dark-knight-05-thumb.webp",
+        "alt": "Dark Knight",
+        "width": 1600,
+        "height": 900
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6491880",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "mirilori-uniform",
+      "star-guardian",
+      "cravingdance"
+    ],
+    "legacyPath": "/product-dark-knight.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p>闇をまとい、凛々しく立つ。<br><strong>VRChat向けダークファンタジー衣装「Dark Knight -暗黒騎士-」</strong>。</p>\n            <p>重厚感のあるダークナイトのイメージを取り入れた、<strong>VRChat向け3D衣装</strong>です。黒を基調とした強めの雰囲気で、<strong>ファンタジー系ワールド</strong>や夜景、城、廃墟、戦闘風の撮影シーンなどに合わせやすく、アバターの印象を一気に引き締められます。</p>\n            <p>かわいいアバターに着せれば、普段とは違う<strong>かっこいい改変</strong>に。クール系・中二系・騎士風の演出と合わせれば、<strong>撮影や動画制作</strong>で主役感のある一枚を作りやすい衣装です。</p>\n            <p><strong>アバター撮影、SNS用サムネイル、動画のワンシーン</strong>、改変後のお披露目などにおすすめ。表情やポーズ、武器系アクセサリー、暗めのライティングと組み合わせることで、より雰囲気のあるダークファンタジーコーデを楽しめます。</p>\n            <p>本商品は<strong>衣装のみの販売</strong>です。<strong>キャラ3Dモデルは同梱されません</strong>。対応アバター、価格差分、同梱内容、利用規約、導入上の注意事項は、購入前に必ず<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Modular Avatar</strong>を導入した<strong>Unity 2022</strong>のプロジェクトを用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>対象アバター用Prefab</strong>をHierarchy内のアバター直下に配置します。</li>\n              <li><strong>改変済みアバター</strong>や別衣装を併用する場合は、アップロード前に<strong>BOOTHの注意事項</strong>を確認してください。</li>\n            </ol>\n            <p><strong>改変済みアバター</strong>、衣装、スケール変更の内容によっては、<strong>位置、貫通、揺れものの調整</strong>が必要になる場合があります。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>77,599～</strong></li>\n              <li>マテリアル数：<strong>3</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>改変済みアバターでも使えますか？</h3>\n            <p><strong>対応アバター</strong>でしたら使えます。ただし、体型、衣装、スケール、ボーン変更などの改変量によっては<strong>調整が必要</strong>です。</p>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>3D衣装</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p>含まれません。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p>自分が使用する<strong>アバターが対象か</strong>、同梱ファイル、価格、利用条件、導入上の注意事項を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "restraint-system",
+    "slug": "restraint-system",
+    "published": true,
+    "sortOrder": 9,
+    "title": "Restraint System",
+    "description": "Restraint Systemは、ワールド内の演出や仕掛けとして確認できる、Restraint SystemのLPです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "world-gimmick",
+    "categoryLabel": "ワールドギミック",
+    "tags": [
+      "world-gimmick"
+    ],
+    "subtags": [],
+    "tagLabels": [
+      "ワールドギミック"
+    ],
+    "subtagLabels": [],
+    "avatars": [],
+    "likes": 370,
+    "price": "¥1,000",
+    "support": "VRChatワールド向け",
+    "content": "ワールド用ギミック、Prefab、設定ファイル、unitypackage",
+    "usage": "VRChat、Unity 2022、ワールド演出、撮影向け",
+    "summaryTags": [
+      "ワールドギミック",
+      "VRChat",
+      "Unity",
+      "Prefab"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/restraint-system/cover.webp",
+    "coverAlt": "Restraint System",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/restraint-system/restraint-system-01.webp",
+        "thumb": "/products/restraint-system/restraint-system-01-thumb.webp",
+        "alt": "Restraint System",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/restraint-system/restraint-system-02.webp",
+        "thumb": "/products/restraint-system/restraint-system-02-thumb.webp",
+        "alt": "Restraint System",
+        "width": 1000,
+        "height": 1000
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6981059",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "monsterchair",
+      "shark-summon",
+      "whale-summon"
+    ],
+    "legacyPath": "/product-restraint-system.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p>ワールドに“<strong>演出として使える拘束ギミック</strong>”を追加。<br><strong>VRChat向けワールドギミック「手錠 & 拘束システム / Restraint System」</strong>。</p>\n            <p><strong>VRChatワールド内</strong>で、RP・撮影・配信演出・ゲームイベントなどに使える、<strong>拘束台＆手錠のギミックパッケージ</strong>です。</p>\n            <p>ワールドに配置するだけで、<strong>雰囲気のあるセット演出</strong>を作りやすく、警備室、牢屋、研究施設、ホラー系ワールド、脱出ゲーム風のシーン、ロールプレイ用の舞台づくりなどに活用できます。</p>\n            <ul>\n              <li>ワールドに雰囲気のあるギミックを置きたい</li>\n              <li>RPやイベントで使える演出装置がほしい</li>\n              <li>撮影・動画制作に使えるセット素材を探している</li>\n            </ul>\n            <p>そんな方におすすめの、VRChatワールド向け拘束ギミックです。</p>\n            <p>本ギミックは、<strong>利用者同士の同意</strong>を前提とした演出用アイテムです。公開ワールドやイベントで使用する場合は、必ず<strong>ギミックを受ける方の承諾</strong>を得たうえで、トラブルにならない範囲でご利用ください。</p>\n            <p><strong>導入方法、動作環境、同梱内容、利用条件</strong>、最新版の注意事項は、購入前に必ず<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Unity 2022</strong>と<strong>VRChat向けワールド制作環境</strong>を用意します。</li>\n              <li>購入した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>同梱Prefabまたは設定ファイル</strong>をワールドへ配置します。</li>\n              <li><strong>Play ModeやSDK</strong>の確認手順で、ギミックの配置、動作、見え方を確認します。</li>\n              <li>既存ギミックと組み合わせる場合は、<strong>重複設定や干渉</strong>がないか<strong>BOOTHの注意事項</strong>を確認してください。</li>\n            </ol>\n            <p>この商品は、<strong>Unity上でのワールド配置</strong>を想定しています。ワールド構成、既存ギミック、SDK設定によっては<strong>調整が必要</strong>になる場合があります。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li><strong>Tracking制御のunitypackage</strong></li>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>Sound：5種（施錠・解除音など）</li>\n                  <li>Animation：5種＋Animator Controller5種</li>\n                  <li>FBX：手錠・拘束台（モデル付き）</li>\n                  <li>Material：3種</li>\n                  <li>Udon Script：5種（ギミック制御スクリプト）</li>\n                </ul>\n              </li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>どのワールドでも使えますか？</h3>\n            <p><strong>UnityとVRChat SDK</strong>の構成が条件に合えば使える可能性があります。ただし、既存ギミックやワールド構成によって<strong>調整が必要</strong>です。</p>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p>Unity上で扱える<strong>演出素材</strong>として利用できる場合があります。公開先の規約や利用条件をあわせて確認してください。</p>\n            <h3>アバター本体やワールド本体は含まれますか？</h3>\n            <p>含まれません。必要な<strong>アバター、ワールド、SDK類</strong>は別途用意してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p><strong>同梱ファイル、価格、利用条件、導入上の注意事項、必要環境</strong>を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "catmask",
+    "slug": "catmask",
+    "published": true,
+    "sortOrder": 10,
+    "title": "にゃんこお面 CatMask",
+    "description": "にゃんこお面 CatMaskは、アバターの表情づけや撮影アクセントに使いやすい、にゃんこお面の3D装飾品です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "accessory",
+    "categoryLabel": "装飾品",
+    "tags": [
+      "accessory"
+    ],
+    "subtags": [
+      "mask"
+    ],
+    "tagLabels": [
+      "装飾品"
+    ],
+    "subtagLabels": [
+      "マスク"
+    ],
+    "avatars": [],
+    "likes": 406,
+    "price": "無料",
+    "support": "VRChatアバター向け",
+    "content": "お面モデル、Prefab、Material、Texture、unitypackage",
+    "usage": "VRChat、Unity 2022、アバター装飾、撮影向け",
+    "summaryTags": [
+      "3D装飾品",
+      "無料",
+      "お面",
+      "VRChat",
+      "Unity"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/catmask/cover.webp",
+    "coverAlt": "にゃんこお面 CatMask",
+    "coverWidth": 600,
+    "coverHeight": 338,
+    "gallery": [
+      {
+        "src": "/products/catmask/catmask-01.webp",
+        "thumb": "/products/catmask/catmask-01-thumb.webp",
+        "alt": "にゃんこお面 CatMask",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "/products/catmask/catmask-02.webp",
+        "thumb": "/products/catmask/catmask-02-thumb.webp",
+        "alt": "にゃんこお面 CatMask",
+        "width": 1600,
+        "height": 900
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6952703",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "galhalo",
+      "cravingdance",
+      "mirilori-uniform"
+    ],
+    "legacyPath": "/product-catmask.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p>にゃんこのかわいさを、アバターの顔まわりに。<br><strong>VRChat向け3Dアクセサリー「にゃんこお面」</strong>。</p>\n            <p><strong>VRChat</strong>での<strong>アバター改変や撮影</strong>に使いやすい、にゃんこモチーフのお面アクセサリーです。顔まわりに分かりやすいかわいさをプラスできるので、<strong>写真撮影・動画制作・SNS用サムネイル・改変後のお披露目</strong>などで、アバターの印象を手軽に変えられます。</p>\n            <ul>\n              <li>顔まわりにかわいい小物を足したい</li>\n              <li>撮影やサムネイルで印象を変えたい</li>\n              <li>気軽に使えるマスク系アクセサリーがほしい</li>\n            </ul>\n            <p>そんな方におすすめの、<strong>VRChat向けにゃんこお面アクセサリー</strong>です。</p>\n            <p>本商品は、<strong>フォロワー222人達成記念</strong>として制作された<strong>無料配布モデル</strong>です。個人利用・改変が可能ですが、<strong>データの再配布・販売は禁止</strong>されています。利用条件、導入上の注意事項、最新版の同梱内容については、購入前に必ず<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Unity 2022</strong>の<strong>VRChatアバタープロジェクト</strong>を用意します。</li>\n              <li>購入または入手した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>同梱Prefabまたはモデル</strong>をアバターへ配置します。</li>\n              <li><strong>アバターの顔、髪型、頭部サイズ</strong>に合わせて<strong>位置や大きさ</strong>を調整します。</li>\n              <li>表示やマテリアルを確認してから、撮影やアップロードに進みます。</li>\n            </ol>\n            <p>この商品は、<strong>Unity上での配置や調整</strong>を想定しています。アバターの改変内容、髪型、衣装、スケールによっては<strong>位置や表示の調整</strong>が必要になる場合があります。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>5,394</strong></li>\n              <li>マテリアル数：<strong>1</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p><strong>Unity上で扱える3Dデータ</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先やアバター制作者の規約もあわせて確認してください。</p>\n            <h3>対応アバター本体は含まれますか？</h3>\n            <p><strong>含まれません</strong>。<strong>アバター本体</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p><strong>同梱ファイル、価格、利用条件、導入上の注意事項</strong>を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  },
+  {
+    "id": "monsterchair",
+    "slug": "monsterchair",
+    "published": true,
+    "sortOrder": 11,
+    "title": "MonsterChair",
+    "description": "MonsterChairは、VRChat内の演出や撮影に使いやすい、MonsterChairのギミック作品です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "category": "gimmick",
+    "categoryLabel": "ギミック",
+    "tags": [
+      "gimmick"
+    ],
+    "subtags": [
+      "chair-gimmick"
+    ],
+    "tagLabels": [
+      "ギミック"
+    ],
+    "subtagLabels": [
+      "椅子ギミック"
+    ],
+    "avatars": [],
+    "likes": 50,
+    "price": "¥300",
+    "support": "VRChat / Unity向け",
+    "content": "MonsterChairギミック、Prefab、Material、Texture、unitypackage",
+    "usage": "VRChat、Unity 2022、演出、撮影向け",
+    "summaryTags": [
+      "ギミック",
+      "MonsterChair",
+      "VRChat",
+      "Unity",
+      "Prefab"
+    ],
+    "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+    "coverImage": "/products/monsterchair/cover.webp",
+    "coverAlt": "MonsterChair",
+    "coverWidth": 600,
+    "coverHeight": 600,
+    "gallery": [
+      {
+        "src": "/products/monsterchair/monsterchair-01.webp",
+        "thumb": "/products/monsterchair/monsterchair-01-thumb.webp",
+        "alt": "MonsterChair",
+        "width": 1000,
+        "height": 1000
+      },
+      {
+        "src": "/products/monsterchair/monsterchair-02.webp",
+        "thumb": "/products/monsterchair/monsterchair-02-thumb.webp",
+        "alt": "MonsterChair",
+        "width": 1000,
+        "height": 1000
+      }
+    ],
+    "salesUrls": {
+      "booth": "https://macanon.booth.pm/items/6518994",
+      "dlsite": "",
+      "external": []
+    },
+    "relatedIds": [
+      "shark-summon",
+      "capybara-summon",
+      "restraint-system"
+    ],
+    "legacyPath": "/product-monsterchair.html",
+    "contentHtml": "<article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">商品詳細</h2>\n            <p>存在感のある椅子を呼び出して、撮影や演出にアクセントを加える<strong>MonsterChair</strong>。</p>\n            <p><strong>VRChat</strong>での<strong>写真撮影、動画制作、フレンドとの交流</strong>に使いやすい、<strong>椅子モチーフのギミック素材</strong>です。キャラクターの周辺に印象的なオブジェクトを置きたい時や、ワールド内でちょっと目を引く演出を作りたい時に活用できます。</p>\n            <p><strong>椅子ギミック</strong>として分かりやすい見た目なので、撮影用の小物、ネタ演出、<strong>サムネイル制作</strong>のワンポイントにも使いやすい構成です。導入先のアバターやワールド、既存Prefabとの組み合わせによっては、<strong>配置やスケールの調整</strong>が必要になる場合があります。</p>\n            <ul>\n              <li>撮影に使える椅子ギミックがほしい</li>\n              <li>フレンドと遊べる分かりやすい小ネタを追加したい</li>\n              <li>動画やサムネイルに使える印象的なオブジェクトを置きたい</li>\n            </ul>\n            <p>そんな方におすすめの、<strong>VRChat向け椅子ギミック</strong>です。</p>\n            <p><strong>価格、同梱内容、最新版の注意事項</strong>については<strong>BOOTHの商品ページ</strong>をご確認ください。</p>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>導入方法</h2>\n            <ol>\n              <li><strong>Unity 2022</strong>の<strong>VRChatアバタープロジェクト</strong>を用意します。</li>\n              <li>入手した<strong>unitypackage</strong>をプロジェクトへインポートします。</li>\n              <li><strong>BOOTHの商品説明</strong>に従い、<strong>同梱Prefabまたはモデル</strong>をアバターやシーンへ配置します。</li>\n              <li>撮影や使用環境に合わせて<strong>位置、大きさ、向き</strong>を調整します。</li>\n              <li>調整を終えたらアップロードに進みます。</li>\n            </ol>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>同梱内容</h2>\n            <h3>◆内容</h3>\n            <ul>\n              <li>当アセットの<strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                  <li>Animation</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>※モデル情報</h3>\n            <ul>\n              <li>ポリゴン数：<strong>31,960</strong></li>\n              <li>マテリアル数：<strong>1</strong></li>\n            </ul>\n          </article>\n\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>VRChat以外でも使えますか？</h3>\n            <p><strong>Unity上で扱える3Dデータ</strong>として、<strong>静止画撮影、動画制作、3Dゲーム制作</strong>などにも使用できます。公開先や関係する素材の規約もあわせて確認してください。</p>\n            <h3>アバター本体は含まれますか？</h3>\n            <p><strong>含まれません</strong>。<strong>アバター本体や必要な外部ツール</strong>は各公式ページから別途入手してください。</p>\n            <h3>購入前に何を確認すればいいですか？</h3>\n            <p><strong>同梱ファイル、価格、利用条件、導入上の注意事項</strong>を<strong>BOOTHの商品ページ</strong>で確認してください。</p>\n          </article>"
+  }
+]
