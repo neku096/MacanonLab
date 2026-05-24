@@ -1,4 +1,4 @@
-import ProductsBrowser from "@/components/ProductsBrowser";
+import ProductCatalog from "@/components/ProductCatalog";
 import { getFilterOptions, getPublishedProducts } from "@/lib/products";
 
 export const metadata = {
@@ -10,10 +10,13 @@ export default async function ProductsPage({ searchParams }) {
   const params = await searchParams;
   const products = getPublishedProducts();
   const options = getFilterOptions();
-  const tagParam = params?.tag || "all";
+  const tagParam = getSingleParam(params?.tag) || "all";
+  const subtagParam = getSingleParam(params?.subtag);
+  const avatarParam = getSingleParam(params?.avatar);
+  const sortParam = getSingleParam(params?.sort);
   const tagFilter = options.tags.includes(tagParam) ? tagParam : "all";
-  const subtagFilter = params?.subtag || (options.subtags.includes(tagParam) ? tagParam : "all");
-  const avatarFilter = params?.avatar || (options.avatars.includes(tagParam) ? tagParam : "all");
+  const subtagFilter = subtagParam || (options.subtags.includes(tagParam) ? tagParam : "all");
+  const avatarFilter = avatarParam || (options.avatars.includes(tagParam) ? tagParam : "all");
 
   return (
     <main className="booth-list-page">
@@ -24,17 +27,22 @@ export default async function ProductsPage({ searchParams }) {
             <p className="booth-list-lead">商品をサムネイルから確認できます。</p>
           </div>
         </div>
-        <ProductsBrowser
+        <ProductCatalog
           products={products}
           options={options}
           initialFilters={{
             tag: tagFilter,
             subtag: subtagFilter,
             avatar: avatarFilter,
-            sort: params?.sort || "default"
+            sort: sortParam || "default"
           }}
         />
       </section>
     </main>
   );
+}
+
+function getSingleParam(value) {
+  if (Array.isArray(value)) return value[0];
+  return value;
 }

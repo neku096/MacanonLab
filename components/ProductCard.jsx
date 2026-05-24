@@ -3,6 +3,7 @@ import Link from "next/link";
 
 export default function ProductCard({ product, priority = false, variant = "grid" }) {
   const isRelated = variant === "related";
+  const caption = getCardCaption(product);
 
   return (
     <Link
@@ -25,9 +26,19 @@ export default function ProductCard({ product, priority = false, variant = "grid
       {isRelated ? (
         <>
           <strong>{product.title}</strong>
-          <small>{product.support || product.categoryLabel}</small>
+          <small>{caption}</small>
         </>
       ) : null}
     </Link>
   );
+}
+
+function getCardCaption(product) {
+  if (product.subtags?.includes("summon-gimmick")) return "召喚ギミック";
+  if (product.subtags?.includes("chair-gimmick")) return "ギミック";
+  if (product.tags?.includes("clothing")) return "3D衣装";
+  if (product.tags?.includes("accessory")) return "3D装飾品";
+  if (product.tags?.includes("avatar")) return "3Dモデル";
+  if (product.tags?.includes("world-gimmick")) return "ワールドギミック";
+  return product.categoryLabel || product.support;
 }
