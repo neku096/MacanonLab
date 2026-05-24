@@ -64,6 +64,11 @@ function translateText(text) {
     return `Switch ${translateText(productImageSwitch[1])} product images`;
   }
 
+  const productImageOpen = text.match(/^(.+)の商品画像を拡大表示$/);
+  if (productImageOpen) {
+    return `Open ${translateText(productImageOpen[1])} product image gallery`;
+  }
+
   const productPageLink = text.match(/^(.+)の商品ページへ$/);
   if (productPageLink) {
     return `Open ${translateText(productPageLink[1])} product page`;

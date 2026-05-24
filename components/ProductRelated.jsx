@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 
 export default function ProductRelated({ products }) {
@@ -7,9 +8,12 @@ export default function ProductRelated({ products }) {
     <section className="section product-related-section" aria-labelledby="related-products-title">
       <div className="section-heading">
         <div>
-          <small>RELATED</small>
+          <p className="eyebrow">Related</p>
           <h2 id="related-products-title">関連商品</h2>
         </div>
+        <Link className="button secondary" href="/products">
+          BOOTH作品一覧へ
+        </Link>
       </div>
       <div className="product-related-grid">
         {products.map((product) => (
