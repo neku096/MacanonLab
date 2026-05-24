@@ -2,6 +2,7 @@
 Thumbs.db
 node_modules/
 .next/
+.next-preview-*/
 dist/
 build/
 snapshots/

@@ -2,10 +2,17 @@
 setlocal EnableExtensions EnableDelayedExpansion
 chcp 65001 >nul
 
-cd /d "%~dp0"
+set "PROJECT_DIR=%~dp0"
+pushd "%PROJECT_DIR%" >nul 2>nul
+if errorlevel 1 (
+  echo [ERROR] Could not enter the project directory.
+  echo Path: %PROJECT_DIR%
+  pause
+  exit /b 1
+)
 
-set "START_PORT=3200"
-set "MAX_PORT=3299"
+set "START_PORT=3100"
+set "MAX_PORT=3199"
 set "PORT=%START_PORT%"
 
 if "%~1"=="--help" goto usage
@@ -13,7 +20,10 @@ if "%~1"=="/?" goto usage
 
 if not exist "package.json" (
   echo [ERROR] package.json was not found.
-  echo Run this bat from the project root.
+  echo This bat must be placed in the project root.
+  echo Current directory:
+  cd
+  popd >nul 2>nul
   pause
   exit /b 1
 )
@@ -22,6 +32,7 @@ where node.exe >nul 2>nul
 if errorlevel 1 (
   echo [ERROR] Node.js was not found.
   echo Install Node.js, then run this bat again.
+  popd >nul 2>nul
   pause
   exit /b 1
 )
@@ -30,14 +41,7 @@ where npm.cmd >nul 2>nul
 if errorlevel 1 (
   echo [ERROR] npm was not found.
   echo Check your Node.js / npm installation.
-  pause
-  exit /b 1
-)
-
-where curl.exe >nul 2>nul
-if errorlevel 1 (
-  echo [ERROR] curl.exe was not found.
-  echo Run this bat in an environment with Windows curl.exe.
+  popd >nul 2>nul
   pause
   exit /b 1
 )
@@ -48,26 +52,15 @@ if not exist "node_modules\next" (
   echo.
   echo   npm install
   echo.
+  popd >nul 2>nul
   pause
   exit /b 1
-)
-
-call :find_running_preview
-if not errorlevel 1 (
-  set "ROOT_URL=http://localhost:%PORT%"
-  echo.
-  echo [macanon] Existing Next.js preview found.
-  echo   Port: %PORT%
-  echo   URL : !ROOT_URL!
-  echo.
-  echo Opening browser...
-  start "" "!ROOT_URL!"
-  exit /b 0
 )
 
 :find_port
 if %PORT% GTR %MAX_PORT% (
   echo [ERROR] No free port was found from %START_PORT% to %MAX_PORT%.
+  popd >nul 2>nul
   pause
   exit /b 1
 )
@@ -91,54 +84,58 @@ if errorlevel 1 (
 )
 
 set "ROOT_URL=http://localhost:%PORT%"
+set "PRODUCTS_URL=%ROOT_URL%/products"
+set "PREVIEW_DIST_DIR=.next-preview-%PORT%"
 
 echo.
-echo [macanon] Starting Next.js preview.
-echo   Port: %PORT%
-echo   URL : %ROOT_URL%
+echo [macanon] Starting Next.js local preview.
+echo   Project : %CD%
+echo   Port    : %PORT%
+echo   Cache   : %PREVIEW_DIST_DIR%
+echo   Top     : %ROOT_URL%/
+echo   Products: %PRODUCTS_URL%
 echo.
 
-start "MacanonLab Next %PORT%" /D "%~dp0" cmd /k "npm run dev -- -p %PORT%"
+start "MacanonLab Next %PORT%" /D "%CD%" cmd /k "set NEXT_PREVIEW_DIST_DIR=%PREVIEW_DIST_DIR%&& npm.cmd run dev -- -p %PORT%"
 
 echo Waiting for the server...
 call :wait_for_http %PORT%
 if errorlevel 1 (
   echo.
-  echo [ERROR] http://localhost:%PORT% did not respond.
+  echo [ERROR] http://localhost:%PORT%/ did not respond.
   echo Check the Next.js log in the other window.
-  echo If .next is broken, see README.md for the cleanup steps.
+  echo If .next looks broken, stop all Next.js windows and delete .next:
+  echo.
+  echo   rmdir /s /q .next
+  echo   rmdir /s /q .next-preview-*
+  echo.
+  rmdir /s /q "!LOCK_DIR!" >nul 2>nul
+  popd >nul 2>nul
   pause
   exit /b 1
 )
 
 echo Opening browser...
-start "" "%ROOT_URL%"
+start "" "%ROOT_URL%/"
+start "" "%PRODUCTS_URL%"
 
 echo.
-echo Preview is ready. Press Ctrl+C in the Next.js window to stop the server.
+echo Preview is ready.
+echo Stop it with Ctrl+C in the Next.js window.
+popd >nul 2>nul
 exit /b 0
 
 :is_port_free
-netstat -ano | findstr /R /C:":%~1 .*LISTENING" >nul 2>nul
-if not errorlevel 1 exit /b 1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { $client = [System.Net.Sockets.TcpClient]::new('127.0.0.1', %~1); $client.Close(); exit 1 } catch { exit 0 }" >nul 2>nul
+if errorlevel 1 exit /b 1
 exit /b 0
-
-:find_running_preview
-for /L %%P in (%START_PORT%,1,%MAX_PORT%) do (
-  curl.exe -fsS --max-time 1 "http://localhost:%%P/" 2>nul | findstr /I /C:"macanon" >nul 2>nul
-  if not errorlevel 1 (
-    set "PORT=%%P"
-    exit /b 0
-  )
-)
-exit /b 1
 
 :wait_for_http
 set "WAIT_PORT=%~1"
 for /L %%I in (1,1,60) do (
-  curl.exe -fsS --max-time 2 -o nul "http://localhost:%WAIT_PORT%" >nul 2>nul
+  node -e "const http=require('http');const req=http.get('http://127.0.0.1:%WAIT_PORT%/',(res)=>{res.resume();process.exit(res.statusCode<500?0:1)});req.on('error',()=>process.exit(1));req.setTimeout(2000,()=>{req.destroy();process.exit(1)});" >nul 2>nul
   if not errorlevel 1 exit /b 0
-  timeout /t 1 /nobreak >nul
+  ping 127.0.0.1 -n 2 >nul
 )
 exit /b 1
 
@@ -149,7 +146,9 @@ echo Usage:
 echo   preview-next.bat
 echo.
 echo Behavior:
-echo   Finds a free port starting at 3200.
+echo   Finds a free port starting at 3100.
 echo   Runs npm run dev -- -p ^<port^>.
-echo   Opens only the top page in the browser.
+echo   Opens http://localhost:^<port^>/ and /products.
+echo   If 3100 is already in use, it tries 3101, 3102, ...
+popd >nul 2>nul
 exit /b 0
