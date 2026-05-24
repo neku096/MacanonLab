@@ -413,6 +413,7 @@ html[lang="en"] .brand-subtitle {
   display: grid;
   place-items: center;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .share-backdrop {
@@ -425,12 +426,15 @@ html[lang="en"] .brand-subtitle {
 .share-panel {
   position: relative;
   width: min(520px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
   border: 1px solid rgba(0, 185, 225, 0.18);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.96);
   box-shadow: 0 24px 70px rgba(5, 50, 74, 0.24);
   color: #102d3d;
   padding: 30px;
+  transform: translateY(clamp(18px, 4vh, 42px));
 }
 
 .share-close {
@@ -3639,6 +3643,7 @@ p {
 
   .share-panel {
     padding: 24px;
+    transform: translateY(clamp(10px, 2.8vh, 22px));
   }
 
   .share-options {

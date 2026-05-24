@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 function getShareData() {
   if (typeof document === "undefined") {
@@ -17,6 +18,7 @@ function getShareData() {
 export default function ShareButton() {
   const [isOpen, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const closeButtonRef = useRef(null);
   const lastFocusedButtonRef = useRef(null);
 
@@ -38,6 +40,10 @@ export default function ShareButton() {
     window.requestAnimationFrame(restoreFocus);
     window.setTimeout(restoreFocus, 0);
   }
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     document.body.classList.toggle("is-share-modal-open", isOpen);
@@ -110,6 +116,47 @@ export default function ShareButton() {
   }
 
   const shareData = isOpen ? getShareData() : { title: "", url: "" };
+  const modal = (
+    <div className="share-modal" role="dialog" aria-modal="true" aria-labelledby="share-modal-title" hidden={!isOpen}>
+      <div className="share-backdrop" data-share-close onClick={closeShareModal} />
+      <div className="share-panel">
+        <button className="share-close" type="button" data-share-close data-share-close-button aria-label="閉じる" onClick={closeShareModal} ref={closeButtonRef}>
+          ×
+        </button>
+        <h2 id="share-modal-title" className="share-title">
+          現在のページを共有
+        </h2>
+        <p className="share-page-title" data-share-title>
+          {shareData.title}
+        </p>
+        <p className="share-page-url" data-share-url>
+          {shareData.url}
+        </p>
+        <div className="share-options">
+          <button className="share-option" type="button" data-share-action="x" onClick={shareToX}>
+            <span className="share-option-icon share-option-x" aria-hidden="true">
+              X
+            </span>
+            <span>Xでシェア</span>
+          </button>
+          <button className="share-option" type="button" data-share-action="line" onClick={shareToLine}>
+            <span className="share-option-icon share-option-line" aria-hidden="true">
+              LINE
+            </span>
+            <span>LINEでシェア</span>
+          </button>
+          <button className="share-option" type="button" data-share-action="copy" onClick={copyUrl}>
+            <span className="share-option-icon share-option-copy" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.9-3.9a3 3 0 0 1 4.2 4.2l-3 3a3 3 0 0 1-4.25 0 1 1 0 1 1 1.42-1.42 1 1 0 0 0 1.41 0l3-3a1 1 0 0 0-1.41-1.41L12 13.4a1 1 0 0 1-1.4 0Zm2.8-2.8a1 1 0 0 1 0 1.4l-3.9 3.9a3 3 0 1 1-4.2-4.2l3-3a3 3 0 0 1 4.25 0 1 1 0 0 1-1.42 1.42 1 1 0 0 0-1.41 0l-3 3a1 1 0 1 0 1.41 1.41L12 10.6a1 1 0 0 1 1.4 0Z" />
+              </svg>
+            </span>
+            <span data-copy-label>{copied ? "URLをコピーしました" : "URLをコピー"}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -119,46 +166,7 @@ export default function ShareButton() {
         </svg>
         <span>共有</span>
       </button>
-
-      <div className="share-modal" role="dialog" aria-modal="true" aria-labelledby="share-modal-title" hidden={!isOpen}>
-        <div className="share-backdrop" data-share-close onClick={closeShareModal} />
-        <div className="share-panel">
-          <button className="share-close" type="button" data-share-close data-share-close-button aria-label="閉じる" onClick={closeShareModal} ref={closeButtonRef}>
-            ×
-          </button>
-          <h2 id="share-modal-title" className="share-title">
-            現在のページを共有
-          </h2>
-          <p className="share-page-title" data-share-title>
-            {shareData.title}
-          </p>
-          <p className="share-page-url" data-share-url>
-            {shareData.url}
-          </p>
-          <div className="share-options">
-            <button className="share-option" type="button" data-share-action="x" onClick={shareToX}>
-              <span className="share-option-icon share-option-x" aria-hidden="true">
-                X
-              </span>
-              <span>Xでシェア</span>
-            </button>
-            <button className="share-option" type="button" data-share-action="line" onClick={shareToLine}>
-              <span className="share-option-icon share-option-line" aria-hidden="true">
-                LINE
-              </span>
-              <span>LINEでシェア</span>
-            </button>
-            <button className="share-option" type="button" data-share-action="copy" onClick={copyUrl}>
-              <span className="share-option-icon share-option-copy" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.9-3.9a3 3 0 0 1 4.2 4.2l-3 3a3 3 0 0 1-4.25 0 1 1 0 1 1 1.42-1.42 1 1 0 0 0 1.41 0l3-3a1 1 0 0 0-1.41-1.41L12 13.4a1 1 0 0 1-1.4 0Zm2.8-2.8a1 1 0 0 1 0 1.4l-3.9 3.9a3 3 0 1 1-4.2-4.2l3-3a3 3 0 0 1 4.25 0 1 1 0 0 1-1.42 1.42 1 1 0 0 0-1.41 0l-3 3a1 1 0 1 0 1.41 1.41L12 10.6a1 1 0 0 1 1.4 0Z" />
-                </svg>
-              </span>
-              <span data-copy-label>{copied ? "URLをコピーしました" : "URLをコピー"}</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      {mounted ? createPortal(modal, document.body) : null}
     </>
   );
 }

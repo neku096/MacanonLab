@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <Link className="brand brand-text" href="/" aria-label="トップへ">
+      <Link className="brand brand-text" href="/" aria-label="トップへ" prefetch={false}>
         <img
           className="brand-ocean-logo"
           src="/Macanon_Samune/macanon_Logo_transparent.webp"
@@ -36,7 +36,7 @@ export default function Header() {
         <ShareButton />
       </div>
       <nav className="nav" aria-label="メインナビゲーション">
-        <Link href="/" aria-current={isActive("/") ? "page" : undefined}>
+        <Link href="/" aria-current={isActive("/") ? "page" : undefined} prefetch={false}>
           トップ
         </Link>
         <Link href="/products" aria-current={isActive("/products") ? "page" : undefined}>

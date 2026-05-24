@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <Link className="footer-brand footer-text-brand" href="/" aria-label="トップへ">
+      <Link className="footer-brand footer-text-brand" href="/" aria-label="トップへ" prefetch={false}>
         <img
           className="footer-ocean-logo"
           src="/Macanon_Samune/macanon_Logo_transparent.webp"

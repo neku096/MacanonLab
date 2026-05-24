@@ -1,42 +1,20 @@
-import Link from "next/link";
+import BlogFilterPanel from "@/components/BlogFilterPanel";
 
 export const metadata = {
-  title: "ブログ",
-  description: "macanonのお知らせ、制作メモ、使い方に関するブログです。"
+  title: "Blog",
+  description: "macanonのVRChat、Unity、Modular Avatar向けTips、商品レビュー、制作ブログ記事一覧です。タグで絞り込みできます。"
 };
-
-const posts = [
-  {
-    title: "BOOTH作品をNext.jsで管理しやすくしました",
-    excerpt: "商品データを追加するだけでLPと関連商品を生成できる構成へ移行しています。",
-    href: "/products"
-  },
-  {
-    title: "利用規約・ライセンス",
-    excerpt: "購入前に利用条件、禁止事項、導入上の注意事項をご確認ください。",
-    href: "/terms"
-  }
-];
 
 export default function BlogPage() {
   return (
-    <main className="blog-page">
-      <section className="section sub-hero">
-        <p className="eyebrow">Blog</p>
-        <h1>ブログ</h1>
-        <p>制作メモ、更新情報、使い方に関する情報をまとめます。</p>
-      </section>
-      <section className="section article-related" aria-label="ブログ記事">
-        <div className="article-related-list">
-          {posts.map((post) => (
-            <Link className="article-related-item" href={post.href} key={post.title}>
-              <span className="article-related-copy">
-                <strong>{post.title}</strong>
-                <small>{post.excerpt}</small>
-              </span>
-            </Link>
-          ))}
+    <main className="text-page tips-list-page blog-list-page">
+      <section className="section text-section" aria-labelledby="blog-title">
+        <div className="section-heading">
+          <div>
+            <h1 id="blog-title">Blog</h1>
+          </div>
         </div>
+        <BlogFilterPanel />
       </section>
     </main>
   );
