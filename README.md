@@ -56,3 +56,11 @@ npm run start
 ```bash
 npm run generate:products
 ```
+
+## ディレクトリ整理メモ
+
+- Next.js本体は `app/`, `components/`, `data/`, `lib/`, `public/` を中心に管理します。
+- 旧HTMLの参照・抽出元は `legacy/html/` にまとめています。
+- 旧HTML版のJavaScriptは `legacy/js/script.js` に退避しています。
+- 移行用スクリプトは `scripts/` にまとめています。
+- 詳細な分類は `docs/architecture/project-structure.md` と `docs/todo/cleanup-candidates.md` を確認してください。
