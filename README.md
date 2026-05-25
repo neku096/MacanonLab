@@ -13,11 +13,9 @@ preview-next.bat
 このbatは次の動作をします。
 
 - 既定ポート `3100` から起動します。
-- `3100` が使用中の場合は、`3101`, `3102`, `3103`... の順に空きポートを探します。
-- 空きポートで `npm run dev -- -p <port>` を別ウィンドウで起動します。
-- 起動確認後、`http://localhost:<port>/` と `http://localhost:<port>/products` をブラウザで開きます。
-- 同じbatを二重起動した場合も、使用中のポートを避けて別ポートで起動します。
-- bat起動時だけ `.next-preview-<port>` を使うため、通常の `.next` や本番build設定には影響しません。
+- `3100` が使用中の場合は、既存サーバーを閉じるよう表示して終了します。
+- `npm run dev -- -p 3100` を別ウィンドウで起動します。
+- 起動確認後、`http://localhost:3100/` と `http://localhost:3100/products` をブラウザで開きます。
 - エラー時は画面がすぐ閉じないように停止します。
 
 ## 初回セットアップ
@@ -36,7 +34,6 @@ npm install
 
 ```bat
 rmdir /s /q .next
-rmdir /s /q .next-preview-*
 ```
 
 削除後、再度 `preview-next.bat` を実行すると `.next` は自動で再生成されます。

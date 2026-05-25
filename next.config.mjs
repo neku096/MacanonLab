@@ -29,7 +29,6 @@ const pageRedirects = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  ...(process.env.NEXT_PREVIEW_DIST_DIR ? { distDir: process.env.NEXT_PREVIEW_DIST_DIR } : {}),
   async redirects() {
     return [...productRedirects, ...pageRedirects];
   }

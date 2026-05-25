@@ -11,9 +11,7 @@ if errorlevel 1 (
   exit /b 1
 )
 
-set "START_PORT=3100"
-set "MAX_PORT=3199"
-set "PORT=%START_PORT%"
+set "PORT=3100"
 
 if "%~1"=="--help" goto usage
 if "%~1"=="/?" goto usage
@@ -57,46 +55,27 @@ if not exist "node_modules\next" (
   exit /b 1
 )
 
-:find_port
-if %PORT% GTR %MAX_PORT% (
-  echo [ERROR] No free port was found from %START_PORT% to %MAX_PORT%.
+call :is_port_free
+if errorlevel 1 (
+  echo [ERROR] Port 3100 is already in use.
+  echo 3100が使用中です。既存サーバーを閉じてください。
   popd >nul 2>nul
   pause
   exit /b 1
 )
 
-set "LOCK_DIR=%TEMP%\macanonlab-next-preview-%PORT%.lock"
-
-call :is_port_free %PORT%
-if errorlevel 1 (
-  set /a PORT+=1
-  goto find_port
-)
-
-if exist "!LOCK_DIR!" (
-  rmdir /s /q "!LOCK_DIR!" >nul 2>nul
-)
-
-mkdir "!LOCK_DIR!" >nul 2>nul
-if errorlevel 1 (
-  set /a PORT+=1
-  goto find_port
-)
-
 set "ROOT_URL=http://localhost:%PORT%"
 set "PRODUCTS_URL=%ROOT_URL%/products"
-set "PREVIEW_DIST_DIR=.next-preview-%PORT%"
 
 echo.
 echo [macanon] Starting Next.js local preview.
 echo   Project : %CD%
 echo   Port    : %PORT%
-echo   Cache   : %PREVIEW_DIST_DIR%
 echo   Top     : %ROOT_URL%/
 echo   Products: %PRODUCTS_URL%
 echo.
 
-start "MacanonLab Next %PORT%" /D "%CD%" cmd /k "set NEXT_PREVIEW_DIST_DIR=%PREVIEW_DIST_DIR%&& npm.cmd run dev -- -p %PORT%"
+start "MacanonLab Next %PORT%" /D "%CD%" cmd /k "npm.cmd run dev -- -p %PORT%"
 
 echo Waiting for the server...
 call :wait_for_http %PORT%
@@ -107,9 +86,7 @@ if errorlevel 1 (
   echo If .next looks broken, stop all Next.js windows and delete .next:
   echo.
   echo   rmdir /s /q .next
-  echo   rmdir /s /q .next-preview-*
   echo.
-  rmdir /s /q "!LOCK_DIR!" >nul 2>nul
   popd >nul 2>nul
   pause
   exit /b 1
@@ -126,9 +103,8 @@ popd >nul 2>nul
 exit /b 0
 
 :is_port_free
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { $client = [System.Net.Sockets.TcpClient]::new('127.0.0.1', %~1); $client.Close(); exit 1 } catch { exit 0 }" >nul 2>nul
-if errorlevel 1 exit /b 1
-exit /b 0
+node -e "const net=require('net');const server=net.createServer();server.once('error',()=>process.exit(1));server.once('listening',()=>server.close(()=>process.exit(0)));server.listen(3100,'0.0.0.0');" >nul 2>nul
+exit /b %errorlevel%
 
 :wait_for_http
 set "WAIT_PORT=%~1"
@@ -146,9 +122,8 @@ echo Usage:
 echo   preview-next.bat
 echo.
 echo Behavior:
-echo   Finds a free port starting at 3100.
-echo   Runs npm run dev -- -p ^<port^>.
-echo   Opens http://localhost:^<port^>/ and /products.
-echo   If 3100 is already in use, it tries 3101, 3102, ...
+echo   Runs npm run dev -- -p 3100.
+echo   Opens http://localhost:3100/ and /products.
+echo   If 3100 is already in use, it asks you to close the existing server.
 popd >nul 2>nul
 exit /b 0
