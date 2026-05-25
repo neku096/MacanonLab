@@ -1,21 +1,45 @@
 # Adding Products
 
-商品追加は `data/products.json` を正として管理します。
+商品追加は `data/products.json` を正として管理します。通常はローカル管理画面から編集し、必要な場合だけJSONを直接確認します。
 
 ## 基本方針
 
 - Next.jsの商品LPは `/products/[slug]` で自動生成されます。
 - 商品一覧、関連商品、SEO/OGP、JP/EN切替は `data/products.json` と `data/legacy-i18n.json` を参照します。
-- 旧HTMLからの再抽出は移行補助用です。通常運用では `products.json` を直接編集します。
+- 旧HTMLからの再抽出は移行補助用です。通常運用では `/admin/products` で編集します。
+
+## ローカル管理画面
+
+開発サーバー起動中に次を開きます。
+
+```text
+http://localhost:3100/admin/products
+```
+
+管理画面では次を編集できます。
+
+- 商品一覧
+- 商品追加
+- 商品編集
+- `published` 切替
+- タグ / サブタグ / 対応アバター
+- `relatedIds`
+- 画像パスとギャラリーJSON
+- BOOTH / DLsite / 外部販売URL
+- 英語タイトル、説明、specs、本文HTML
+
+保存時は `validate:products` 相当の検証を先に実行します。エラーがある場合は `data/products.json` と `data/legacy-i18n.json` を保存しません。
+
+管理画面はローカル開発環境用です。本番環境では既定で非公開です。どうしても本番で表示確認する場合だけ、環境変数 `MACANON_ENABLE_ADMIN=1` を設定します。
 
 ## 追加手順
 
-1. `data/product-template.json` を参考に、`data/products.json` に商品オブジェクトを追加します。
+1. `/admin/products` を開き、「追加」から商品オブジェクトを作成します。
 2. `slug` と `id` は同じ値にします。
 3. `public/products/<slug>/` に画像を配置します。
 4. `coverImage`, `gallery[].src`, `gallery[].thumb` を `/products/<slug>/...` 形式で指定します。
 5. `relatedIds` に関連商品IDを指定します。空配列でも動きます。
-6. `data/legacy-i18n.json` の `productPageEnglish` に `product-<slug>.html` キーを追加します。
+6. 英語データを入力します。管理画面は `data/legacy-i18n.json` の `productPageEnglish` に `product-<slug>.html` キーとして保存します。
 7. `published` を `true` にする前に `npm run validate:products` を実行します。
 8. `npm run build` でページ生成を確認します。
 

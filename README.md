@@ -57,9 +57,15 @@ npm run start
 npm run validate:products
 ```
 
-商品追加手順は `docs/products/adding-product.md` に分離しています。
+商品追加・編集は、ローカル開発サーバー起動中に次の管理画面から行えます。
 
-商品データを既存HTMLから再生成する場合は次を実行します。
+```text
+http://localhost:3100/admin/products
+```
+
+管理画面は `products.json` と `legacy-i18n.json` を保存前に検証します。本番環境では既定で非公開です。商品追加手順の詳細は `docs/products/adding-product.md` に分離しています。
+
+旧HTMLから商品データを再生成する場合は次を実行します。
 
 ```bash
 npm run generate:products
