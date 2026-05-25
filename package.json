@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "generate:products": "node scripts/extract-legacy-products.mjs"
+    "generate:products": "node scripts/extract-legacy-products.mjs",
+    "validate:products": "node scripts/validate-products.mjs"
   },
   "dependencies": {
     "next": "latest",

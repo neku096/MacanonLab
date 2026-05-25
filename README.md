@@ -51,6 +51,14 @@ npm run build
 npm run start
 ```
 
+商品データを検証する場合は次を実行します。
+
+```bash
+npm run validate:products
+```
+
+商品追加手順は `docs/products/adding-product.md` に分離しています。
+
 商品データを既存HTMLから再生成する場合は次を実行します。
 
 ```bash

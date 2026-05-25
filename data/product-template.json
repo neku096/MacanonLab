@@ -1,0 +1,55 @@
+{
+  "id": "example-product",
+  "slug": "example-product",
+  "published": false,
+  "sortOrder": 999,
+  "title": "商品名",
+  "description": "検索結果やOGPに使う短い説明文です。",
+  "category": "gimmick",
+  "categoryLabel": "ギミック",
+  "tags": [
+    "gimmick"
+  ],
+  "subtags": [
+    "summon-gimmick"
+  ],
+  "tagLabels": [
+    "ギミック"
+  ],
+  "subtagLabels": [
+    "召喚ギミック"
+  ],
+  "avatars": [],
+  "likes": 0,
+  "price": "¥0",
+  "support": "VRChatアバター向け",
+  "content": "Prefab、Animation、unitypackage",
+  "usage": "VRChat、Unity 2022、Modular Avatar、撮影向け",
+  "summaryTags": [
+    "VRChat",
+    "Unity",
+    "Modular Avatar"
+  ],
+  "note": "購入前に、対応アバター、同梱ファイル、価格、利用条件、導入上の注意事項をBOOTHの商品ページでご確認ください。",
+  "coverImage": "/products/example-product/cover.webp",
+  "coverAlt": "商品名",
+  "coverWidth": 600,
+  "coverHeight": 600,
+  "gallery": [
+    {
+      "src": "/products/example-product/example-product-01.webp",
+      "thumb": "/products/example-product/example-product-01-thumb.webp",
+      "alt": "商品名",
+      "width": 1000,
+      "height": 1000
+    }
+  ],
+  "salesUrls": {
+    "booth": "",
+    "dlsite": "",
+    "external": []
+  },
+  "relatedIds": [],
+  "legacyPath": "/product-example-product.html",
+  "contentHtml": "<article class=\"product-detail-block\"><h2>商品詳細</h2><p>商品説明を入れます。</p></article>"
+}
