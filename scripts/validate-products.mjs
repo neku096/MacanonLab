@@ -280,6 +280,11 @@ function validateProductShape(product, index, allKeys) {
 
   if (!hasText(product.id)) addError(`${label}: id が空です`);
   if (!hasText(product.slug)) addError(`${label}: slug が空です`);
+  for (const field of ["title", "description", "coverImage"]) {
+    if (!hasText(product[field])) {
+      addError(`${label}: ${field} が空です`);
+    }
+  }
   if (hasText(product.slug) && !SLUG_PATTERN.test(product.slug)) {
     addError(`${label}: slug は小文字英数字とハイフンのみで指定してください (${product.slug})`);
   }
@@ -325,6 +330,30 @@ function validateProductShape(product, index, allKeys) {
   }
 }
 
+function validateGalleryShape(product, gallerySrcOwners) {
+  if (!Array.isArray(product.gallery)) return;
+
+  for (const [index, image] of product.gallery.entries()) {
+    if (!isPlainObject(image)) {
+      addError(`${product.slug}: gallery[${index}] は object にしてください`);
+      continue;
+    }
+
+    if (!hasText(image.src)) {
+      addError(`${product.slug}: gallery[${index}].src が空です`);
+    } else {
+      const owners = gallerySrcOwners.get(image.src) || [];
+      owners.push(`${product.slug}: gallery[${index}].src`);
+      gallerySrcOwners.set(image.src, owners);
+    }
+
+    if (!hasText(image.thumb)) addError(`${product.slug}: gallery[${index}].thumb が空です`);
+    if (!hasText(image.alt)) addWarning(`${product.slug}: gallery[${index}].alt が空です`);
+    if (!Number.isInteger(image.width)) addError(`${product.slug}: gallery[${index}].width は integer にしてください`);
+    if (!Number.isInteger(image.height)) addError(`${product.slug}: gallery[${index}].height は integer にしてください`);
+  }
+}
+
 async function validateImages(product) {
   if (hasText(product.coverImage)) {
     await assertPublicFile(product.coverImage, `${product.slug}: coverImage`);
@@ -333,15 +362,7 @@ async function validateImages(product) {
   if (!Array.isArray(product.gallery)) return;
 
   for (const [index, image] of product.gallery.entries()) {
-    if (!isPlainObject(image)) {
-      addError(`${product.slug}: gallery[${index}] は object にしてください`);
-      continue;
-    }
-    if (!hasText(image.src)) addError(`${product.slug}: gallery[${index}].src が空です`);
-    if (!hasText(image.thumb)) addError(`${product.slug}: gallery[${index}].thumb が空です`);
-    if (!hasText(image.alt)) addWarning(`${product.slug}: gallery[${index}].alt が空です`);
-    if (!Number.isInteger(image.width)) addError(`${product.slug}: gallery[${index}].width は integer にしてください`);
-    if (!Number.isInteger(image.height)) addError(`${product.slug}: gallery[${index}].height は integer にしてください`);
+    if (!isPlainObject(image)) continue;
     if (hasText(image.src)) await assertPublicFile(image.src, `${product.slug}: gallery[${index}].src`);
     if (hasText(image.thumb)) await assertPublicFile(image.thumb, `${product.slug}: gallery[${index}].thumb`);
   }
@@ -361,6 +382,7 @@ export async function validateProductsData(products, legacyI18n) {
   const allKeys = new Set(REQUIRED_FIELDS);
   const validTags = new Set(products.flatMap((product) => (Array.isArray(product.tags) ? product.tags : [])));
   const validSubtags = new Set(products.flatMap((product) => (Array.isArray(product.subtags) ? product.subtags : [])));
+  const gallerySrcOwners = new Map();
 
   for (const duplicate of findDuplicates(products, "slug")) {
     addError(`slug が重複しています: ${duplicate}`);
@@ -385,6 +407,8 @@ export async function validateProductsData(products, legacyI18n) {
       }
     }
 
+    validateGalleryShape(product, gallerySrcOwners);
+
     if (product.published) {
       validateEnglish(product, productPageEnglish);
       await validateImages(product);
@@ -392,6 +416,12 @@ export async function validateProductsData(products, legacyI18n) {
 
     for (const href of extractLinks(product.contentHtml)) {
       validateInternalLink(href, product, productBySlug, validTags, validSubtags);
+    }
+  }
+
+  for (const [src, owners] of gallerySrcOwners) {
+    if (owners.length > 1) {
+      addError(`gallery src が重複しています (${src}): ${owners.join(", ")}`);
     }
   }
 
