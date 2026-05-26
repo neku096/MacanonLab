@@ -1,21 +1,21 @@
 import { notFound } from "next/navigation";
-import AdminProductsClient from "@/components/AdminProductsClient";
+import AdminSlideLinksClient from "@/components/AdminSlideLinksClient";
 import { isAdminWriteEnabled } from "@/lib/adminProductsStore";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "商品管理",
+  title: "スライドリンク集カード管理",
   robots: {
     index: false,
     follow: false
   }
 };
 
-export default function AdminProductsPage() {
+export default function AdminSlideLinksPage() {
   if (!isAdminWriteEnabled()) {
     notFound();
   }
 
-  return <AdminProductsClient />;
+  return <AdminSlideLinksClient />;
 }

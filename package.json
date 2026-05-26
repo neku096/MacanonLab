@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "generate:products": "node scripts/extract-legacy-products.mjs",
-    "validate:products": "node scripts/validate-products.mjs"
+    "validate:products": "node scripts/validate-products.mjs",
+    "validate:slide-links": "node scripts/validate-slide-links.mjs",
+    "validate": "npm run validate:products && npm run validate:slide-links"
   },
   "dependencies": {
     "next": "latest",
