@@ -6,6 +6,7 @@ import HomeProductSlider from "./HomeProductSlider";
 import styles from "./AdminProductsClient.module.css";
 
 const API_BASE = "/api/admin/slide-links";
+const CATEGORY_OPTIONS = ["featured", "new", "recommended", "free", "other"];
 
 function slugify(value) {
   return value
@@ -53,6 +54,36 @@ function orderSignature(slideLinks) {
   return slideLinks.map((link) => `${link.id}:${link.sortOrder}`).join("|");
 }
 
+function normalizeCategory(category) {
+  return typeof category === "string" && category.trim() ? category.trim() : "other";
+}
+
+function categoryRank(category) {
+  const fixedIndex = CATEGORY_OPTIONS.indexOf(normalizeCategory(category));
+  return fixedIndex >= 0 ? fixedIndex : CATEGORY_OPTIONS.length;
+}
+
+function groupByCategory(items) {
+  const groups = new Map();
+
+  for (const item of items) {
+    const category = normalizeCategory(item.category);
+    if (!groups.has(category)) groups.set(category, []);
+    groups.get(category).push({ ...item, category });
+  }
+
+  return [...groups.entries()]
+    .map(([category, categoryItems]) => ({ category, items: categoryItems }))
+    .sort((a, b) => {
+      const rankDiff = categoryRank(a.category) - categoryRank(b.category);
+      if (rankDiff !== 0) return rankDiff;
+      const firstA = Number(a.items[0]?.sortOrder) || 0;
+      const firstB = Number(b.items[0]?.sortOrder) || 0;
+      if (firstA !== firstB) return firstA - firstB;
+      return a.category.localeCompare(b.category, "ja");
+    });
+}
+
 function slideLinkFromProduct(product, slideLinks, sortOrder = nextSortOrder(slideLinks)) {
   return {
     id: uniqueId(product.slug || product.title, slideLinks),
@@ -97,6 +128,7 @@ export default function AdminSlideLinksClient() {
   const [slideLinks, setSlideLinks] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedId, setSelectedId] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
   const [draggingId, setDraggingId] = useState("");
   const [savedOrderSignature, setSavedOrderSignature] = useState("");
   const [isLoading, setLoading] = useState(true);
@@ -119,16 +151,33 @@ export default function AdminSlideLinksClient() {
     [products, selectedLink?.sourceProductSlug]
   );
   const publishedProducts = useMemo(() => products.filter((product) => product.published), [products]);
+  const categories = useMemo(() => {
+    const categorySet = new Set(CATEGORY_OPTIONS);
+    sortedSlideLinks.forEach((link) => categorySet.add(normalizeCategory(link.category)));
+    return [...categorySet].sort((a, b) => {
+      const rankDiff = categoryRank(a) - categoryRank(b);
+      if (rankDiff !== 0) return rankDiff;
+      return a.localeCompare(b, "ja");
+    });
+  }, [sortedSlideLinks]);
+  const filteredSlideLinks = useMemo(
+    () =>
+      categoryFilter === "all"
+        ? sortedSlideLinks
+        : sortedSlideLinks.filter((link) => normalizeCategory(link.category) === categoryFilter),
+    [categoryFilter, sortedSlideLinks]
+  );
   const hasOrderChanges = useMemo(
     () => Boolean(savedOrderSignature) && orderSignature(sortedSlideLinks) !== savedOrderSignature,
     [savedOrderSignature, sortedSlideLinks]
   );
   const previewItems = useMemo(
-    () => sortedSlideLinks.filter((link) => link.published),
+    () => sortedSlideLinks.filter((link) => link.published).map((link) => ({ ...link, category: normalizeCategory(link.category) })),
     [sortedSlideLinks]
   );
+  const previewGroups = useMemo(() => groupByCategory(previewItems), [previewItems]);
   const previewSignature = useMemo(
-    () => previewItems.map((link) => `${link.id}:${link.sortOrder}:${link.published}`).join("|"),
+    () => previewItems.map((link) => `${link.id}:${link.sortOrder}:${link.published}:${link.category}`).join("|"),
     [previewItems]
   );
 
@@ -394,20 +443,30 @@ export default function AdminSlideLinksClient() {
           <div>
             <span>Preview</span>
             <strong>Topスライダー表示</strong>
-            <small>保存前のstateから published:true のカードだけを表示します。</small>
+            <small>保存前のstateから published:true のカードだけをカテゴリ別に表示します。</small>
           </div>
-          <small>{previewItems.length} published cards</small>
+          <small>{previewGroups.length} categories / {previewItems.length} published cards</small>
         </header>
         {previewItems.length ? (
-          <div className={styles.sliderPreviewGrid}>
-            <div className={styles.sliderPreviewFrame}>
-              <span className={styles.previewLabel}>PC</span>
-              <HomeProductSlider items={previewItems} key={`desktop-${previewSignature}`} />
-            </div>
-            <div className={`${styles.sliderPreviewFrame} ${styles.mobileSliderPreview}`}>
-              <span className={styles.previewLabel}>Mobile</span>
-              <HomeProductSlider items={previewItems} key={`mobile-${previewSignature}`} />
-            </div>
+          <div className={styles.categoryPreviewStack}>
+            {previewGroups.map((group) => (
+              <section className={styles.categoryPreviewGroup} key={group.category}>
+                <div className={styles.categoryPreviewHeading}>
+                  <strong>{group.category}</strong>
+                  <small>{group.items.length} items</small>
+                </div>
+                <div className={styles.sliderPreviewGrid}>
+                  <div className={styles.sliderPreviewFrame}>
+                    <span className={styles.previewLabel}>PC</span>
+                    <HomeProductSlider items={group.items} key={`desktop-${group.category}-${previewSignature}`} />
+                  </div>
+                  <div className={`${styles.sliderPreviewFrame} ${styles.mobileSliderPreview}`}>
+                    <span className={styles.previewLabel}>Mobile</span>
+                    <HomeProductSlider items={group.items} key={`mobile-${group.category}-${previewSignature}`} />
+                  </div>
+                </div>
+              </section>
+            ))}
           </div>
         ) : (
           <p className={styles.fieldHint}>published:true のカードがないため、Topスライダーには表示されません。</p>
@@ -422,9 +481,28 @@ export default function AdminSlideLinksClient() {
               追加
             </button>
           </div>
+          <div className={styles.categoryFilter} aria-label="category filter">
+            <button
+              className={categoryFilter === "all" ? styles.isActive : ""}
+              type="button"
+              onClick={() => setCategoryFilter("all")}
+            >
+              all
+            </button>
+            {categories.map((category) => (
+              <button
+                className={categoryFilter === category ? styles.isActive : ""}
+                type="button"
+                key={category}
+                onClick={() => setCategoryFilter(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
           <p className={styles.fieldHint}>左のハンドルをドラッグ、または上下ボタンでTop表示順を調整できます。</p>
           <div className={`${styles.productList} ${styles.sortableList}`}>
-            {sortedSlideLinks.map((link, index) => (
+            {filteredSlideLinks.map((link, index) => (
               <div
                 className={`${styles.sortableItem}${link.id === selectedLink.id ? ` ${styles.isSelected}` : ""}${!link.published ? ` ${styles.isDraft}` : ""}${draggingId === link.id ? ` ${styles.isDragging}` : ""}`}
                 data-slide-id={link.id}
@@ -446,16 +524,16 @@ export default function AdminSlideLinksClient() {
                   type="button"
                   onClick={() => setSelectedId(link.id)}
                 >
-                  <span>{index + 1}. {link.title || link.id}</span>
+                  <span>{sortedSlideLinks.findIndex((item) => item.id === link.id) + 1}. {link.title || link.id}</span>
                   <small>
-                    {link.published ? "published" : "draft"} / {link.category || "no category"}
+                    {link.published ? "published" : "draft"} / {normalizeCategory(link.category)}
                   </small>
                 </button>
                 <div className={styles.sortActions} aria-label={`${link.title || link.id} の並び替え`}>
-                  <button type="button" onClick={() => moveSlideLink(link.id, -1)} disabled={index === 0} aria-label="上へ移動">
+                  <button type="button" onClick={() => moveSlideLink(link.id, -1)} disabled={sortedSlideLinks.findIndex((item) => item.id === link.id) === 0} aria-label="上へ移動">
                     ↑
                   </button>
-                  <button type="button" onClick={() => moveSlideLink(link.id, 1)} disabled={index === sortedSlideLinks.length - 1} aria-label="下へ移動">
+                  <button type="button" onClick={() => moveSlideLink(link.id, 1)} disabled={sortedSlideLinks.findIndex((item) => item.id === link.id) === sortedSlideLinks.length - 1} aria-label="下へ移動">
                     ↓
                   </button>
                 </div>
@@ -510,7 +588,17 @@ export default function AdminSlideLinksClient() {
               <input value={selectedLink.title || ""} onChange={(event) => updateSelected({ title: event.target.value })} />
             </Field>
             <Field label="category">
-              <input value={selectedLink.category || ""} onChange={(event) => updateSelected({ category: event.target.value })} />
+              <input
+                value={selectedLink.category || ""}
+                list="slide-link-category-options"
+                placeholder="featured / new / recommended / free / other"
+                onChange={(event) => updateSelected({ category: event.target.value })}
+              />
+              <datalist id="slide-link-category-options">
+                {categories.map((category) => (
+                  <option value={category} key={category} />
+                ))}
+              </datalist>
             </Field>
             <Field label="sourceProductSlug">
               <select
