@@ -44,6 +44,22 @@ function nextSortOrder(slideLinks) {
   return Math.max(-1, ...slideLinks.map((link) => (Number.isFinite(link.sortOrder) ? link.sortOrder : 0))) + 1;
 }
 
+function slideLinkFromProduct(product, slideLinks, sortOrder = nextSortOrder(slideLinks)) {
+  return {
+    id: uniqueId(product.slug || product.title, slideLinks),
+    title: product.title || product.slug,
+    description: product.description || "",
+    url: product.salesUrls?.booth || `/products/${product.slug}`,
+    thumbnail: product.coverImage || "",
+    category: product.categoryLabel || product.category || "",
+    tags: Array.isArray(product.tags) ? product.tags : [],
+    sortOrder,
+    published: Boolean(product.published),
+    openInNewTab: Boolean(product.salesUrls?.booth),
+    sourceProductSlug: product.slug
+  };
+}
+
 function createSlideLink(slideLinks) {
   const id = uniqueId("slide-link", slideLinks);
   return {
@@ -70,6 +86,7 @@ async function parseJsonResponse(response) {
 
 export default function AdminSlideLinksClient() {
   const [slideLinks, setSlideLinks] = useState([]);
+  const [products, setProducts] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [isSaving, setSaving] = useState(false);
@@ -85,6 +102,11 @@ export default function AdminSlideLinksClient() {
     () => slideLinks.find((link) => link.id === selectedId) || sortedSlideLinks[0] || null,
     [selectedId, slideLinks, sortedSlideLinks]
   );
+  const selectedProduct = useMemo(
+    () => products.find((product) => product.slug === selectedLink?.sourceProductSlug) || null,
+    [products, selectedLink?.sourceProductSlug]
+  );
+  const publishedProducts = useMemo(() => products.filter((product) => product.published), [products]);
 
   useEffect(() => {
     let ignore = false;
@@ -96,6 +118,7 @@ export default function AdminSlideLinksClient() {
         if (!response.ok) throw new Error(payload.error || "スライドリンク集カードを読み込めませんでした。");
         if (ignore) return;
         const nextSlideLinks = Array.isArray(payload.slideLinks) ? payload.slideLinks : [];
+        setProducts(Array.isArray(payload.products) ? payload.products : []);
         setSlideLinks(nextSlideLinks);
         setSelectedId(nextSlideLinks[0]?.id || "");
       } catch (loadError) {
@@ -127,6 +150,15 @@ export default function AdminSlideLinksClient() {
     setValidation(null);
     setError("");
     setMessage("スライドリンク集カードを追加しました。保存前にURLとthumbnailを入力してください。");
+  }
+
+  function addProductSlideLink(product) {
+    const nextLink = slideLinkFromProduct(product, slideLinks);
+    setSlideLinks((current) => [...current, nextLink]);
+    setSelectedId(nextLink.id);
+    setValidation(null);
+    setError("");
+    setMessage(`${product.title || product.slug} からTopスライダー用カードを追加しました。`);
   }
 
   function deleteSelectedLink() {
@@ -185,6 +217,25 @@ export default function AdminSlideLinksClient() {
     }
   }
 
+  function applyProductDefaults(product = selectedProduct) {
+    if (!selectedLink || !product) return;
+    updateSelected({
+      title: product.title || selectedLink.title,
+      description: product.description || selectedLink.description,
+      url: product.salesUrls?.booth || selectedLink.url || `/products/${product.slug}`,
+      thumbnail: product.coverImage || selectedLink.thumbnail,
+      category: product.categoryLabel || product.category || selectedLink.category,
+      tags: Array.isArray(product.tags) ? product.tags : selectedLink.tags || [],
+      openInNewTab: Boolean(product.salesUrls?.booth) || selectedLink.openInNewTab,
+      sourceProductSlug: product.slug
+    });
+  }
+
+  function applyProductThumbnail(product = selectedProduct) {
+    if (!product?.coverImage) return;
+    updateSelected({ thumbnail: product.coverImage, sourceProductSlug: product.slug });
+  }
+
   if (isLoading) {
     return (
       <main className={styles.page}>
@@ -199,8 +250,8 @@ export default function AdminSlideLinksClient() {
         <header className={styles.header}>
           <div>
             <p className={styles.eyebrow}>Local Admin</p>
-            <h1>スライドリンク集カード管理</h1>
-            <p>data/slide-links.json を手入力で管理します。</p>
+            <h1>Top商品スライダー管理</h1>
+            <p>data/slide-links.json でTopページの商品リンクスライダーを管理します。</p>
           </div>
           <div className={styles.actions}>
             <Link className={styles.secondaryButton} href="/admin">
@@ -227,8 +278,8 @@ export default function AdminSlideLinksClient() {
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>Local Admin</p>
-          <h1>スライドリンク集カード管理</h1>
-          <p>外部取得なしで、リンク集カードの表示情報をローカルJSONへ保存します。</p>
+          <h1>Top商品スライダー管理</h1>
+          <p>Topページの商品リンクスライダー用カードをローカルJSONへ保存します。</p>
         </div>
         <div className={styles.actions}>
           <Link className={styles.secondaryButton} href="/admin">
@@ -274,6 +325,28 @@ export default function AdminSlideLinksClient() {
               </button>
             ))}
           </div>
+          <div className={styles.sidebarHeader}>
+            <strong>商品から追加</strong>
+          </div>
+          <div className={styles.productList}>
+            {publishedProducts
+              .filter((product) => !slideLinks.some((link) => link.sourceProductSlug === product.slug))
+              .slice(0, 12)
+              .map((product) => (
+                <button
+                  className={styles.productItem}
+                  type="button"
+                  key={product.slug}
+                  onClick={() => addProductSlideLink(product)}
+                >
+                  <span>{product.title || product.slug}</span>
+                  <small>{product.slug}</small>
+                </button>
+              ))}
+            {publishedProducts.every((product) => slideLinks.some((link) => link.sourceProductSlug === product.slug)) ? (
+              <p className={styles.fieldHint}>追加できる未登録商品はありません。</p>
+            ) : null}
+          </div>
         </aside>
 
         <section className={styles.editor}>
@@ -302,12 +375,42 @@ export default function AdminSlideLinksClient() {
             <Field label="category">
               <input value={selectedLink.category || ""} onChange={(event) => updateSelected({ category: event.target.value })} />
             </Field>
+            <Field label="sourceProductSlug">
+              <select
+                value={selectedLink.sourceProductSlug || ""}
+                onChange={(event) => {
+                  const product = products.find((item) => item.slug === event.target.value);
+                  if (product) {
+                    applyProductDefaults(product);
+                  } else {
+                    updateSelected({ sourceProductSlug: "" });
+                  }
+                }}
+              >
+                <option value="">なし</option>
+                {products.map((product) => (
+                  <option value={product.slug} key={product.slug}>
+                    {product.title || product.slug}
+                  </option>
+                ))}
+              </select>
+            </Field>
             <Field label="url">
               <input value={selectedLink.url || ""} onChange={(event) => updateSelected({ url: event.target.value })} />
+              {selectedProduct?.salesUrls?.booth ? (
+                <button className={styles.smallButton} type="button" onClick={() => updateSelected({ url: selectedProduct.salesUrls.booth, openInNewTab: true })}>
+                  BOOTH URLを入れる
+                </button>
+              ) : null}
             </Field>
             <Field label="thumbnail">
               <input value={selectedLink.thumbnail || ""} onChange={(event) => updateSelected({ thumbnail: event.target.value })} />
-              <small className={styles.fieldHint}>手入力のみです。URL先や画像の自動取得は行いません。</small>
+              <small className={styles.fieldHint}>手入力、または sourceProductSlug の商品画像から候補入力できます。外部取得は行いません。</small>
+              {selectedProduct?.coverImage ? (
+                <button className={styles.smallButton} type="button" onClick={() => applyProductThumbnail()}>
+                  商品画像を入れる
+                </button>
+              ) : null}
             </Field>
             <Field label="sortOrder">
               <input

@@ -1,1 +1,182 @@
-[]
+[
+  {
+    "id": "cravingdance",
+    "title": "〖ルミナ対応〗CravingDance",
+    "description": "〖ルミナ対応〗CravingDanceは、ルミナ向けに調整した、雰囲気づくりと撮影に使いやすい3D衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/7439310",
+    "thumbnail": "/products/cravingdance/cover.webp",
+    "category": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "sortOrder": 0,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "cravingdance"
+  },
+  {
+    "id": "shark-summon",
+    "title": "〖召喚ギミック〗鮫召喚 Shark summon",
+    "description": "〖召喚ギミック〗鮫召喚 Shark summonは、VRChat上で鮫を召喚する演出を楽しめる、アバター向け召喚ギミックです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/7002971",
+    "thumbnail": "/products/shark-summon/cover.webp",
+    "category": "ギミック",
+    "tags": [
+      "gimmick"
+    ],
+    "sortOrder": 1,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "shark-summon"
+  },
+  {
+    "id": "whale-summon",
+    "title": "鯨召喚 Whale summon",
+    "description": "鯨召喚 Whale summonは、VRChatで鯨を呼び出す演出を加えられる、アバター向け召喚ギミックです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6322284",
+    "thumbnail": "/products/whale-summon/cover.webp",
+    "category": "ギミック",
+    "tags": [
+      "gimmick"
+    ],
+    "sortOrder": 2,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "whale-summon"
+  },
+  {
+    "id": "capybara-summon",
+    "title": "カピバラ召喚 Capybara summon",
+    "description": "カピバラ召喚 Capybara summonは、VRChat内でカピバラを呼び出して、写真や交流のワンポイントに使える召喚ギミックです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6768358",
+    "thumbnail": "/products/capybara-summon/cover.webp",
+    "category": "ギミック",
+    "tags": [
+      "gimmick"
+    ],
+    "sortOrder": 3,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "capybara-summon"
+  },
+  {
+    "id": "mirilori-uniform",
+    "title": "ミリロリ制服 MiriLori Uniform",
+    "description": "ミリロリ制服 MiriLori Uniformは、ミリタリー感とロリータ風の印象を組み合わせた、VRChat向け3D衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6599351",
+    "thumbnail": "/products/mirilori-uniform/cover.webp",
+    "category": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "sortOrder": 4,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "mirilori-uniform"
+  },
+  {
+    "id": "star-guardian",
+    "title": "スターガーディアン Star Guardian",
+    "description": "スターガーディアン Star Guardianは、星や守護者のイメージを取り入れた、VRChat向け3D衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/7213010",
+    "thumbnail": "/products/star-guardian/cover.webp",
+    "category": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "sortOrder": 5,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "star-guardian"
+  },
+  {
+    "id": "galhalo",
+    "title": "ギャルヘイロー GalHalo",
+    "description": "ギャルヘイロー GalHaloは、アバターの印象づけや撮影アクセントに使いやすい、ヘイロー系の3D装飾品です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6867754",
+    "thumbnail": "/products/galhalo/cover.webp",
+    "category": "装飾品",
+    "tags": [
+      "accessory"
+    ],
+    "sortOrder": 6,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "galhalo"
+  },
+  {
+    "id": "mini-whale",
+    "title": "無料 ミニ クジラ",
+    "description": "無料 ミニ クジラは、小物や撮影アクセントとして使いやすい、ミニクジラの3Dモデルです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6421899",
+    "thumbnail": "/products/mini-whale/cover.webp",
+    "category": "3Dモデル",
+    "tags": [
+      "avatar"
+    ],
+    "sortOrder": 7,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "mini-whale"
+  },
+  {
+    "id": "dark-knight",
+    "title": "Dark Knight",
+    "description": "Dark Knightは、Dark Knightの印象を取り入れた、VRChat向け衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6491880",
+    "thumbnail": "/products/dark-knight/cover.webp",
+    "category": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "sortOrder": 8,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "dark-knight"
+  },
+  {
+    "id": "restraint-system",
+    "title": "Restraint System",
+    "description": "Restraint Systemは、ワールド内の演出や仕掛けとして確認できる、Restraint SystemのLPです。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6981059",
+    "thumbnail": "/products/restraint-system/cover.webp",
+    "category": "ワールドギミック",
+    "tags": [
+      "world-gimmick"
+    ],
+    "sortOrder": 9,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "restraint-system"
+  },
+  {
+    "id": "catmask",
+    "title": "にゃんこお面 CatMask",
+    "description": "にゃんこお面 CatMaskは、アバターの表情づけや撮影アクセントに使いやすい、にゃんこお面の3D装飾品です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6952703",
+    "thumbnail": "/products/catmask/cover.webp",
+    "category": "装飾品",
+    "tags": [
+      "accessory"
+    ],
+    "sortOrder": 10,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "catmask"
+  },
+  {
+    "id": "monsterchair",
+    "title": "MonsterChair",
+    "description": "MonsterChairは、VRChat内の演出や撮影に使いやすい、MonsterChairのギミック作品です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/6518994",
+    "thumbnail": "/products/monsterchair/cover.webp",
+    "category": "ギミック",
+    "tags": [
+      "gimmick"
+    ],
+    "sortOrder": 11,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "monsterchair"
+  }
+]

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import ProductCard from "@/components/ProductCard";
+import Image from "next/image";
 
 const AUTO_SLIDE_DELAY = 3600;
 const STEP_SIZE = 2;
@@ -17,7 +17,7 @@ function getSlideLabel(index) {
   return `${index + 1}枚目へ`;
 }
 
-export default function HomeProductSlider({ products }) {
+export default function HomeProductSlider({ items = [] }) {
   const sliderRef = useRef(null);
   const [pageCount, setPageCount] = useState(1);
   const [activePage, setActivePage] = useState(0);
@@ -97,7 +97,7 @@ export default function HomeProductSlider({ products }) {
         slider.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
         return;
       }
-      const nextIndex = clamp(currentIndex + direction * STEP_SIZE, 0, products.length - 1);
+      const nextIndex = clamp(currentIndex + direction * STEP_SIZE, 0, items.length - 1);
       slider.scrollTo({ left: getSlideLeft(nextIndex), behavior: "smooth" });
     };
 
@@ -249,7 +249,7 @@ export default function HomeProductSlider({ products }) {
       window.removeEventListener("resize", updateMetrics);
       window.removeEventListener("macanon:languagechange", onLanguageChange);
     };
-  }, [products.length]);
+  }, [items.length]);
 
   function scrollToPage(index) {
     const slider = sliderRef.current;
@@ -263,14 +263,8 @@ export default function HomeProductSlider({ products }) {
   return (
     <div className="slider-shell">
       <div className="product-slider product-card-slider" data-slider data-card-selector=".product-card" data-loop="true" tabIndex={0} ref={sliderRef}>
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            variant="related"
-            href={product.salesUrls?.booth || `/products/${product.slug}`}
-            external={Boolean(product.salesUrls?.booth)}
-          />
+        {items.map((item) => (
+          <SlideLinkCard item={item} key={item.id} />
         ))}
       </div>
       <div className="slider-dots" data-slider-dots aria-label="商品スライド位置">
@@ -287,5 +281,32 @@ export default function HomeProductSlider({ products }) {
         ))}
       </div>
     </div>
+  );
+}
+
+function SlideLinkCard({ item }) {
+  const linkProps = item.openInNewTab
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
+
+  return (
+    <a
+      className="product-card"
+      href={item.url}
+      data-booth-tags={(item.tags || []).join(" ")}
+      aria-label={`${item.title}のリンクを開く`}
+      {...linkProps}
+    >
+      <Image
+        className="product-cover"
+        src={item.thumbnail}
+        alt={item.thumbnailAlt || item.title}
+        width={item.thumbnailWidth || 600}
+        height={item.thumbnailHeight || 600}
+        sizes="(max-width: 860px) 50vw, 240px"
+      />
+      <strong>{item.title}</strong>
+      <small>{item.category || item.description}</small>
+    </a>
   );
 }

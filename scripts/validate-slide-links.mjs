@@ -3,6 +3,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const slideLinksPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "data", "slide-links.json");
+const productsPath = path.join(/*turbopackIgnore: true*/ process.cwd(), "data", "products.json");
 const REQUIRED_FIELDS = [
   "id",
   "title",
@@ -15,7 +16,7 @@ const REQUIRED_FIELDS = [
   "published",
   "openInNewTab"
 ];
-const OPTIONAL_FIELDS = new Set(["slug"]);
+const OPTIONAL_FIELDS = new Set(["slug", "sourceProductSlug"]);
 
 let errors = [];
 let warnings = [];
@@ -84,7 +85,7 @@ function validateTags(link, label) {
   });
 }
 
-function validateSlideLink(link, index, allowedKeys) {
+function validateSlideLink(link, index, allowedKeys, productBySlug) {
   const label = labelFor(link, index);
 
   if (!isPlainObject(link)) {
@@ -105,6 +106,13 @@ function validateSlideLink(link, index, allowedKeys) {
 
   if (!hasText(link.id)) addError(`${label}: id が空です`);
   if ("slug" in link && !hasText(link.slug)) addError(`${label}: slug が空です`);
+  if ("sourceProductSlug" in link) {
+    if (!hasText(link.sourceProductSlug)) {
+      addError(`${label}: sourceProductSlug が空です`);
+    } else if (!productBySlug.has(link.sourceProductSlug)) {
+      addError(`${label}: sourceProductSlug が products.json に存在しません (${link.sourceProductSlug})`);
+    }
+  }
   if (!hasText(link.title)) addError(`${label}: title が空です`);
   if (!hasText(link.url)) addError(`${label}: url が空です`);
   if (!hasText(link.thumbnail)) addError(`${label}: thumbnail が空です`);
@@ -136,7 +144,7 @@ function validateSlideLink(link, index, allowedKeys) {
   }
 }
 
-export function validateSlideLinksData(slideLinks) {
+export function validateSlideLinksData(slideLinks, products = []) {
   resetValidationState();
 
   if (!Array.isArray(slideLinks)) {
@@ -146,6 +154,11 @@ export function validateSlideLinksData(slideLinks) {
 
   const allowedKeys = new Set([...REQUIRED_FIELDS, ...OPTIONAL_FIELDS]);
   const published = slideLinks.filter((link) => isPlainObject(link) && link.published);
+  const productBySlug = new Map(
+    (Array.isArray(products) ? products : [])
+      .filter((product) => isPlainObject(product) && hasText(product.slug))
+      .map((product) => [product.slug, product])
+  );
 
   for (const duplicate of findDuplicates(slideLinks, "id")) {
     addError(`id が重複しています: ${duplicate}`);
@@ -154,7 +167,7 @@ export function validateSlideLinksData(slideLinks) {
     addError(`slug が重複しています: ${duplicate}`);
   }
 
-  slideLinks.forEach((link, index) => validateSlideLink(link, index, allowedKeys));
+  slideLinks.forEach((link, index) => validateSlideLink(link, index, allowedKeys, productBySlug));
   return buildValidationResult(slideLinks, published);
 }
 
@@ -190,15 +203,18 @@ function printValidationResult(result) {
 
 async function main() {
   resetValidationState();
-  const slideLinks = await readJson(slideLinksPath, "data/slide-links.json");
+  const [slideLinks, products] = await Promise.all([
+    readJson(slideLinksPath, "data/slide-links.json"),
+    readJson(productsPath, "data/products.json")
+  ]);
 
-  if (!slideLinks) {
+  if (!slideLinks || !products) {
     printValidationResult(buildValidationResult([], []));
     process.exitCode = 1;
     return;
   }
 
-  const result = validateSlideLinksData(slideLinks);
+  const result = validateSlideLinksData(slideLinks, products);
   printValidationResult(result);
   if (!result.ok) {
     process.exitCode = 1;

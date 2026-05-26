@@ -2,22 +2,8 @@ import Link from "next/link";
 import HomeProductSlider from "@/components/HomeProductSlider";
 import ProductCard from "@/components/ProductCard";
 import { getProductBySlug, getPublishedProducts } from "@/lib/products";
+import { getPublishedSlideLinks } from "@/lib/slideLinks";
 import { SITE } from "@/lib/site";
-
-const HOME_PRODUCT_SLUGS = [
-  "cravingdance",
-  "shark-summon",
-  "whale-summon",
-  "capybara-summon",
-  "mirilori-uniform",
-  "star-guardian",
-  "galhalo",
-  "mini-whale",
-  "dark-knight",
-  "restraint-system",
-  "catmask",
-  "monsterchair"
-];
 
 const WORK_SLUGS = [
   "cravingdance",
@@ -58,7 +44,7 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  const products = getProductsBySlug(HOME_PRODUCT_SLUGS);
+  const slideLinks = getPublishedSlideLinks();
   const workProducts = getProductsBySlug(WORK_SLUGS);
 
   return (
@@ -105,7 +91,7 @@ export default function HomePage() {
             一覧で見る
           </Link>
         </div>
-        <HomeProductSlider products={products} />
+        <HomeProductSlider items={slideLinks} />
       </section>
 
       <section className="section text-section pr-hero" aria-labelledby="pr-title">
