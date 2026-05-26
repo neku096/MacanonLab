@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import HomeProductSlider from "./HomeProductSlider";
 import styles from "./AdminProductsClient.module.css";
 
 const API_BASE = "/api/admin/slide-links";
@@ -42,6 +43,14 @@ function uniqueId(base, slideLinks, currentId = "") {
 
 function nextSortOrder(slideLinks) {
   return Math.max(-1, ...slideLinks.map((link) => (Number.isFinite(link.sortOrder) ? link.sortOrder : 0))) + 1;
+}
+
+function normalizeSortOrder(slideLinks) {
+  return slideLinks.map((link, index) => ({ ...link, sortOrder: index }));
+}
+
+function orderSignature(slideLinks) {
+  return slideLinks.map((link) => `${link.id}:${link.sortOrder}`).join("|");
 }
 
 function slideLinkFromProduct(product, slideLinks, sortOrder = nextSortOrder(slideLinks)) {
@@ -88,11 +97,14 @@ export default function AdminSlideLinksClient() {
   const [slideLinks, setSlideLinks] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedId, setSelectedId] = useState("");
+  const [draggingId, setDraggingId] = useState("");
+  const [savedOrderSignature, setSavedOrderSignature] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [isSaving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [validation, setValidation] = useState(null);
+  const dragStateRef = useRef({ id: "", pointerId: null });
 
   const sortedSlideLinks = useMemo(
     () => [...slideLinks].sort((a, b) => (Number(a.sortOrder) || 0) - (Number(b.sortOrder) || 0)),
@@ -107,6 +119,18 @@ export default function AdminSlideLinksClient() {
     [products, selectedLink?.sourceProductSlug]
   );
   const publishedProducts = useMemo(() => products.filter((product) => product.published), [products]);
+  const hasOrderChanges = useMemo(
+    () => Boolean(savedOrderSignature) && orderSignature(sortedSlideLinks) !== savedOrderSignature,
+    [savedOrderSignature, sortedSlideLinks]
+  );
+  const previewItems = useMemo(
+    () => sortedSlideLinks.filter((link) => link.published),
+    [sortedSlideLinks]
+  );
+  const previewSignature = useMemo(
+    () => previewItems.map((link) => `${link.id}:${link.sortOrder}:${link.published}`).join("|"),
+    [previewItems]
+  );
 
   useEffect(() => {
     let ignore = false;
@@ -120,6 +144,7 @@ export default function AdminSlideLinksClient() {
         const nextSlideLinks = Array.isArray(payload.slideLinks) ? payload.slideLinks : [];
         setProducts(Array.isArray(payload.products) ? payload.products : []);
         setSlideLinks(nextSlideLinks);
+        setSavedOrderSignature(orderSignature([...nextSlideLinks].sort((a, b) => (Number(a.sortOrder) || 0) - (Number(b.sortOrder) || 0))));
         setSelectedId(nextSlideLinks[0]?.id || "");
       } catch (loadError) {
         if (!ignore) setError(loadError.message);
@@ -143,9 +168,63 @@ export default function AdminSlideLinksClient() {
     setError("");
   }
 
+  function reorderSlideLinks(activeId, targetId) {
+    if (!activeId || !targetId || activeId === targetId) return;
+    setSlideLinks((current) => {
+      const ordered = [...current].sort((a, b) => (Number(a.sortOrder) || 0) - (Number(b.sortOrder) || 0));
+      const activeIndex = ordered.findIndex((link) => link.id === activeId);
+      const targetIndex = ordered.findIndex((link) => link.id === targetId);
+      if (activeIndex < 0 || targetIndex < 0 || activeIndex === targetIndex) return current;
+      const [activeLink] = ordered.splice(activeIndex, 1);
+      ordered.splice(targetIndex, 0, activeLink);
+      return normalizeSortOrder(ordered);
+    });
+    setSelectedId(activeId);
+    setValidation(null);
+    setError("");
+  }
+
+  function moveSlideLink(id, direction) {
+    const ordered = sortedSlideLinks;
+    const currentIndex = ordered.findIndex((link) => link.id === id);
+    const nextIndex = currentIndex + direction;
+    if (currentIndex < 0 || nextIndex < 0 || nextIndex >= ordered.length) return;
+    reorderSlideLinks(id, ordered[nextIndex].id);
+    setMessage("順番を変更しました。保存するとTopスライダーに反映されます。");
+  }
+
+  function startDrag(event, id) {
+    dragStateRef.current = { id, pointerId: event.pointerId };
+    setDraggingId(id);
+    setSelectedId(id);
+    event.currentTarget.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  }
+
+  function moveDrag(event) {
+    const activeId = dragStateRef.current.id;
+    if (!activeId) return;
+    const target = document
+      .elementsFromPoint(event.clientX, event.clientY)
+      .find((element) => element instanceof HTMLElement && element.dataset.slideId);
+    const targetId = target?.dataset.slideId;
+    if (targetId) reorderSlideLinks(activeId, targetId);
+    event.preventDefault();
+  }
+
+  function stopDrag(event) {
+    if (!dragStateRef.current.id) return;
+    if (event.currentTarget.hasPointerCapture(dragStateRef.current.pointerId)) {
+      event.currentTarget.releasePointerCapture(dragStateRef.current.pointerId);
+    }
+    dragStateRef.current = { id: "", pointerId: null };
+    setDraggingId("");
+    setMessage("順番を変更しました。保存するとTopスライダーに反映されます。");
+  }
+
   function addSlideLink() {
     const nextLink = createSlideLink(slideLinks);
-    setSlideLinks((current) => [...current, nextLink]);
+    setSlideLinks(normalizeSortOrder([...sortedSlideLinks, nextLink]));
     setSelectedId(nextLink.id);
     setValidation(null);
     setError("");
@@ -154,7 +233,7 @@ export default function AdminSlideLinksClient() {
 
   function addProductSlideLink(product) {
     const nextLink = slideLinkFromProduct(product, slideLinks);
-    setSlideLinks((current) => [...current, nextLink]);
+    setSlideLinks(normalizeSortOrder([...sortedSlideLinks, nextLink]));
     setSelectedId(nextLink.id);
     setValidation(null);
     setError("");
@@ -209,6 +288,7 @@ export default function AdminSlideLinksClient() {
       const payload = await parseJsonResponse(response);
       setValidation(payload.validation || null);
       if (!response.ok) throw new Error(payload.error || "保存に失敗しました。");
+      setSavedOrderSignature(orderSignature(sortedSlideLinks));
       setMessage("data/slide-links.json を保存しました。");
     } catch (saveError) {
       setError(saveError.message);
@@ -302,6 +382,38 @@ export default function AdminSlideLinksClient() {
         </section>
       )}
 
+      {hasOrderChanges ? (
+        <section className={styles.orderNotice} aria-live="polite">
+          <strong>順番変更あり</strong>
+          <span>保存すると、この並び順がTopの商品スライダーに反映されます。</span>
+        </section>
+      ) : null}
+
+      <section className={styles.sliderPreviewPanel} aria-label="Topスライダープレビュー">
+        <header className={styles.sliderPreviewHeader}>
+          <div>
+            <span>Preview</span>
+            <strong>Topスライダー表示</strong>
+            <small>保存前のstateから published:true のカードだけを表示します。</small>
+          </div>
+          <small>{previewItems.length} published cards</small>
+        </header>
+        {previewItems.length ? (
+          <div className={styles.sliderPreviewGrid}>
+            <div className={styles.sliderPreviewFrame}>
+              <span className={styles.previewLabel}>PC</span>
+              <HomeProductSlider items={previewItems} key={`desktop-${previewSignature}`} />
+            </div>
+            <div className={`${styles.sliderPreviewFrame} ${styles.mobileSliderPreview}`}>
+              <span className={styles.previewLabel}>Mobile</span>
+              <HomeProductSlider items={previewItems} key={`mobile-${previewSignature}`} />
+            </div>
+          </div>
+        ) : (
+          <p className={styles.fieldHint}>published:true のカードがないため、Topスライダーには表示されません。</p>
+        )}
+      </section>
+
       <div className={styles.layout}>
         <aside className={styles.sidebar}>
           <div className={styles.sidebarHeader}>
@@ -310,19 +422,44 @@ export default function AdminSlideLinksClient() {
               追加
             </button>
           </div>
-          <div className={styles.productList}>
-            {sortedSlideLinks.map((link) => (
-              <button
-                className={`${styles.productItem}${link.id === selectedLink.id ? ` ${styles.isSelected}` : ""}`}
-                type="button"
+          <p className={styles.fieldHint}>左のハンドルをドラッグ、または上下ボタンでTop表示順を調整できます。</p>
+          <div className={`${styles.productList} ${styles.sortableList}`}>
+            {sortedSlideLinks.map((link, index) => (
+              <div
+                className={`${styles.sortableItem}${link.id === selectedLink.id ? ` ${styles.isSelected}` : ""}${!link.published ? ` ${styles.isDraft}` : ""}${draggingId === link.id ? ` ${styles.isDragging}` : ""}`}
+                data-slide-id={link.id}
                 key={link.id}
-                onClick={() => setSelectedId(link.id)}
               >
-                <span>{link.title || link.id}</span>
-                <small>
-                  {link.published ? "published" : "draft"} / {link.category || "no category"}
-                </small>
-              </button>
+                <button
+                  className={styles.dragHandle}
+                  type="button"
+                  aria-label={`${link.title || link.id} をドラッグして並び替え`}
+                  onPointerDown={(event) => startDrag(event, link.id)}
+                  onPointerMove={moveDrag}
+                  onPointerUp={stopDrag}
+                  onPointerCancel={stopDrag}
+                >
+                  <span aria-hidden="true">≡</span>
+                </button>
+                <button
+                  className={styles.sortableSelect}
+                  type="button"
+                  onClick={() => setSelectedId(link.id)}
+                >
+                  <span>{index + 1}. {link.title || link.id}</span>
+                  <small>
+                    {link.published ? "published" : "draft"} / {link.category || "no category"}
+                  </small>
+                </button>
+                <div className={styles.sortActions} aria-label={`${link.title || link.id} の並び替え`}>
+                  <button type="button" onClick={() => moveSlideLink(link.id, -1)} disabled={index === 0} aria-label="上へ移動">
+                    ↑
+                  </button>
+                  <button type="button" onClick={() => moveSlideLink(link.id, 1)} disabled={index === sortedSlideLinks.length - 1} aria-label="下へ移動">
+                    ↓
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
           <div className={styles.sidebarHeader}>
