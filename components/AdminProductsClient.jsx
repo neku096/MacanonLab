@@ -272,6 +272,11 @@ function uniqueSlug(base, products, currentSlug = "") {
   return nextSlug;
 }
 
+function withCopySuffix(value, fallback = "New Product") {
+  const base = value?.trim() || fallback;
+  return `${base} (Copy)`;
+}
+
 export default function AdminProductsClient() {
   const [products, setProducts] = useState([]);
   const [productTemplate, setProductTemplate] = useState(null);
@@ -289,6 +294,7 @@ export default function AdminProductsClient() {
   const [tagSearch, setTagSearch] = useState("");
   const [subtagSearch, setSubtagSearch] = useState("");
   const [avatarSearch, setAvatarSearch] = useState("");
+  const [duplicateNoticeSlug, setDuplicateNoticeSlug] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [isSaving, setSaving] = useState(false);
 
@@ -394,6 +400,7 @@ export default function AdminProductsClient() {
       setProductTemplate(payload.productTemplate || null);
       setProductPageEnglish(payload.productPageEnglish || {});
       setSelectedSlug(payload.products?.[0]?.slug || "");
+      setDuplicateNoticeSlug("");
     } catch (error) {
       setMessage(error.message);
     } finally {
@@ -456,6 +463,7 @@ export default function AdminProductsClient() {
     if (!galleryState.error) {
       setGalleryText(JSON.stringify(nextGallery, null, 2));
     }
+    setDuplicateNoticeSlug((current) => (current === oldSlug ? nextSlug : current));
     setProductPageEnglish((current) => {
       const next = { ...current };
       next[nextKey] = current[oldKey] || createEnglish(selectedProduct);
@@ -509,9 +517,59 @@ export default function AdminProductsClient() {
       [legacyKey(nextProduct)]: createEnglish(nextProduct)
     }));
     setSelectedSlug(baseSlug);
+    setDuplicateNoticeSlug("");
     setValidation(null);
     setImageCheckSummary(null);
     setMessage("新規商品を追加しました。保存前に内容と画像パスを確認してください。");
+  }
+
+  function duplicateSelectedProduct() {
+    if (!selectedProduct || !english) return;
+    if (galleryState.error) {
+      setJsonError(`gallery JSON を修正してください: ${galleryState.error}`);
+      return;
+    }
+
+    const oldSlug = selectedProduct.slug || "new-product";
+    const nextSlug = uniqueSlug(`${oldSlug}-copy`, products);
+    const nextTitle = withCopySuffix(selectedProduct.title, selectedProduct.slug || "New Product");
+    const nextKey = `product-${nextSlug}.html`;
+    const nextGallery = replaceGalleryPaths(clone(galleryItems), oldSlug, nextSlug);
+    const nextCoverImage = selectedProduct.coverImage
+      ? replaceProductDirPath(selectedProduct.coverImage, oldSlug, nextSlug)
+      : productImageDirForSlug(nextSlug) + "cover.webp";
+    const nextEnglishTitle = withCopySuffix(
+      english.title,
+      selectedProduct.title || selectedProduct.slug || "New Product"
+    );
+    const nextProduct = {
+      ...clone(selectedProduct),
+      id: nextSlug,
+      slug: nextSlug,
+      published: false,
+      sortOrder: Math.max(-1, ...products.map((product) => Number(product.sortOrder) || 0)) + 1,
+      title: nextTitle,
+      legacyPath: `/${nextKey}`,
+      coverImage: nextCoverImage,
+      gallery: nextGallery
+    };
+    const nextEnglish = {
+      ...clone(english),
+      title: nextEnglishTitle,
+      pageTitle: `${nextEnglishTitle} | macanon`
+    };
+
+    setProducts((current) => [...current, nextProduct]);
+    setProductPageEnglish((current) => ({
+      ...current,
+      [nextKey]: nextEnglish
+    }));
+    setSelectedSlug(nextSlug);
+    setDuplicateNoticeSlug(nextSlug);
+    setValidation(null);
+    setImageCheckSummary(null);
+    setJsonError("");
+    setMessage("商品を複製しました。slug / title / 画像を変更してから検証してください。");
   }
 
   function deleteSelectedProduct() {
@@ -547,6 +605,7 @@ export default function AdminProductsClient() {
     setSelectedSlug(nextProduct?.slug || "");
     setValidation(null);
     setImageCheckSummary(null);
+    setDuplicateNoticeSlug((current) => (current === selectedProduct.slug ? "" : current));
     setJsonError("");
     setMessage(`${targetLabel} を削除しました。relatedIds の参照も削除済みです。検証して保存してください。`);
   }
@@ -851,9 +910,14 @@ export default function AdminProductsClient() {
               <strong>{selectedProduct.title || selectedProduct.slug}</strong>
               <small>{selectedProduct.slug}</small>
             </div>
-            <button className={styles.dangerButton} type="button" onClick={deleteSelectedProduct}>
-              商品を削除
-            </button>
+            <div className={styles.editorHeaderActions}>
+              <button className={styles.secondaryButton} type="button" onClick={duplicateSelectedProduct}>
+                複製
+              </button>
+              <button className={styles.dangerButton} type="button" onClick={deleteSelectedProduct}>
+                商品を削除
+              </button>
+            </div>
           </div>
 
           {!selectedProduct.published ? (
@@ -861,6 +925,13 @@ export default function AdminProductsClient() {
               <strong>Draft URL</strong>
               <code>/products/{selectedProduct.slug}</code>
               <span>published:false の間は公開側では 404 が正常です。商品一覧と sitemap にも表示されません。</span>
+            </div>
+          ) : null}
+
+          {duplicateNoticeSlug === selectedProduct.slug ? (
+            <div className={styles.duplicateNotice} role="alert">
+              <strong>複製後の確認</strong>
+              <span>複製後は slug / title / 画像を変更してください。</span>
             </div>
           ) : null}
 

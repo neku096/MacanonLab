@@ -30,6 +30,14 @@
 6. 管理画面の画像warningと validate 結果を確認します。
 7. 公開前に `published:true` へ切り替え、`npm.cmd run validate:products` と `npm.cmd run build` を通します。
 
+## 既存商品の複製手順
+
+1. 複製元の商品を選択し、「複製」を押します。
+2. 複製された商品は `published:false`、`<slug>-copy` 系の仮slug、`(Copy)` 付きタイトルになります。
+3. warningに従い、保存前に `slug`, `title`, 画像パスを実商品用に変更します。
+4. slug変更時は `coverImage`, `gallery`, 英語キーも候補更新されます。
+5. 保存前に管理画面の validate と画像warningを確認します。
+
 ## Slug命名ルール
 
 - `slug` と `id` は同じ値にします。

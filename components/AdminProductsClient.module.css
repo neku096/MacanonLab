@@ -196,6 +196,13 @@
   font-weight: 800;
 }
 
+.editorHeaderActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 .dangerButton {
   min-height: 42px;
   border: 1px solid #f3a1bd;
@@ -245,6 +252,27 @@
   font: inherit;
   font-size: 0.84rem;
   font-weight: 900;
+}
+
+.duplicateNotice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  border: 1px solid rgba(240, 190, 72, 0.74);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #6b4a00;
+  background: rgba(255, 248, 226, 0.92);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.duplicateNotice strong {
+  color: #9c6b00;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .assistPanel {
