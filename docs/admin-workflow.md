@@ -86,6 +86,8 @@
 - `/products/[slug]` へ直接アクセスしても `notFound()` になります。
 - metadata上も未公開商品は `robots: { index: false, follow: false }` 扱いです。
 - sitemapは公開商品のみを対象にします。
+- draft の公開URLをブラウザやHTTPで確認した時に `404` になるのは正常です。
+- ブラウザconsoleでは main document の `404` が error として記録される場合がありますが、draft 非公開確認としてはHTTP status `404` を見ます。
 
 公開する時は `published:true` にしたうえで、公開商品向け必須項目、英語データ、画像実体、販売URLを確認してください。
 

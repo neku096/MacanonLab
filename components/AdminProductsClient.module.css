@@ -215,6 +215,38 @@
   box-shadow: 0 14px 28px rgba(183, 31, 88, 0.14);
 }
 
+.draftNotice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  border: 1px solid rgba(158, 230, 247, 0.9);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #315c70;
+  background: rgba(246, 253, 255, 0.88);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.draftNotice strong {
+  color: #05a9d9;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.draftNotice code {
+  border: 1px solid rgba(146, 221, 241, 0.9);
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: #073047;
+  background: rgba(255, 255, 255, 0.95);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
 .assistPanel {
   display: grid;
   gap: 16px;

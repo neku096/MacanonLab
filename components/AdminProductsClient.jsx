@@ -469,7 +469,10 @@ export default function AdminProductsClient() {
   function handleTitleChange(nextTitle) {
     if (!selectedProduct) return;
     const nextPatch = { title: nextTitle };
-    const shouldAutoSlug = !selectedProduct.published && /^new-product(-\d+)?$/.test(selectedProduct.slug || "");
+    const currentTitleSlug = uniqueSlug(selectedProduct.title || "", products, selectedProduct.slug);
+    const shouldAutoSlug =
+      !selectedProduct.published &&
+      (/^new-product(-\d+)?$/.test(selectedProduct.slug || "") || selectedProduct.slug === currentTitleSlug);
 
     if (shouldAutoSlug) {
       const nextSlug = uniqueSlug(nextTitle, products, selectedProduct.slug);
@@ -852,6 +855,14 @@ export default function AdminProductsClient() {
               商品を削除
             </button>
           </div>
+
+          {!selectedProduct.published ? (
+            <div className={styles.draftNotice}>
+              <strong>Draft URL</strong>
+              <code>/products/{selectedProduct.slug}</code>
+              <span>published:false の間は公開側では 404 が正常です。商品一覧と sitemap にも表示されません。</span>
+            </div>
+          ) : null}
 
           <div className={styles.gridTwo}>
             <Field label="タイトル">
