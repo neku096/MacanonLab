@@ -1,19 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductCard({ product, priority = false, variant = "grid" }) {
+export default function ProductCard({ product, priority = false, variant = "grid", href, external = false }) {
   const isRelated = variant === "related";
   const caption = getCardCaption(product);
-
-  return (
-    <Link
-      className={isRelated ? "product-card" : "booth-list-thumb"}
-      href={`/products/${product.slug}`}
-      data-booth-tags={product.tags.join(" ")}
-      data-booth-subtags={product.subtags.join(" ")}
-      data-likes={product.likes}
-      aria-label={`${product.title}の商品ページへ`}
-    >
+  const linkHref = href || `/products/${product.slug}`;
+  const tags = Array.isArray(product.tags) ? product.tags : [];
+  const subtags = Array.isArray(product.subtags) ? product.subtags : [];
+  const linkProps = {
+    className: isRelated ? "product-card" : "booth-list-thumb",
+    href: linkHref,
+    "data-booth-tags": tags.join(" "),
+    "data-booth-subtags": subtags.join(" "),
+    "data-likes": product.likes,
+    "aria-label": external ? `${product.title}のBOOTH商品ページへ` : `${product.title}の商品ページへ`
+  };
+  const content = (
+    <>
       <Image
         className={isRelated ? "product-cover" : undefined}
         src={product.coverImage}
@@ -29,8 +32,10 @@ export default function ProductCard({ product, priority = false, variant = "grid
           <small>{caption}</small>
         </>
       ) : null}
-    </Link>
+    </>
   );
+
+  return external ? <a {...linkProps}>{content}</a> : <Link {...linkProps}>{content}</Link>;
 }
 
 function getCardCaption(product) {

@@ -264,7 +264,13 @@ export default function HomeProductSlider({ products }) {
     <div className="slider-shell">
       <div className="product-slider product-card-slider" data-slider data-card-selector=".product-card" data-loop="true" tabIndex={0} ref={sliderRef}>
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} variant="related" />
+          <ProductCard
+            key={product.id}
+            product={product}
+            variant="related"
+            href={product.salesUrls?.booth || `/products/${product.slug}`}
+            external={Boolean(product.salesUrls?.booth)}
+          />
         ))}
       </div>
       <div className="slider-dots" data-slider-dots aria-label="商品スライド位置">
