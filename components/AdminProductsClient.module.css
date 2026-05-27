@@ -1018,35 +1018,6 @@
   min-width: 0;
 }
 
-.categoryPreviewStack {
-  display: grid;
-  gap: 20px;
-}
-
-.categoryPreviewGroup {
-  display: grid;
-  gap: 12px;
-}
-
-.categoryPreviewHeading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  border-bottom: 1px solid rgba(158, 230, 247, 0.72);
-  padding-bottom: 8px;
-}
-
-.categoryPreviewHeading strong {
-  color: #073047;
-  font-size: 1.02rem;
-}
-
-.categoryPreviewHeading small {
-  color: #5e7886;
-  font-weight: 800;
-}
-
 .statusPanel p {
   margin: 0;
 }

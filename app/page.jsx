@@ -2,7 +2,7 @@ import Link from "next/link";
 import HomeProductSlider from "@/components/HomeProductSlider";
 import ProductCard from "@/components/ProductCard";
 import { getProductBySlug, getPublishedProducts } from "@/lib/products";
-import { getPublishedSlideLinkGroups } from "@/lib/slideLinks";
+import { getPublishedSlideLinks } from "@/lib/slideLinks";
 import { SITE } from "@/lib/site";
 
 const WORK_SLUGS = [
@@ -44,7 +44,7 @@ export const metadata = {
 };
 
 export default function HomePage() {
-  const slideLinkGroups = getPublishedSlideLinkGroups();
+  const slideLinks = getPublishedSlideLinks();
   const workProducts = getProductsBySlug(WORK_SLUGS);
 
   return (
@@ -91,17 +91,7 @@ export default function HomePage() {
             一覧で見る
           </Link>
         </div>
-        <div className="category-slider-stack">
-          {slideLinkGroups.map((group) => (
-            <section className="category-slider-group" aria-label={`${group.category}の商品リンク`} key={group.category}>
-              <div className="category-slider-heading">
-                <h3>{group.category}</h3>
-                <small>{group.items.length} items</small>
-              </div>
-              <HomeProductSlider items={group.items} />
-            </section>
-          ))}
-        </div>
+        <HomeProductSlider items={slideLinks} />
       </section>
 
       <section className="section text-section pr-hero" aria-labelledby="pr-title">

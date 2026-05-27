@@ -17,6 +17,20 @@ function getSlideLabel(index) {
   return `${index + 1}枚目へ`;
 }
 
+function getSliderDotsLabel() {
+  if (typeof document !== "undefined" && document.documentElement.lang === "en") {
+    return "Product slide position";
+  }
+  return "商品スライド位置";
+}
+
+function getCardAriaLabel(item) {
+  if (typeof document !== "undefined" && document.documentElement.lang === "en") {
+    return `Open ${item.title}`;
+  }
+  return `${item.title}のリンクを開く`;
+}
+
 export default function HomeProductSlider({ items = [] }) {
   const sliderRef = useRef(null);
   const [pageCount, setPageCount] = useState(1);
@@ -163,7 +177,11 @@ export default function HomeProductSlider({ items = [] }) {
       const totalMovedX = Math.abs(event.clientX - dragState.startX);
       if (!dragState.hasDragged && totalMovedX < 8 && dragState.pressedLink && dragState.pressedLink.getAttribute("href") !== "#") {
         dragState.suppressNextClick = true;
-        window.location.href = dragState.pressedLink.href;
+        if (dragState.pressedLink.target === "_blank") {
+          window.open(dragState.pressedLink.href, "_blank", "noopener,noreferrer");
+        } else {
+          window.location.href = dragState.pressedLink.href;
+        }
       }
       dragState.pressedLink = null;
     };
@@ -267,7 +285,7 @@ export default function HomeProductSlider({ items = [] }) {
           <SlideLinkCard item={item} key={item.id} />
         ))}
       </div>
-      <div className="slider-dots" data-slider-dots aria-label="商品スライド位置">
+      <div className="slider-dots" data-slider-dots aria-label={getSliderDotsLabel()}>
         {Array.from({ length: pageCount }, (_, index) => (
           <button
             className={`slider-dot${activePage === index ? " is-active" : ""}`}
@@ -294,7 +312,7 @@ function SlideLinkCard({ item }) {
       className="product-card"
       href={item.url}
       data-booth-tags={(item.tags || []).join(" ")}
-      aria-label={`${item.title}のリンクを開く`}
+      aria-label={getCardAriaLabel(item)}
       {...linkProps}
     >
       <Image
@@ -306,7 +324,7 @@ function SlideLinkCard({ item }) {
         sizes="(max-width: 860px) 50vw, 240px"
       />
       <strong>{item.title}</strong>
-      <small>{item.category || item.description}</small>
+      <small>{item.description}</small>
     </a>
   );
 }

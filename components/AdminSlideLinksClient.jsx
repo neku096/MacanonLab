@@ -63,27 +63,6 @@ function categoryRank(category) {
   return fixedIndex >= 0 ? fixedIndex : CATEGORY_OPTIONS.length;
 }
 
-function groupByCategory(items) {
-  const groups = new Map();
-
-  for (const item of items) {
-    const category = normalizeCategory(item.category);
-    if (!groups.has(category)) groups.set(category, []);
-    groups.get(category).push({ ...item, category });
-  }
-
-  return [...groups.entries()]
-    .map(([category, categoryItems]) => ({ category, items: categoryItems }))
-    .sort((a, b) => {
-      const rankDiff = categoryRank(a.category) - categoryRank(b.category);
-      if (rankDiff !== 0) return rankDiff;
-      const firstA = Number(a.items[0]?.sortOrder) || 0;
-      const firstB = Number(b.items[0]?.sortOrder) || 0;
-      if (firstA !== firstB) return firstA - firstB;
-      return a.category.localeCompare(b.category, "ja");
-    });
-}
-
 function slideLinkFromProduct(product, slideLinks, sortOrder = nextSortOrder(slideLinks)) {
   return {
     id: uniqueId(product.slug || product.title, slideLinks),
@@ -175,7 +154,6 @@ export default function AdminSlideLinksClient() {
     () => sortedSlideLinks.filter((link) => link.published).map((link) => ({ ...link, category: normalizeCategory(link.category) })),
     [sortedSlideLinks]
   );
-  const previewGroups = useMemo(() => groupByCategory(previewItems), [previewItems]);
   const previewSignature = useMemo(
     () => previewItems.map((link) => `${link.id}:${link.sortOrder}:${link.published}:${link.category}`).join("|"),
     [previewItems]
@@ -443,30 +421,20 @@ export default function AdminSlideLinksClient() {
           <div>
             <span>Preview</span>
             <strong>Topスライダー表示</strong>
-            <small>保存前のstateから published:true のカードだけをカテゴリ別に表示します。</small>
+            <small>公開Topと同じ1本スライダーで、保存前の published:true カードだけを表示します。</small>
           </div>
-          <small>{previewGroups.length} categories / {previewItems.length} published cards</small>
+          <small>{previewItems.length} published cards</small>
         </header>
         {previewItems.length ? (
-          <div className={styles.categoryPreviewStack}>
-            {previewGroups.map((group) => (
-              <section className={styles.categoryPreviewGroup} key={group.category}>
-                <div className={styles.categoryPreviewHeading}>
-                  <strong>{group.category}</strong>
-                  <small>{group.items.length} items</small>
-                </div>
-                <div className={styles.sliderPreviewGrid}>
-                  <div className={styles.sliderPreviewFrame}>
-                    <span className={styles.previewLabel}>PC</span>
-                    <HomeProductSlider items={group.items} key={`desktop-${group.category}-${previewSignature}`} />
-                  </div>
-                  <div className={`${styles.sliderPreviewFrame} ${styles.mobileSliderPreview}`}>
-                    <span className={styles.previewLabel}>Mobile</span>
-                    <HomeProductSlider items={group.items} key={`mobile-${group.category}-${previewSignature}`} />
-                  </div>
-                </div>
-              </section>
-            ))}
+          <div className={styles.sliderPreviewGrid}>
+            <div className={styles.sliderPreviewFrame}>
+              <span className={styles.previewLabel}>PC</span>
+              <HomeProductSlider items={previewItems} key={`desktop-${previewSignature}`} />
+            </div>
+            <div className={`${styles.sliderPreviewFrame} ${styles.mobileSliderPreview}`}>
+              <span className={styles.previewLabel}>Mobile</span>
+              <HomeProductSlider items={previewItems} key={`mobile-${previewSignature}`} />
+            </div>
           </div>
         ) : (
           <p className={styles.fieldHint}>published:true のカードがないため、Topスライダーには表示されません。</p>
