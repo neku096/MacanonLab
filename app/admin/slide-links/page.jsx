@@ -4,13 +4,17 @@ import { isAdminWriteEnabled } from "@/lib/adminProductsStore";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "スライドリンク集カード管理",
-  robots: {
-    index: false,
-    follow: false
-  }
+const adminRobots = {
+  index: false,
+  follow: false
 };
+
+export function generateMetadata() {
+  return {
+    title: isAdminWriteEnabled() ? "スライドリンク集カード管理 | macanon" : "404 | macanon",
+    robots: adminRobots
+  };
+}
 
 export default function AdminSlideLinksPage() {
   if (!isAdminWriteEnabled()) {

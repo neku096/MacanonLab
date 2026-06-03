@@ -5,13 +5,17 @@ import { isAdminWriteEnabled } from "@/lib/adminProductsStore";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Admin",
-  robots: {
-    index: false,
-    follow: false
-  }
+const adminRobots = {
+  index: false,
+  follow: false
 };
+
+export function generateMetadata() {
+  return {
+    title: isAdminWriteEnabled() ? "Admin | macanon" : "404 | macanon",
+    robots: adminRobots
+  };
+}
 
 export default function AdminPage() {
   if (!isAdminWriteEnabled()) {

@@ -10,23 +10,36 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function getSlideLabel(index) {
-  if (typeof document !== "undefined" && document.documentElement.lang === "en") {
+function getCurrentLanguage() {
+  if (typeof window === "undefined") return "ja";
+  try {
+    const storedLanguage = window.localStorage.getItem("macanon-language");
+    if (storedLanguage === "en" || storedLanguage === "ja") {
+      return storedLanguage;
+    }
+  } catch {
+    // localStorage can be blocked; fall back to the document language.
+  }
+  return document.documentElement.lang === "en" ? "en" : "ja";
+}
+
+function getSlideLabel(index, language) {
+  if (language === "en") {
     return `Go to slide ${index + 1}`;
   }
   return `${index + 1}枚目へ`;
 }
 
-function getSliderDotsLabel() {
-  if (typeof document !== "undefined" && document.documentElement.lang === "en") {
+function getSliderDotsLabel(language) {
+  if (language === "en") {
     return "Product slide position";
   }
   return "商品スライド位置";
 }
 
-function getCardAriaLabel(item) {
-  if (typeof document !== "undefined" && document.documentElement.lang === "en") {
-    return `Open ${item.title}`;
+function getCardAriaLabel(item, language) {
+  if (language === "en") {
+    return `Open link for ${item.title}`;
   }
   return `${item.title}のリンクを開く`;
 }
@@ -35,7 +48,7 @@ export default function HomeProductSlider({ items = [] }) {
   const sliderRef = useRef(null);
   const [pageCount, setPageCount] = useState(1);
   const [activePage, setActivePage] = useState(0);
-  const [, setLanguageTick] = useState(0);
+  const [language, setLanguage] = useState("ja");
   const dragStateRef = useRef({
     isDragging: false,
     hasDragged: false,
@@ -203,7 +216,7 @@ export default function HomeProductSlider({ items = [] }) {
     };
 
     const onLanguageChange = () => {
-      setLanguageTick((value) => value + 1);
+      setLanguage(getCurrentLanguage());
     };
     const onDragStart = (event) => event.preventDefault();
     const onLostPointerCapture = () => {
@@ -213,6 +226,7 @@ export default function HomeProductSlider({ items = [] }) {
     };
 
     updateMetrics();
+    onLanguageChange();
     slider.addEventListener("scroll", updateMetrics, { passive: true });
     slider.addEventListener("keydown", onKeyDown);
     slider.addEventListener("pointerdown", onPointerDown);
@@ -282,15 +296,15 @@ export default function HomeProductSlider({ items = [] }) {
     <div className="slider-shell">
       <div className="product-slider product-card-slider" data-slider data-card-selector=".product-card" data-loop="true" tabIndex={0} ref={sliderRef}>
         {items.map((item) => (
-          <SlideLinkCard item={item} key={item.id} />
+          <SlideLinkCard item={item} language={language} key={item.id} />
         ))}
       </div>
-      <div className="slider-dots" data-slider-dots aria-label={getSliderDotsLabel()}>
+      <div className="slider-dots" data-slider-dots aria-label={getSliderDotsLabel(language)}>
         {Array.from({ length: pageCount }, (_, index) => (
           <button
             className={`slider-dot${activePage === index ? " is-active" : ""}`}
             type="button"
-            aria-label={getSlideLabel(index)}
+            aria-label={getSlideLabel(index, language)}
             aria-pressed={activePage === index}
             aria-current={activePage === index ? "true" : "false"}
             key={index}
@@ -302,7 +316,7 @@ export default function HomeProductSlider({ items = [] }) {
   );
 }
 
-function SlideLinkCard({ item }) {
+function SlideLinkCard({ item, language }) {
   const linkProps = item.openInNewTab
     ? { target: "_blank", rel: "noopener noreferrer" }
     : {};
@@ -312,7 +326,7 @@ function SlideLinkCard({ item }) {
       className="product-card"
       href={item.url}
       data-booth-tags={(item.tags || []).join(" ")}
-      aria-label={getCardAriaLabel(item)}
+      aria-label={getCardAriaLabel(item, language)}
       {...linkProps}
     >
       <Image
