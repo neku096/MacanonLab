@@ -3,11 +3,14 @@ Thumbs.db
 node_modules/
 .env.local
 .env*.local
+.dev.vars
 .next/
+.open-next/
 dist/
 build/
 snapshots/
 .playwright-mcp/
+.wrangler/
 archive/
 backups/
 codex-backups/
