@@ -2,11 +2,20 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import AdminFilePathInput from "./AdminFilePathInput";
 import HomeProductSlider from "./HomeProductSlider";
 import styles from "./AdminProductsClient.module.css";
 
 const API_BASE = "/api/admin/slide-links";
 const CATEGORY_OPTIONS = ["featured", "new", "recommended", "free", "other"];
+const CATEGORY_LABELS = {
+  all: "すべて",
+  featured: "注目",
+  new: "新着",
+  recommended: "おすすめ",
+  free: "無料",
+  other: "その他"
+};
 
 function slugify(value) {
   return value
@@ -83,7 +92,7 @@ function createSlideLink(slideLinks) {
   const id = uniqueId("slide-link", slideLinks);
   return {
     id,
-    title: "New Slide Link",
+    title: "新規スライドリンク",
     description: "",
     url: "",
     thumbnail: "",
@@ -92,6 +101,18 @@ function createSlideLink(slideLinks) {
     sortOrder: nextSortOrder(slideLinks),
     published: false,
     openInNewTab: true
+  };
+}
+
+function duplicateSlideLink(link, slideLinks) {
+  const baseTitle = link.title || link.id || "スライドリンク";
+  const nextId = uniqueId(`${link.id || baseTitle}-copy`, slideLinks);
+  return {
+    ...link,
+    id: nextId,
+    title: `${baseTitle}のコピー`,
+    sortOrder: nextSortOrder(slideLinks),
+    published: false
   };
 }
 
@@ -115,6 +136,7 @@ export default function AdminSlideLinksClient() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [validation, setValidation] = useState(null);
+  const [duplicateWarning, setDuplicateWarning] = useState("");
   const dragStateRef = useRef({ id: "", pointerId: null });
 
   const sortedSlideLinks = useMemo(
@@ -193,6 +215,7 @@ export default function AdminSlideLinksClient() {
     );
     setValidation(null);
     setError("");
+    setDuplicateWarning("");
   }
 
   function reorderSlideLinks(activeId, targetId) {
@@ -209,6 +232,7 @@ export default function AdminSlideLinksClient() {
     setSelectedId(activeId);
     setValidation(null);
     setError("");
+    setDuplicateWarning("");
   }
 
   function moveSlideLink(id, direction) {
@@ -255,7 +279,8 @@ export default function AdminSlideLinksClient() {
     setSelectedId(nextLink.id);
     setValidation(null);
     setError("");
-    setMessage("スライドリンク集カードを追加しました。保存前にURLとthumbnailを入力してください。");
+    setDuplicateWarning("");
+    setMessage("スライドリンク集カードを追加しました。保存前にリンクURLとサムネイルを入力してください。");
   }
 
   function addProductSlideLink(product) {
@@ -264,7 +289,19 @@ export default function AdminSlideLinksClient() {
     setSelectedId(nextLink.id);
     setValidation(null);
     setError("");
+    setDuplicateWarning("");
     setMessage(`${product.title || product.slug} からTopスライダー用カードを追加しました。`);
+  }
+
+  function duplicateSelectedLink() {
+    if (!selectedLink) return;
+    const nextLink = duplicateSlideLink(selectedLink, slideLinks);
+    setSlideLinks(normalizeSortOrder([...sortedSlideLinks, nextLink]));
+    setSelectedId(nextLink.id);
+    setValidation(null);
+    setError("");
+    setDuplicateWarning("複製後はタイトル・URL・表示順を確認してください。");
+    setMessage(`${selectedLink.title || selectedLink.id} を複製しました。`);
   }
 
   function deleteSelectedLink() {
@@ -274,6 +311,7 @@ export default function AdminSlideLinksClient() {
     setSelectedId(nextSlideLinks[0]?.id || "");
     setValidation(null);
     setError("");
+    setDuplicateWarning("");
     setMessage(`${selectedLink.title || selectedLink.id} を削除しました。保存すると data/slide-links.json に反映されます。`);
   }
 
@@ -285,7 +323,7 @@ export default function AdminSlideLinksClient() {
     });
     const payload = await parseJsonResponse(response);
     setValidation(payload.validation || null);
-    if (!response.ok) throw new Error(payload.error || "validate:slide-links でエラーがありました。");
+    if (!response.ok) throw new Error(payload.error || "スライダー設定の確認でエラーがありました。");
     return payload.validation;
   }
 
@@ -294,7 +332,7 @@ export default function AdminSlideLinksClient() {
     setError("");
     try {
       await requestValidation({ slideLinks });
-      setMessage("validate:slide-links 相当の検証に成功しました。");
+      setMessage("スライダー設定の確認に成功しました。");
     } catch (validateError) {
       setError(validateError.message);
     }
@@ -330,7 +368,7 @@ export default function AdminSlideLinksClient() {
       title: product.title || selectedLink.title,
       description: product.description || selectedLink.description,
       url: product.salesUrls?.booth || selectedLink.url || `/products/${product.slug}`,
-      thumbnail: product.coverImage || selectedLink.thumbnail,
+      thumbnail: selectedLink.thumbnail || product.coverImage || "",
       category: product.categoryLabel || product.category || selectedLink.category,
       tags: Array.isArray(product.tags) ? product.tags : selectedLink.tags || [],
       openInNewTab: Boolean(product.salesUrls?.booth) || selectedLink.openInNewTab,
@@ -338,14 +376,9 @@ export default function AdminSlideLinksClient() {
     });
   }
 
-  function applyProductThumbnail(product = selectedProduct) {
-    if (!product?.coverImage) return;
-    updateSelected({ thumbnail: product.coverImage, sourceProductSlug: product.slug });
-  }
-
   if (isLoading) {
     return (
-      <main className={styles.page}>
+      <main className={styles.page} data-no-translate>
         <p>スライドリンク集カードを読み込んでいます...</p>
       </main>
     );
@@ -353,7 +386,7 @@ export default function AdminSlideLinksClient() {
 
   if (!selectedLink) {
     return (
-      <main className={styles.page}>
+      <main className={styles.page} data-no-translate>
         <header className={styles.header}>
           <div>
             <p className={styles.eyebrow}>Local Admin</p>
@@ -381,7 +414,7 @@ export default function AdminSlideLinksClient() {
   }
 
   return (
-    <main className={styles.page} data-admin-slide-links>
+    <main className={styles.page} data-admin-slide-links data-no-translate>
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>Local Admin</p>
@@ -389,14 +422,14 @@ export default function AdminSlideLinksClient() {
           <p>Topページの商品リンクスライダー用カードをローカルJSONへ保存します。</p>
         </div>
         <div className={styles.actions}>
+          <button className={styles.secondaryButton} type="button" onClick={validateDraft}>
+            スライダー設定を確認
+          </button>
           <Link className={styles.secondaryButton} href="/admin">
             Adminへ戻る
           </Link>
-          <button className={styles.secondaryButton} type="button" onClick={validateDraft}>
-            validate:slide-links
-          </button>
           <button className={styles.primaryButton} type="button" onClick={saveDraft} disabled={isSaving}>
-            {isSaving ? "保存中..." : "検証して保存"}
+            {isSaving ? "保存中..." : "確認して保存"}
           </button>
         </div>
       </header>
@@ -419,11 +452,11 @@ export default function AdminSlideLinksClient() {
       <section className={styles.sliderPreviewPanel} aria-label="Topスライダープレビュー">
         <header className={styles.sliderPreviewHeader}>
           <div>
-            <span>Preview</span>
+            <span>プレビュー</span>
             <strong>Topスライダー表示</strong>
-            <small>公開Topと同じ1本スライダーで、保存前の published:true カードだけを表示します。</small>
+            <small>公開Topと同じ1本スライダーで、保存前の公開カードだけを表示します。</small>
           </div>
-          <small>{previewItems.length} published cards</small>
+          <small>{previewItems.length} 公開カード</small>
         </header>
         {previewItems.length ? (
           <div className={styles.sliderPreviewGrid}>
@@ -432,30 +465,30 @@ export default function AdminSlideLinksClient() {
               <HomeProductSlider items={previewItems} key={`desktop-${previewSignature}`} />
             </div>
             <div className={`${styles.sliderPreviewFrame} ${styles.mobileSliderPreview}`}>
-              <span className={styles.previewLabel}>Mobile</span>
+              <span className={styles.previewLabel}>スマホ</span>
               <HomeProductSlider items={previewItems} key={`mobile-${previewSignature}`} />
             </div>
           </div>
         ) : (
-          <p className={styles.fieldHint}>published:true のカードがないため、Topスライダーには表示されません。</p>
+          <p className={styles.fieldHint}>公開カードがないため、Topスライダーには表示されません。</p>
         )}
       </section>
 
       <div className={styles.layout}>
         <aside className={styles.sidebar}>
           <div className={styles.sidebarHeader}>
-            <strong>{slideLinks.length} cards</strong>
+            <strong>{slideLinks.length} 枚</strong>
             <button className={styles.smallButton} type="button" onClick={addSlideLink}>
               追加
             </button>
           </div>
-          <div className={styles.categoryFilter} aria-label="category filter">
+          <div className={styles.categoryFilter} aria-label="カテゴリフィルター">
             <button
               className={categoryFilter === "all" ? styles.isActive : ""}
               type="button"
               onClick={() => setCategoryFilter("all")}
             >
-              all
+              {CATEGORY_LABELS.all}
             </button>
             {categories.map((category) => (
               <button
@@ -464,7 +497,7 @@ export default function AdminSlideLinksClient() {
                 key={category}
                 onClick={() => setCategoryFilter(category)}
               >
-                {category}
+                {CATEGORY_LABELS[category] || category}
               </button>
             ))}
           </div>
@@ -494,7 +527,7 @@ export default function AdminSlideLinksClient() {
                 >
                   <span>{sortedSlideLinks.findIndex((item) => item.id === link.id) + 1}. {link.title || link.id}</span>
                   <small>
-                    {link.published ? "published" : "draft"} / {normalizeCategory(link.category)}
+                    {link.published ? "公開" : "下書き"} / {CATEGORY_LABELS[normalizeCategory(link.category)] || normalizeCategory(link.category)}
                   </small>
                 </button>
                 <div className={styles.sortActions} aria-label={`${link.title || link.id} の並び替え`}>
@@ -539,23 +572,35 @@ export default function AdminSlideLinksClient() {
               <strong>{selectedLink.title || selectedLink.id}</strong>
               <small>{selectedLink.id}</small>
             </div>
-            <button className={styles.dangerButton} type="button" onClick={deleteSelectedLink}>
-              削除
-            </button>
+            <div className={styles.editorHeaderActions}>
+              <button className={styles.secondaryButton} type="button" onClick={duplicateSelectedLink}>
+                複製
+              </button>
+              <button className={styles.dangerButton} type="button" onClick={deleteSelectedLink}>
+                削除
+              </button>
+            </div>
           </div>
+
+          {duplicateWarning ? (
+            <div className={styles.duplicateNotice} aria-live="polite">
+              <strong>確認</strong>
+              <span>{duplicateWarning}</span>
+            </div>
+          ) : null}
 
           {!selectedLink.published ? (
             <div className={styles.draftNotice}>
-              <strong>Draft</strong>
+              <strong>下書き</strong>
               <span>published:false のカードは公開側で利用しない前提のデータです。</span>
             </div>
           ) : null}
 
           <div className={styles.gridTwo}>
-            <Field label="title">
+            <Field label="タイトル">
               <input value={selectedLink.title || ""} onChange={(event) => updateSelected({ title: event.target.value })} />
             </Field>
-            <Field label="category">
+            <Field label="カテゴリ">
               <input
                 value={selectedLink.category || ""}
                 list="slide-link-category-options"
@@ -568,7 +613,7 @@ export default function AdminSlideLinksClient() {
                 ))}
               </datalist>
             </Field>
-            <Field label="sourceProductSlug">
+            <Field label="参照商品">
               <select
                 value={selectedLink.sourceProductSlug || ""}
                 onChange={(event) => {
@@ -588,7 +633,7 @@ export default function AdminSlideLinksClient() {
                 ))}
               </select>
             </Field>
-            <Field label="url">
+            <Field label="リンクURL">
               <input value={selectedLink.url || ""} onChange={(event) => updateSelected({ url: event.target.value })} />
               {selectedProduct?.salesUrls?.booth ? (
                 <button className={styles.smallButton} type="button" onClick={() => updateSelected({ url: selectedProduct.salesUrls.booth, openInNewTab: true })}>
@@ -596,49 +641,49 @@ export default function AdminSlideLinksClient() {
                 </button>
               ) : null}
             </Field>
-            <Field label="thumbnail">
-              <input value={selectedLink.thumbnail || ""} onChange={(event) => updateSelected({ thumbnail: event.target.value })} />
-              <small className={styles.fieldHint}>手入力、または sourceProductSlug の商品画像から候補入力できます。外部取得は行いません。</small>
-              {selectedProduct?.coverImage ? (
-                <button className={styles.smallButton} type="button" onClick={() => applyProductThumbnail()}>
-                  商品画像を入れる
-                </button>
-              ) : null}
+            <Field label="サムネイル">
+              <AdminFilePathInput
+                value={selectedLink.thumbnail || ""}
+                onChange={(thumbnail) => updateSelected({ thumbnail })}
+                targetDir={`/slide-links/${selectedLink.id || "slide-link"}/`}
+                placeholder="/slide-links/example/thumbnail.webp"
+              />
+              <small className={styles.fieldHint}>サムネイルが空の時だけ、参照商品の coverImage を自動入力します。手入力済みの場合は上書きしません。</small>
             </Field>
-            <Field label="sortOrder">
+            <Field label="表示順">
               <input
                 type="number"
                 value={selectedLink.sortOrder ?? 0}
                 onChange={(event) => updateSelected({ sortOrder: Number(event.target.value) })}
               />
             </Field>
-            <Field label="published">
+            <Field label="公開">
               <label className={styles.checkLabel}>
                 <input
                   type="checkbox"
                   checked={Boolean(selectedLink.published)}
                   onChange={(event) => updateSelected({ published: event.target.checked })}
                 />
-                published
+                公開
               </label>
             </Field>
-            <Field label="openInNewTab">
+            <Field label="新しいタブで開く">
               <label className={styles.checkLabel}>
                 <input
                   type="checkbox"
                   checked={Boolean(selectedLink.openInNewTab)}
                   onChange={(event) => updateSelected({ openInNewTab: event.target.checked })}
                 />
-                openInNewTab
+                新しいタブで開く
               </label>
             </Field>
           </div>
 
-          <Field label="description">
+          <Field label="説明">
             <textarea value={selectedLink.description || ""} onChange={(event) => updateSelected({ description: event.target.value })} />
           </Field>
 
-          <Field label="tags (, または改行区切り)">
+          <Field label="タグ（カンマ、または改行区切り）">
             <input value={joinList(selectedLink.tags)} onChange={(event) => updateSelected({ tags: splitList(event.target.value) })} />
           </Field>
         </section>
@@ -661,11 +706,11 @@ function ValidationResult({ validation }) {
     <div className={styles.validation}>
       <strong>{validation.ok ? "検証OK" : "検証エラー"}</strong>
       <span>
-        Cards: {validation.counts.slideLinks} / Published: {validation.counts.published}
+        カード: {validation.counts.slideLinks} / 公開: {validation.counts.published}
       </span>
       {validation.errors?.length ? (
         <div className={styles.validationGroup}>
-          <strong>Errors</strong>
+          <strong>エラー</strong>
           <ul className={styles.errorList}>
             {validation.errors.map((item) => (
               <li key={item}>{item}</li>
@@ -675,7 +720,7 @@ function ValidationResult({ validation }) {
       ) : null}
       {validation.warnings?.length ? (
         <div className={styles.validationGroup}>
-          <strong>Warnings</strong>
+          <strong>警告</strong>
           <ul className={styles.warningList}>
             {validation.warnings.map((item) => (
               <li key={item}>{item}</li>

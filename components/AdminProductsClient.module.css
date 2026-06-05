@@ -49,12 +49,17 @@
 .secondaryButton,
 .smallButton,
 .inlineControl button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 42px;
   border: 1px solid #92ddf1;
   border-radius: 999px;
   padding: 0 20px;
   font: inherit;
   font-weight: 900;
+  text-align: center;
+  text-decoration: none;
   color: #073047;
   background: rgba(255, 255, 255, 0.88);
   cursor: pointer;
@@ -685,6 +690,49 @@
   background: rgba(255, 255, 255, 0.94);
   font: inherit;
   font-weight: 700;
+}
+
+.filePathInput {
+  display: grid;
+  gap: 7px;
+}
+
+.filePathInput:hover {
+  border-radius: 10px;
+}
+
+.filePathRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.hiddenFileInput {
+  display: none;
+}
+
+.filePendingBox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  border: 1px dashed rgba(5, 169, 217, 0.58);
+  border-radius: 10px;
+  padding: 9px;
+  background: rgba(237, 251, 255, 0.86);
+  color: #073047;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.filePendingBox span {
+  overflow-wrap: anywhere;
+}
+
+.filePendingBox em {
+  color: #a15a00;
+  font-style: normal;
 }
 
 .galleryEditorFields input:focus,

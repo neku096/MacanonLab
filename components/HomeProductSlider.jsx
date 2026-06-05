@@ -324,13 +324,7 @@ function SlideLinkCard({ item, language }) {
     : {};
 
   return (
-    <a
-      className="product-card"
-      href={item.url}
-      data-booth-tags={(item.tags || []).join(" ")}
-      aria-label={getCardAriaLabel(item, language)}
-      {...linkProps}
-    >
+    <a className="product-card" href={item.url} aria-label={getCardAriaLabel(item, language)} {...linkProps}>
       <Image
         className="product-cover"
         src={item.thumbnail}
@@ -339,8 +333,6 @@ function SlideLinkCard({ item, language }) {
         height={item.thumbnailHeight || 600}
         sizes="(max-width: 860px) 50vw, 240px"
       />
-      <strong>{item.title}</strong>
-      <small>{item.description}</small>
     </a>
   );
 }

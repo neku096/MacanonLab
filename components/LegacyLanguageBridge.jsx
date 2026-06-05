@@ -74,12 +74,12 @@ function translateText(text) {
     return `Open ${translateText(productPageLink[1])} product page`;
   }
 
-  const boothProductPageLink = text.match(/^(.+)?BOOTH??????$/);
+  const boothProductPageLink = text.match(/^(.+)のBOOTH商品ページへ$/);
   if (boothProductPageLink) {
     return `Open ${translateText(boothProductPageLink[1])} BOOTH product page`;
   }
 
-  const termsPageAlt = text.match(/^(.+) (\d+)????$/);
+  const termsPageAlt = text.match(/^(.+) (\d+)ページ目$/);
   if (termsPageAlt) {
     return `${translateText(termsPageAlt[1])} page ${termsPageAlt[2]}`;
   }
@@ -94,7 +94,7 @@ function translateText(text) {
     return `Show image ${thumbLabel[1]}`;
   }
 
-  const productImageLabel = text.match(/^(.+) ???? (\d+)??$/);
+  const productImageLabel = text.match(/^(.+) 商品画像 (\d+)枚目$/);
   if (productImageLabel) {
     return `${translateText(productImageLabel[1])} product image ${productImageLabel[2]}`;
   }
@@ -212,6 +212,8 @@ export default function LegacyLanguageBridge() {
 
     const translateAttributes = (isEnglish) => {
       document.querySelectorAll("*").forEach((element) => {
+        if (element.closest("[data-no-translate]")) return;
+
         for (const attribute of ATTRIBUTE_NAMES) {
           if (!element.hasAttribute(attribute)) continue;
 
@@ -239,7 +241,7 @@ export default function LegacyLanguageBridge() {
       const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
         acceptNode(node) {
           const parent = node.parentElement;
-          if (!parent || parent.closest("script, style, noscript, svg")) {
+          if (!parent || parent.closest("script, style, noscript, svg, [data-no-translate]")) {
             return NodeFilter.FILTER_REJECT;
           }
           if (parent.closest("[data-share-url]")) {

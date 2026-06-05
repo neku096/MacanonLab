@@ -1,6 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import AdminFilePathInput from "./AdminFilePathInput";
 import styles from "./AdminProductsClient.module.css";
 
 const API_BASE = "/api/admin/products";
@@ -46,7 +48,6 @@ const NEW_PRODUCT_CONTENT_HTML = `<article class="product-detail-block">
 function productImageDirForSlug(slug) {
   return `/products/${slug || "new-product"}/`;
 }
-
 function productImageDir(product) {
   return productImageDirForSlug(product?.slug || "new-product");
 }
@@ -172,7 +173,7 @@ function parseGalleryText(value) {
   try {
     const parsed = JSON.parse(value || "[]");
     if (!Array.isArray(parsed)) {
-      return { items: [], error: "gallery JSON は array にしてください" };
+      return { items: [], error: "商品画像一覧JSON は配列形式にしてください" };
     }
     return { items: parsed, error: "" };
   } catch (error) {
@@ -188,11 +189,11 @@ function collectImageEntries(products) {
   const entries = [];
   for (const product of products) {
     if (!product) continue;
-    entries.push({ label: `${product.slug}: coverImage`, path: product.coverImage || "" });
+    entries.push({ label: `${product.slug}: カバー画像`, path: product.coverImage || "" });
     if (Array.isArray(product.gallery)) {
       product.gallery.forEach((image, index) => {
-        entries.push({ label: `${product.slug}: gallery[${index}].src`, path: image?.src || "" });
-        entries.push({ label: `${product.slug}: gallery[${index}].thumb`, path: image?.thumb || "" });
+        entries.push({ label: `${product.slug}: 商品画像${index + 1}`, path: image?.src || "" });
+        entries.push({ label: `${product.slug}: サムネイル${index + 1}`, path: image?.thumb || "" });
       });
     }
   }
@@ -526,7 +527,7 @@ export default function AdminProductsClient() {
   function duplicateSelectedProduct() {
     if (!selectedProduct || !english) return;
     if (galleryState.error) {
-      setJsonError(`gallery JSON を修正してください: ${galleryState.error}`);
+      setJsonError(`商品画像一覧JSON を修正してください: ${galleryState.error}`);
       return;
     }
 
@@ -569,7 +570,7 @@ export default function AdminProductsClient() {
     setValidation(null);
     setImageCheckSummary(null);
     setJsonError("");
-    setMessage("商品を複製しました。slug / title / 画像を変更してから検証してください。");
+    setMessage("商品を複製しました。slug / タイトル / 画像を変更してから検証してください。");
   }
 
   function deleteSelectedProduct() {
@@ -577,7 +578,7 @@ export default function AdminProductsClient() {
 
     const targetLabel = `${selectedProduct.title || selectedProduct.slug} (${selectedProduct.slug})`;
     const confirmed = window.confirm(
-      `${targetLabel} を削除します。\n関連商品の relatedIds からも参照を削除します。\n保存前に validate:products が必要です。`
+      `${targetLabel} を削除します。\n関連商品の参照からも削除します。\n保存前に商品データ確認が必要です。`
     );
     if (!confirmed) return;
 
@@ -607,7 +608,7 @@ export default function AdminProductsClient() {
     setImageCheckSummary(null);
     setDuplicateNoticeSlug((current) => (current === selectedProduct.slug ? "" : current));
     setJsonError("");
-    setMessage(`${targetLabel} を削除しました。relatedIds の参照も削除済みです。検証して保存してください。`);
+    setMessage(`${targetLabel} を削除しました。関連商品の参照も削除済みです。検証して保存してください。`);
   }
 
   function generateSlugFromTitle() {
@@ -665,7 +666,7 @@ export default function AdminProductsClient() {
 
   function updateGalleryItem(index, patch) {
     if (galleryState.error) {
-      setJsonError(`gallery JSON を修正してください: ${galleryState.error}`);
+      setJsonError(`商品画像一覧JSON を修正してください: ${galleryState.error}`);
       return;
     }
     updateGallery(galleryItems.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item)));
@@ -682,7 +683,7 @@ export default function AdminProductsClient() {
 
   function addGalleryImage() {
     if (galleryState.error) {
-      setJsonError(`gallery JSON を修正してください: ${galleryState.error}`);
+      setJsonError(`商品画像一覧JSON を修正してください: ${galleryState.error}`);
       return;
     }
     updateGallery([...galleryItems, galleryImageCandidate(selectedProduct, nextGalleryIndex(selectedProduct, galleryItems) - 1)]);
@@ -690,7 +691,7 @@ export default function AdminProductsClient() {
 
   function regenerateGalleryCandidates() {
     if (galleryState.error) {
-      setJsonError(`gallery JSON を修正してください: ${galleryState.error}`);
+      setJsonError(`商品画像一覧JSON を修正してください: ${galleryState.error}`);
       return;
     }
     const count = Math.max(galleryItems.length, 1);
@@ -706,7 +707,7 @@ export default function AdminProductsClient() {
 
   function removeGalleryImage(index) {
     if (galleryState.error) {
-      setJsonError(`gallery JSON を修正してください: ${galleryState.error}`);
+      setJsonError(`商品画像一覧JSON を修正してください: ${galleryState.error}`);
       return;
     }
     updateGallery(galleryItems.filter((_, itemIndex) => itemIndex !== index));
@@ -714,7 +715,7 @@ export default function AdminProductsClient() {
 
   function moveGalleryImage(index, direction) {
     if (galleryState.error) {
-      setJsonError(`gallery JSON を修正してください: ${galleryState.error}`);
+      setJsonError(`商品画像一覧JSON を修正してください: ${galleryState.error}`);
       return;
     }
     const targetIndex = index + direction;
@@ -788,7 +789,7 @@ export default function AdminProductsClient() {
       const payload = await response.json();
       setValidation(payload.validation || null);
       if (!response.ok) throw new Error("検証エラーがあります");
-      setMessage("validate:products 相当の検証に成功しました。");
+      setMessage("商品データの確認に成功しました。");
       return payload.validation;
     } catch (error) {
       setJsonError(error.message);
@@ -833,7 +834,7 @@ export default function AdminProductsClient() {
 
   if (isLoading) {
     return (
-      <main className={styles.page}>
+      <main className={styles.page} data-no-translate>
         <p>商品データを読み込んでいます...</p>
       </main>
     );
@@ -841,7 +842,7 @@ export default function AdminProductsClient() {
 
   if (!selectedProduct) {
     return (
-      <main className={styles.page}>
+      <main className={styles.page} data-no-translate>
         <h1>商品管理</h1>
         <button className={styles.primaryButton} type="button" onClick={addProduct}>
           商品を追加
@@ -851,19 +852,22 @@ export default function AdminProductsClient() {
   }
 
   return (
-    <main className={styles.page} data-admin-products>
+    <main className={styles.page} data-admin-products data-no-translate>
       <header className={styles.header}>
         <div>
-          <p className={styles.eyebrow}>Local Admin</p>
+          <p className={styles.eyebrow}>ローカル管理</p>
           <h1>商品管理</h1>
           <p>products.json と英語商品データをローカルで編集します。</p>
         </div>
         <div className={styles.actions}>
           <button className={styles.secondaryButton} type="button" onClick={validateDraft}>
-            validate:products
+            商品データを確認
           </button>
+          <Link className={styles.secondaryButton} href="/admin">
+            Adminへ戻る
+          </Link>
           <button className={styles.primaryButton} type="button" onClick={saveDraft} disabled={isSaving}>
-            {isSaving ? "保存中..." : "検証して保存"}
+            {isSaving ? "保存中..." : "確認して保存"}
           </button>
         </div>
       </header>
@@ -880,7 +884,7 @@ export default function AdminProductsClient() {
       <div className={styles.layout}>
         <aside className={styles.sidebar}>
           <div className={styles.sidebarHeader}>
-            <strong>{products.length} products</strong>
+            <strong>{products.length} 商品</strong>
             <button className={styles.smallButton} type="button" onClick={addProduct}>
               追加
             </button>
@@ -897,7 +901,7 @@ export default function AdminProductsClient() {
                   onClick={() => setSelectedSlug(product.slug)}
                 >
                   <span>{product.title || product.slug}</span>
-                  <small>{product.published ? "published" : "draft"} / {product.slug}</small>
+                  <small>{product.published ? "公開" : "下書き"} / {product.slug}</small>
                 </button>
               ))}
           </div>
@@ -922,16 +926,16 @@ export default function AdminProductsClient() {
 
           {!selectedProduct.published ? (
             <div className={styles.draftNotice}>
-              <strong>Draft URL</strong>
+              <strong>下書きURL</strong>
               <code>/products/{selectedProduct.slug}</code>
-              <span>published:false の間は公開側では 404 が正常です。商品一覧と sitemap にも表示されません。</span>
+              <span>公開OFFの間は公開側では 404 が正常です。商品一覧と sitemap にも表示されません。</span>
             </div>
           ) : null}
 
           {duplicateNoticeSlug === selectedProduct.slug ? (
             <div className={styles.duplicateNotice} role="alert">
               <strong>複製後の確認</strong>
-              <span>複製後は slug / title / 画像を変更してください。</span>
+              <span>複製後は slug / タイトル / 画像を変更してください。</span>
             </div>
           ) : null}
 
@@ -939,14 +943,15 @@ export default function AdminProductsClient() {
             <Field label="タイトル">
               <input value={selectedProduct.title || ""} onChange={(event) => handleTitleChange(event.target.value)} />
               {!selectedProduct.published ? (
-                <small className={styles.fieldHint}>新規/draft商品はタイトルからslugと画像path候補を自動更新します。</small>
+                <small className={styles.fieldHint}>新規/下書き商品はタイトルからslugと画像パス候補を自動更新します。</small>
               ) : null}
             </Field>
-            <Field label="slug / id">
+            <Field label="商品ID">
               <div className={styles.inlineControl}>
                 <input value={selectedProduct.slug || ""} onChange={(event) => updateSlug(event.target.value)} />
                 <button type="button" onClick={generateSlugFromTitle}>生成</button>
               </div>
+              <small className={styles.fieldHint}>URLや画像フォルダ名に使います。半角英数字とハイフンで管理してください。</small>
               <small className={styles.fieldHint}>現在の画像候補: {productImageDir(selectedProduct)}cover.webp</small>
             </Field>
             <Field label="公開状態">
@@ -956,10 +961,10 @@ export default function AdminProductsClient() {
                   checked={Boolean(selectedProduct.published)}
                   onChange={(event) => updateSelected({ published: event.target.checked })}
                 />
-                published
+                公開
               </label>
             </Field>
-            <Field label="掲載順">
+            <Field label="表示順">
               <input
                 type="number"
                 value={selectedProduct.sortOrder ?? 0}
@@ -983,7 +988,7 @@ export default function AdminProductsClient() {
             </Field>
           </div>
 
-          <Field label="description / SEO説明">
+          <Field label="説明 / SEO説明">
             <textarea value={selectedProduct.description || ""} onChange={(event) => updateSelected({ description: event.target.value })} />
           </Field>
 
@@ -1006,47 +1011,50 @@ export default function AdminProductsClient() {
           </div>
 
           <div className={styles.gridTwo}>
-            <Field label="通常タグ (,区切り)">
+            <Field label="通常タグ（カンマ区切り）">
               <input value={joinList(selectedProduct.tags)} onChange={(event) => updateSelected({ tags: splitList(event.target.value) })} />
             </Field>
-            <Field label="通常タグ表示名 (,区切り)">
+            <Field label="通常タグ表示名（カンマ区切り）">
               <input value={joinList(selectedProduct.tagLabels)} onChange={(event) => updateSelected({ tagLabels: splitList(event.target.value) })} />
             </Field>
-            <Field label="サブタグ (,区切り)">
+            <Field label="サブタグ（カンマ区切り）">
               <input value={joinList(selectedProduct.subtags)} onChange={(event) => updateSelected({ subtags: splitList(event.target.value) })} />
             </Field>
-            <Field label="サブタグ表示名 (,区切り)">
+            <Field label="サブタグ表示名（カンマ区切り）">
               <input value={joinList(selectedProduct.subtagLabels)} onChange={(event) => updateSelected({ subtagLabels: splitList(event.target.value) })} />
             </Field>
-            <Field label="関連商品ID (,区切り)">
+            <Field label="関連商品">
               <input value={joinList(selectedProduct.relatedIds)} onChange={(event) => updateSelected({ relatedIds: splitList(event.target.value) })} />
+              <small className={styles.fieldHint}>商品詳細ページ下部に表示する関連商品のIDを指定します。複数ある場合はカンマで区切ります。</small>
             </Field>
-            <Field label="summaryTags (,区切り)">
+            <Field label="要約タグ（カンマ区切り）">
               <input value={joinList(selectedProduct.summaryTags)} onChange={(event) => updateSelected({ summaryTags: splitList(event.target.value) })} />
             </Field>
-            <Field label="対応アバター (,区切り)">
+            <Field label="対応アバター一覧">
               <input value={joinList(selectedProduct.avatars)} onChange={(event) => updateSelected({ avatars: splitList(event.target.value) })} />
+              <small className={styles.fieldHint}>この商品が対応しているアバター名を入力します。複数ある場合はカンマで区切ります。</small>
             </Field>
-            <Field label="人気順用 likes">
+            <Field label="人気順スコア">
               <input
                 type="number"
                 value={selectedProduct.likes ?? 0}
                 onChange={(event) => updateSelected({ likes: Number(event.target.value) })}
               />
+              <small className={styles.fieldHint}>商品一覧を人気順に並べる時の目安です。数値が大きいほど上位に表示されやすくなります。</small>
             </Field>
           </div>
 
           <section className={styles.assistPanel}>
             <div className={styles.assistHeader}>
               <div>
-                <span>Input Assist</span>
+                <span>入力補助</span>
                 <strong>候補から追加</strong>
-                <small>既存商品から relatedIds、タグ、対応アバター候補を検索して追加できます。</small>
+                <small>既存商品から関連商品、タグ、対応アバターを検索して追加できます。</small>
               </div>
             </div>
             <div className={styles.assistGrid}>
               <SuggestionGroup
-                title="relatedIds候補"
+                title="関連商品候補"
                 searchLabel="商品名・slugで検索"
                 searchValue={relatedSearch}
                 onSearchChange={setRelatedSearch}
@@ -1086,16 +1094,22 @@ export default function AdminProductsClient() {
           </section>
 
           <div className={styles.gridTwo}>
-            <Field label="coverImage">
-              <input value={selectedProduct.coverImage || ""} onChange={(event) => updateSelected({ coverImage: event.target.value })} />
+            <Field label="カバー画像">
+              <AdminFilePathInput
+                value={selectedProduct.coverImage || ""}
+                onChange={(coverImage) => updateSelected({ coverImage })}
+                targetDir={productImageDir(selectedProduct)}
+                placeholder="/products/example/cover.webp"
+              />
             </Field>
-            <Field label="coverAlt">
+            <Field label="画像説明文">
               <input value={selectedProduct.coverAlt || ""} onChange={(event) => updateSelected({ coverAlt: event.target.value })} />
+              <small className={styles.fieldHint}>画像が表示できない時やアクセシビリティ用に使う短い説明文です。</small>
             </Field>
-            <Field label="coverWidth">
+            <Field label="カバー画像の幅">
               <input type="number" value={selectedProduct.coverWidth ?? 600} onChange={(event) => updateSelected({ coverWidth: Number(event.target.value) })} />
             </Field>
-            <Field label="coverHeight">
+            <Field label="カバー画像の高さ">
               <input type="number" value={selectedProduct.coverHeight ?? 600} onChange={(event) => updateSelected({ coverHeight: Number(event.target.value) })} />
             </Field>
           </div>
@@ -1105,7 +1119,7 @@ export default function AdminProductsClient() {
               <div>
                 <span>画像配置先</span>
                 <strong>public{productImageDir(selectedProduct)}</strong>
-                <small>JSONでは `{productImageDir(selectedProduct)}...` の形式で指定します。</small>
+                <small>入力欄では `{productImageDir(selectedProduct)}...` の形式で指定します。</small>
               </div>
               <button className={styles.smallButton} type="button" onClick={applyCoverCandidate}>
                 cover.webp候補
@@ -1126,44 +1140,54 @@ export default function AdminProductsClient() {
 
             <div className={styles.galleryHeader}>
               <div>
-                <span>Gallery</span>
-                <strong>サムネイル一覧</strong>
-                <small>並び替え、追加、削除、thumb候補入力ができます。</small>
+                <span>商品画像一覧</span>
+                <strong>商品画像</strong>
+                <small>並び替え、追加、削除、サムネイル候補入力ができます。</small>
               </div>
               <div className={styles.inlineActions}>
                 <button className={styles.smallButton} type="button" onClick={regenerateGalleryCandidates}>
                   連番候補を再生成
                 </button>
                 <button className={styles.smallButton} type="button" onClick={addGalleryImage}>
-                  gallery追加
+                  商品画像を追加
                 </button>
               </div>
             </div>
 
             {galleryState.error ? (
-              <p className={styles.warningText}>gallery JSON を修正してください: {galleryState.error}</p>
+              <p className={styles.warningText}>商品画像一覧JSON を修正してください: {galleryState.error}</p>
             ) : null}
 
             <div className={styles.galleryEditorList}>
               {galleryItems.map((image, index) => (
                 <div className={styles.galleryEditorItem} key={`${image.src || "gallery"}-${index}`}>
-                  <ImagePreview label={`gallery ${index + 1}`} path={image.src || ""} check={imageChecks[image.src || ""]} />
+                  <ImagePreview label={`商品画像 ${index + 1}`} path={image.src || ""} check={imageChecks[image.src || ""]} />
                   <div className={styles.galleryEditorFields}>
                     <label>
-                      <span>src</span>
-                      <input value={image.src || ""} onChange={(event) => updateGallerySrc(index, event.target.value)} />
+                      <span>画像パス</span>
+                      <AdminFilePathInput
+                        value={image.src || ""}
+                        onChange={(src) => updateGallerySrc(index, src)}
+                        targetDir={productImageDir(selectedProduct)}
+                        placeholder={`${productImageDir(selectedProduct)}${selectedProduct.slug || "product"}-${String(index + 1).padStart(2, "0")}.webp`}
+                      />
                     </label>
                     <label>
-                      <span>thumb</span>
-                      <input value={image.thumb || ""} onChange={(event) => updateGalleryItem(index, { thumb: event.target.value })} />
+                      <span>サムネイル</span>
+                      <AdminFilePathInput
+                        value={image.thumb || ""}
+                        onChange={(thumb) => updateGalleryItem(index, { thumb })}
+                        targetDir={productImageDir(selectedProduct)}
+                        placeholder={thumbCandidate(image.src || "") || `${productImageDir(selectedProduct)}${selectedProduct.slug || "product"}-${String(index + 1).padStart(2, "0")}-thumb.webp`}
+                      />
                     </label>
                     <label>
-                      <span>alt</span>
+                      <span>画像の説明</span>
                       <input value={image.alt || ""} onChange={(event) => updateGalleryItem(index, { alt: event.target.value })} />
                     </label>
                     <div className={styles.galleryMetaFields}>
                       <label>
-                        <span>width</span>
+                        <span>幅</span>
                         <input
                           type="number"
                           value={image.width ?? 1000}
@@ -1171,7 +1195,7 @@ export default function AdminProductsClient() {
                         />
                       </label>
                       <label>
-                        <span>height</span>
+                        <span>高さ</span>
                         <input
                           type="number"
                           value={image.height ?? 1000}
@@ -1188,7 +1212,7 @@ export default function AdminProductsClient() {
                       ↓
                     </button>
                     <button type="button" onClick={() => updateGalleryItem(index, { thumb: thumbCandidate(image.src || "") })}>
-                      thumb候補
+                      サムネイル候補
                     </button>
                     <button type="button" onClick={() => removeGalleryImage(index)}>
                       削除
@@ -1199,8 +1223,9 @@ export default function AdminProductsClient() {
             </div>
           </section>
 
-          <Field label="gallery JSON">
+          <Field label="商品画像一覧JSON">
             <textarea className={styles.codeArea} value={galleryText} onChange={(event) => setGalleryText(event.target.value)} />
+            <small className={styles.fieldHint}>商品画像一覧をJSONで直接調整する管理者向け欄です。通常は上の画像入力欄を使ってください。</small>
           </Field>
 
           <Field label="外部販売URL JSON">
@@ -1218,7 +1243,7 @@ export default function AdminProductsClient() {
           <section className={styles.subsection}>
             <h2>英語データ</h2>
             <div className={styles.gridTwo}>
-              <Field label="English title">
+              <Field label="英語タイトル">
                 <input value={english?.title || ""} onChange={(event) => updateEnglish({ title: event.target.value })} />
                 {!english?.title && englishTitleCandidate ? (
                   <span className={styles.inlineSuggestion}>
@@ -1227,23 +1252,23 @@ export default function AdminProductsClient() {
                   </span>
                 ) : null}
               </Field>
-              <Field label="English pageTitle">
+              <Field label="英語ページタイトル">
                 <input value={english?.pageTitle || ""} onChange={(event) => updateEnglish({ pageTitle: event.target.value })} />
               </Field>
             </div>
-            <Field label="English description">
+            <Field label="英語説明">
               <textarea value={english?.description || ""} onChange={(event) => updateEnglish({ description: event.target.value })} />
             </Field>
-            <Field label="English summaryTags (,区切り)">
+            <Field label="英語要約タグ（カンマ区切り）">
               <input value={joinList(english?.summaryTags)} onChange={(event) => updateEnglish({ summaryTags: splitList(event.target.value) })} />
             </Field>
-            <Field label="English specs JSON">
+            <Field label="英語スペックJSON">
               <textarea className={styles.codeArea} value={specsText} onChange={(event) => setSpecsText(event.target.value)} />
             </Field>
-            <Field label="English note">
+            <Field label="英語購入前注意文">
               <textarea value={english?.note || ""} onChange={(event) => updateEnglish({ note: event.target.value })} />
             </Field>
-            <Field label="English detailHtml">
+            <Field label="英語本文HTML">
               <textarea className={styles.codeArea} value={english?.detailHtml || ""} onChange={(event) => updateEnglish({ detailHtml: event.target.value })} />
             </Field>
           </section>
@@ -1276,7 +1301,7 @@ function SuggestionGroup({
     <section className={styles.suggestionGroup}>
       <header>
         <strong>{title}</strong>
-        <small>{selectedValues.length ? `選択中 ${selectedValues.length}件` : "未選択"}</small>
+        <small>{selectedValues.length ? `選択中: ${selectedValues.length}件` : "未選択"}</small>
       </header>
       <label className={styles.suggestionSearch}>
         <span>{searchLabel}</span>
@@ -1319,10 +1344,10 @@ function ValidationResult({ validation }) {
 
   return (
     <div className={styles.validation}>
-      <strong>{validation.ok ? "Validation passed" : "Validation failed"}</strong>
+      <strong>{validation.ok ? "検証OK" : "検証エラー"}</strong>
       {validation.counts ? (
         <p>
-          Products: {validation.counts.products} / Published: {validation.counts.published} / Images: {validation.counts.images} / Links: {validation.counts.links}
+          商品: {validation.counts.products} / 公開: {validation.counts.published} / 画像: {validation.counts.images} / リンク: {validation.counts.links}
         </p>
       ) : null}
       {imageErrors.length ? (
