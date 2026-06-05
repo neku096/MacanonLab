@@ -1,5 +1,6 @@
 import "../styles.css";
 import "./next.css";
+import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LegacyLanguageBridge from "@/components/LegacyLanguageBridge";
@@ -48,6 +49,10 @@ export const viewport = {
   themeColor: "#dff9ff"
 };
 
+const ENABLE_CLOUDFLARE_INSIGHTS =
+  process.env.NODE_ENV === "production" &&
+  process.env.NEXT_PUBLIC_ENABLE_CLOUDFLARE_INSIGHTS === "1";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ja" data-scroll-behavior="smooth">
@@ -56,6 +61,13 @@ export default function RootLayout({ children }) {
         {children}
         <Footer />
         <LegacyLanguageBridge />
+        {ENABLE_CLOUDFLARE_INSIGHTS ? (
+          <Script
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            strategy="afterInteractive"
+            data-cf-beacon='{"token":"149708549118473db17c4d3f09c570b6"}'
+          />
+        ) : null}
       </body>
     </html>
   );
