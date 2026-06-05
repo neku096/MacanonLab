@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import legacyI18n from "@/data/legacy-i18n.json";
 
 const AUTO_SLIDE_DELAY = 3600;
 const STEP_SIZE = 2;
+const { translations } = legacyI18n;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -39,7 +41,7 @@ function getSliderDotsLabel(language) {
 
 function getCardAriaLabel(item, language) {
   if (language === "en") {
-    return `Open link for ${item.title}`;
+    return `Open link for ${translations[item.title] || item.title}`;
   }
   return `${item.title}のリンクを開く`;
 }

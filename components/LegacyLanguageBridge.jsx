@@ -74,6 +74,16 @@ function translateText(text) {
     return `Open ${translateText(productPageLink[1])} product page`;
   }
 
+  const boothProductPageLink = text.match(/^(.+)?BOOTH??????$/);
+  if (boothProductPageLink) {
+    return `Open ${translateText(boothProductPageLink[1])} BOOTH product page`;
+  }
+
+  const termsPageAlt = text.match(/^(.+) (\d+)????$/);
+  if (termsPageAlt) {
+    return `${translateText(termsPageAlt[1])} page ${termsPageAlt[2]}`;
+  }
+
   const slideLabel = text.match(/^商品スライド (\d+)$/);
   if (slideLabel) {
     return `Product slide ${slideLabel[1]}`;
@@ -82,6 +92,11 @@ function translateText(text) {
   const thumbLabel = text.match(/^(\d+)枚目の画像を表示$/);
   if (thumbLabel) {
     return `Show image ${thumbLabel[1]}`;
+  }
+
+  const productImageLabel = text.match(/^(.+) ???? (\d+)??$/);
+  if (productImageLabel) {
+    return `${translateText(productImageLabel[1])} product image ${productImageLabel[2]}`;
   }
 
   const itemCount = text.match(/^(\d+)件$/);
@@ -148,16 +163,16 @@ export default function LegacyLanguageBridge() {
     };
 
     const setProductAttribute = (selector, attribute, englishValue, isEnglish) => {
-      const element = document.querySelector(selector);
-      if (!element) return;
-      const original = rememberElementValue(element, attribute, element.getAttribute(attribute));
-      if (isEnglish) {
-        element.setAttribute(attribute, englishValue);
-      } else if (original == null) {
-        element.removeAttribute(attribute);
-      } else {
-        element.setAttribute(attribute, original);
-      }
+      document.querySelectorAll(selector).forEach((element) => {
+        const original = rememberElementValue(element, attribute, element.getAttribute(attribute));
+        if (isEnglish) {
+          element.setAttribute(attribute, englishValue);
+        } else if (original == null) {
+          element.removeAttribute(attribute);
+        } else {
+          element.setAttribute(attribute, original);
+        }
+      });
     };
 
     const applyProductEnglish = (isEnglish) => {
