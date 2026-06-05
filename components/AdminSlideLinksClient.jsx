@@ -462,11 +462,11 @@ export default function AdminSlideLinksClient() {
           <div className={styles.sliderPreviewGrid}>
             <div className={styles.sliderPreviewFrame}>
               <span className={styles.previewLabel}>PC</span>
-              <HomeProductSlider items={previewItems} key={`desktop-${previewSignature}`} />
+              <HomeProductSlider imageLoading="eager" items={previewItems} key={`desktop-${previewSignature}`} />
             </div>
             <div className={`${styles.sliderPreviewFrame} ${styles.mobileSliderPreview}`}>
               <span className={styles.previewLabel}>スマホ</span>
-              <HomeProductSlider items={previewItems} key={`mobile-${previewSignature}`} />
+              <HomeProductSlider imageLoading="eager" items={previewItems} key={`mobile-${previewSignature}`} />
             </div>
           </div>
         ) : (

@@ -2,11 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import legacyI18n from "@/data/legacy-i18n.json";
 
 const AUTO_SLIDE_DELAY = 3600;
 const STEP_SIZE = 2;
-const { translations } = legacyI18n;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -41,12 +39,12 @@ function getSliderDotsLabel(language) {
 
 function getCardAriaLabel(item, language) {
   if (language === "en") {
-    return `Open link for ${translations[item.title] || item.title}`;
+    return `Open link for ${item.title}`;
   }
   return `${item.title}のリンクを開く`;
 }
 
-export default function HomeProductSlider({ items = [] }) {
+export default function HomeProductSlider({ imageLoading, items = [] }) {
   const sliderRef = useRef(null);
   const [pageCount, setPageCount] = useState(1);
   const [activePage, setActivePage] = useState(0);
@@ -298,7 +296,7 @@ export default function HomeProductSlider({ items = [] }) {
     <div className="slider-shell">
       <div className="product-slider product-card-slider" data-slider data-card-selector=".product-card" data-loop="true" tabIndex={0} ref={sliderRef}>
         {items.map((item) => (
-          <SlideLinkCard item={item} language={language} key={item.id} />
+          <SlideLinkCard imageLoading={imageLoading} item={item} language={language} key={item.id} />
         ))}
       </div>
       <div className="slider-dots" data-slider-dots aria-label={getSliderDotsLabel(language)}>
@@ -318,21 +316,30 @@ export default function HomeProductSlider({ items = [] }) {
   );
 }
 
-function SlideLinkCard({ item, language }) {
+function SlideLinkCard({ imageLoading, item, language }) {
   const linkProps = item.openInNewTab
     ? { target: "_blank", rel: "noopener noreferrer" }
     : {};
 
   return (
-    <a className="product-card" href={item.url} aria-label={getCardAriaLabel(item, language)} {...linkProps}>
+    <a
+      className="product-card"
+      href={item.url}
+      data-booth-tags={(item.tags || []).join(" ")}
+      aria-label={getCardAriaLabel(item, language)}
+      {...linkProps}
+    >
       <Image
         className="product-cover"
         src={item.thumbnail}
         alt={item.thumbnailAlt || item.title}
         width={item.thumbnailWidth || 600}
         height={item.thumbnailHeight || 600}
+        loading={imageLoading}
         sizes="(max-width: 860px) 50vw, 240px"
       />
+      <strong>{item.title}</strong>
+      <small>{item.description}</small>
     </a>
   );
 }
