@@ -339,8 +339,6 @@ function SlideLinkCard({ item, language }) {
         height={item.thumbnailHeight || 600}
         sizes="(max-width: 860px) 50vw, 240px"
       />
-      <strong>{item.title}</strong>
-      <small>{item.description}</small>
     </a>
   );
 }
