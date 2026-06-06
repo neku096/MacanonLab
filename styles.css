@@ -28,7 +28,7 @@
 .brand-ocean-logo {
   display: block;
   width: clamp(190px, 20vw, 280px);
-  height: clamp(50px, 5.1vw, 74px);
+  height: clamp(51px, 5.1vw, 74px);
   flex: 0 0 auto;
   object-fit: contain;
   object-position: center;
