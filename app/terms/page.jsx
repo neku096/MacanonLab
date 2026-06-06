@@ -1,6 +1,12 @@
 import TermsRadioTabs from "@/components/TermsRadioTabs";
 
 export const metadata = {
+  alternates: {
+    canonical: "/terms"
+  },
+  openGraph: {
+    url: "/terms"
+  },
   title: "利用規約・ライセンス",
   description: "macanonサイトの利用規約とDLsite/BOOTH商品向けライセンスを確認できます。"
 };

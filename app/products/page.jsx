@@ -2,6 +2,12 @@ import ProductCatalog from "@/components/ProductCatalog";
 import { getFilterOptions, getPublishedProducts } from "@/lib/products";
 
 export const metadata = {
+  alternates: {
+    canonical: "/products"
+  },
+  openGraph: {
+    url: "/products"
+  },
   title: "BOOTH作品一覧",
   description: "macanonのVRChat向け3D衣装、召喚ギミック、アクセサリーを商品サムネイルから確認できます。"
 };

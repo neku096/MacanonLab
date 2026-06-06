@@ -2,6 +2,12 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 
 export const metadata = {
+  alternates: {
+    canonical: "/links"
+  },
+  openGraph: {
+    url: "/links"
+  },
   title: "Links",
   description: "macanonのBOOTH、X、サイト内ページへのリンク集です。"
 };

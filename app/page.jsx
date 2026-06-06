@@ -24,6 +24,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     title: "macanon | VRChat向け3D衣装・ギミック制作",
+    url: "/",
     description:
       "VRChat向けの3D衣装、召喚ギミック、アクセサリーを制作するmacanonの作品サイトです。BOOTH商品と制作相談の導線をまとめています。",
     images: [

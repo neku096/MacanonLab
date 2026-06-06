@@ -30,6 +30,7 @@ export const metadata = {
     type: "website",
     siteName: SITE.name,
     title: SITE.title,
+    url: "/",
     description: SITE.description,
     images: [
       {
