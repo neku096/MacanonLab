@@ -338,8 +338,6 @@ function SlideLinkCard({ imageLoading, item, language }) {
         loading={imageLoading}
         sizes="(max-width: 860px) 50vw, 240px"
       />
-      <strong>{item.title}</strong>
-      <small>{item.description}</small>
     </a>
   );
 }

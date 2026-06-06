@@ -1,3 +1,0 @@
-# Cloudflare remote preview URL. Replace with the final canonical domain before DNS cutover.
-NEXT_PUBLIC_SITE_URL=https://macanon-lab-preview.macanon-vrc.workers.dev
-MACANON_ENABLE_ADMIN=0

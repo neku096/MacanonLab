@@ -9,10 +9,7 @@
     "利用規約 | macanon": "Terms | macanon",
     "利用規約・ライセンス | macanon": "Terms & License | macanon",
     "macanonはVRChat向けの3D衣装、召喚ギミック、アクセサリーを制作しています。BOOTH作品、制作相談、ブログ記事への導線をまとめた公式サイトです。": "macanon creates VRChat 3D outfits, summon gimmicks, and accessories. This official site collects links to BOOTH works, commission information, and blog posts.",
-    "VRChat向け3D衣装・ギミック制作サイトです。": "A site for VRChat 3D outfit and gimmick production.",
     "VRChat向けの3D衣装、召喚ギミック、アクセサリーを制作するmacanonの公式サイトです。": "The official macanon site for VRChat 3D outfits, summon gimmicks, and accessories.",
-    "VRChat向けの3D衣装、召喚ギミック、アクセサリーを制作するmacanonの作品サイトです。BOOTH商品と制作相談の導線をまとめています。": "A macanon works site for VRChat 3D outfits, summon gimmicks, and accessories. It collects links to BOOTH products and commission inquiries.",
-    "VRChat向けの3D衣装、召喚ギミック、アクセサリーを制作するmacanonの作品サイトです。": "A macanon works site for VRChat 3D outfits, summon gimmicks, and accessories.",
     "macanon BOOTH商品サムネイル": "macanon BOOTH product thumbnail",
     "macanonのVRChat向け3D衣装、召喚ギミック、アクセサリーをBOOTH商品サムネイルで確認できます。": "Browse macanon's VRChat 3D outfits, summon gimmicks, and accessories through BOOTH product thumbnails.",
     "macanonのVRChat向け3D衣装、召喚ギミック、アクセサリー一覧です。": "A list of macanon's VRChat 3D outfits, summon gimmicks, and accessories.",
@@ -41,7 +38,6 @@
     "このページを共有": "Share this page",
     "共有": "Share",
     "現在のページを共有": "Share this page",
-    "リンクプレビュー": "Link Preview",
     "閉じる": "Close",
     "Xでシェア": "Share on X",
     "LINEでシェア": "Share on LINE",
@@ -113,9 +109,6 @@
     "次のサムネイルへ": "Next thumbnails",
     "前の画像": "Previous image",
     "次の画像": "Next image",
-    "DLsiteで見る": "View on DLsite",
-    "外部販売ページを見る": "View external sales page",
-    "商品が見つかりません": "Product Not Found",
     "作品カテゴリ": "Work category",
     "商品キーワード": "Product keywords",
     "商品画像はBOOTH掲載サムネイルを基にしています。": "Product images are based on BOOTH listing thumbnails.",
@@ -148,19 +141,15 @@
     "サブタグを検索する": "Search sub tags",
     "サブタグ検索を閉じる": "Close sub tag search",
     "サブタグで検索…": "Search sub tags...",
-    "サブタグで検索...": "Search sub tags...",
     "サブタグで検索": "Search sub tags",
     "検索文字列をクリア": "Clear search text",
     "検索できるサブタグ": "Searchable sub tags",
     "該当するサブタグがありません": "No matching sub tags",
-    "0件": "0 items",
     "関連商品": "Related Products",
     "BOOTH作品一覧へ": "Back to BOOTH Works",
     "掲載順": "Listed Order",
     "通常順": "Default Order",
     "人気順": "Popular",
-    "BOOTH作品表示順": "BOOTH works display order",
-    "BOOTH作品ページ切り替え": "BOOTH works page navigation",
     "すべて": "All",
     "衣装": "Outfits",
     "ギミック": "Gimmick",
@@ -243,17 +232,7 @@
     "該当するブログ記事はまだありません。": "No matching blog posts yet.",
     "ブログ記事はまだありません。公開後はタグごとに絞り込みできます。": "There are no blog posts yet. Once published, they can be filtered by tag.",
     "Tips記事はまだありません。記事を追加すると、この一覧にカード形式で表示できます。": "There are no Tips articles yet. When articles are added, they will appear here as cards.",
-    "ページが見つかりません": "Page Not Found",
-    "公開されていない商品、または移動したページの可能性があります。": "This product may be unpublished, or the page may have moved.",
-    "macanonのBOOTH、X、サイト内ページへのリンク集です。": "A collection of links to macanon's BOOTH, X, and pages on this site.",
-    "BOOTH、X、サイト内ページへのリンクをまとめています。": "Links to BOOTH, X, and pages on this site are collected here.",
-    "外部リンク": "External Links",
-    "macanonのVRChat向け3D衣装、召喚ギミック、アクセサリーを商品サムネイルから確認できます。": "Browse macanon's VRChat 3D outfits, summon gimmicks, and accessories from product thumbnails.",
-    "macanonサイトの利用規約とDLsite/BOOTH商品向けライセンスを確認できます。": "View the macanon site terms and DLsite/BOOTH product license guidance.",
-    "macanon利用規約 日本語": "macanon license terms Japanese",
-    "macanon 使用条款 中文": "macanon license terms Chinese",
     "各商品の利用条件、禁止事項、更新履歴、導入条件は、BOOTHの商品ページおよび商品に同梱された規約を優先します。": "For each product, the BOOTH product page and included terms take priority for usage conditions, restrictions, update history, and setup requirements.",
-    "各商品の利用条件、禁止事項、更新履歴、導入条件は、DLsiteまたはBOOTHの商品ページおよび商品に同梱された規約を優先します。": "For each product, the DLsite or BOOTH product page and the terms included with the product take priority for usage conditions, restrictions, update history, and setup requirements.",
     "画像、文章、商品データの無断転載、再配布、販売、AI学習への利用は行わないでください。": "Do not repost, redistribute, sell, or use images, text, or product data for AI training without permission.",
     "案件のご相談や商品に関するお問い合わせは、BOOTHまたはXの案内からご連絡ください。": "For commissions or product inquiries, please contact me through BOOTH or X.",
     "アクセス解析について": "About Access Analytics",
@@ -635,6 +614,37 @@
         ]
       ],
       "detailHtml": "\n          <article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">Product Details</h2>\n            <p>An avatar summon gimmick where a <strong>large whale silhouette</strong> appears. It is designed to be impactful at a glance and easy to use for photo scenes, video production, social moments with friends, and small surprise effects inside worlds.</p>\n            <p>In addition to the whale model data, it includes <strong>animations, particles</strong>, and male/female <strong>\"riding-style\" poses</strong>. The whale's large presence and particle effects can add a fantasy accent to familiar VRChat scenery.</p>\n            <ul>\n              <li>You want a large, eye-catching effect.</li>\n              <li>You want to take fantasy-style photos.</li>\n              <li>You want an easy-to-understand gimmick for videos or social moments.</li>\n            </ul>\n            <p>Recommended for anyone looking for a <strong>VRChat Whale Summon gimmick</strong>.</p>\n            <p>For the latest included files, setup steps, cautions, and license details, please check the <strong>BOOTH product page</strong>.</p>\n          </article>\n          <article class=\"product-detail-block\">\n            <h2>Setup</h2>\n            <ol>\n              <li>Prepare a <strong>Unity 2022</strong> project with <strong>Modular Avatar</strong> installed.</li>\n              <li>Import the purchased <strong>unitypackage</strong> into the project.</li>\n              <li>Follow the <strong>BOOTH product description</strong> and place the included <strong>Prefab</strong> in the hierarchy.</li>\n            </ol>\n          </article>\n          <article class=\"product-detail-block\">\n            <h2>Included Files</h2>\n            <h3>Contents</h3>\n            <ul>\n              <li>This asset's <strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                  <li>Animation</li>\n                </ul>\n              </li>\n              <li>The model's <strong>blend</strong> file</li>\n            </ul>\n            <h3>Model Info</h3>\n            <ul>\n              <li>Polygon count: <strong>31,456</strong></li>\n              <li>Material count: <strong>1</strong></li>\n            </ul>\n          </article>\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>Can I use it outside VRChat?</h3>\n            <p>It can also be used as <strong>3D data in Unity</strong> for still-image shoots, video production, 3D game production, and similar uses. Please also check the rules of the publication destination and the avatar creator.</p>\n            <h3>Is the avatar body included?</h3>\n            <p>No. Please obtain the <strong>avatar body</strong> separately from each official page.</p>\n            <h3>What should I check before purchasing?</h3>\n            <p>Please check the <strong>BOOTH product page</strong> for included files, price, usage conditions, and setup notes.</p>\n          </article>"
+    },
+    "product-cravingdance-copy.html": {
+      "title": "CravingDance for Lumina (Copy)",
+      "pageTitle": "CravingDance for Lumina (Copy) | macanon",
+      "description": "CravingDance is a cyber-style 3D outfit adjusted for Lumina, designed for mood-building, dancing, posing, and photography. This LP collects the BOOTH link, price, setup notes, included files, FAQ, and terms guidance.",
+      "summaryTags": [
+        "Lumina compatible",
+        "3D Outfit",
+        "VRChat",
+        "Unity",
+        "Modular Avatar"
+      ],
+      "specs": [
+        [
+          "Compatibility",
+          "For Lumina"
+        ],
+        [
+          "Contents",
+          "Lumina outfit, Prefab, Material, Texture, unitypackage"
+        ],
+        [
+          "Use",
+          "VRChat, Unity 2022, Modular Avatar, avatar edits, photography"
+        ],
+        [
+          "Price",
+          "¥1,000"
+        ]
+      ],
+      "detailHtml": "\n          <article class=\"product-detail-block\">\n            <h2 id=\"product-detail-title\">Product Details</h2>\n            <p>Wrapped in light, made to catch the eye.<br><strong>CravingDance, a cyber outfit for Lumina</strong>.</p>\n            <p>This is a <strong>Lumina-compatible 3D outfit</strong> intended for use in <strong>VRChat</strong>. With glowing lines and a cyber-inspired mood, it is designed to stand out in active scenes such as <strong>dancing, pose photography, and video production</strong>.</p>\n            <p>Recommended when you want to use <strong>glowing accents</strong> in photos or make <strong>Lumina</strong> feel more striking in an avatar edit.</p>\n            <ul>\n              <li>You want to edit Lumina in a cyber style.</li>\n              <li>You want an outfit that looks good in dance or pose photos.</li>\n              <li>You want to create neon or near-future thumbnails.</li>\n            </ul>\n            <p>Recommended for anyone looking for a <strong>VRChat 3D outfit</strong>.</p>\n            <p>This product includes <strong>the outfit only</strong>. The <strong>original 3D avatar model is not included</strong>. Before purchasing, please check the <strong>BOOTH product page</strong> for compatible avatars, shape keys, setup instructions, usage conditions, and the latest notes.</p>\n          </article>\n          <article class=\"product-detail-block\">\n            <h2>Setup</h2>\n            <ol>\n              <li>Prepare a <strong>Unity 2022</strong> project with <strong>Modular Avatar</strong> installed.</li>\n              <li>Import the purchased <strong>unitypackage</strong> into the project.</li>\n              <li>Follow the <strong>BOOTH product description</strong> and place the <strong>target avatar Prefab</strong> directly under the avatar in the Hierarchy.</li>\n              <li>If you use an edited avatar or another outfit at the same time, check the <strong>BOOTH notes</strong> before upload.</li>\n            </ol>\n            <p>This product is intended to be installed with <strong>Modular Avatar</strong>. Depending on edited avatars, outfits, or scale changes, <strong>position, clipping, or physics adjustment</strong> may be required.</p>\n          </article>\n          <article class=\"product-detail-block\">\n            <h2>Included Files</h2>\n            <h3>Supported Shape Key</h3>\n            <ul>\n              <li><strong>Big_Breast</strong></li>\n            </ul>\n            <h3>Contents</h3>\n            <ul>\n              <li>This asset's <strong>unitypackage</strong>\n                <ul>\n                  <li>FBX</li>\n                  <li>Prefab</li>\n                  <li>Material</li>\n                  <li>Texture</li>\n                </ul>\n              </li>\n            </ul>\n            <h3>Model Info</h3>\n            <ul>\n              <li>Polygon count: <strong>66,095</strong></li>\n              <li>Material count: <strong>3</strong></li>\n            </ul>\n          </article>\n          <article class=\"product-detail-block\">\n            <h2>FAQ</h2>\n            <h3>Can I use it on an edited avatar?</h3>\n            <p>It can be used if the avatar is a <strong>supported avatar</strong>. However, depending on body shape, outfit, scale, bone edits, or other changes, <strong>adjustment may be required</strong>.</p>\n            <h3>Can I use it outside VRChat?</h3>\n            <p>It can also be used as a <strong>3D outfit in Unity</strong> for still-image shoots, video production, 3D game production, and similar uses. Please also check the rules of the publication destination and the avatar creator.</p>\n            <h3>Is the avatar body included?</h3>\n            <p>No. Please obtain the <strong>avatar body</strong> separately from each official page.</p>\n            <h3>What should I check before purchasing?</h3>\n            <p>Please check whether your <strong>avatar is supported</strong>, along with the included files, price, usage conditions, and setup notes on the <strong>BOOTH product page</strong>.</p>\n          </article>"
     }
   }
 }

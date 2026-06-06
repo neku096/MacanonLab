@@ -178,5 +178,20 @@
     "published": true,
     "openInNewTab": true,
     "sourceProductSlug": "monsterchair"
+  },
+  {
+    "id": "cravingdance-copy",
+    "title": "〖ルミナ対応〗CravingDanceのコピー",
+    "description": "〖ルミナ対応〗CravingDanceは、ルミナ向けに調整した、雰囲気づくりと撮影に使いやすい3D衣装です。 BOOTH商品ページへの導線、価格、導入方法、同梱内容、FAQ、利用規約へのリンクをまとめた個別LPです。",
+    "url": "https://macanon.booth.pm/items/7439310",
+    "thumbnail": "/products/cravingdance/cover.webp",
+    "category": "衣装",
+    "tags": [
+      "clothing"
+    ],
+    "sortOrder": 12,
+    "published": true,
+    "openInNewTab": true,
+    "sourceProductSlug": "cravingdance"
   }
 ]

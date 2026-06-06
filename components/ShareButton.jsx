@@ -124,42 +124,34 @@ export default function ShareButton() {
           ×
         </button>
         <h2 id="share-modal-title" className="share-title">
-          このページを共有
+          現在のページを共有
         </h2>
-        <div className="share-preview">
-          <div className="share-preview-image" aria-hidden="true">
-            <img src="/Macanon_Samune/macanon_Logo_transparent.webp" alt="" />
-          </div>
-          <div className="share-page-card">
-            <p className="share-preview-label">リンクプレビュー</p>
-            <p className="share-page-title" data-share-title>
-              {shareData.title}
-            </p>
-            <p className="share-page-url" data-share-url>
-              {shareData.url}
-            </p>
-          </div>
-        </div>
+        <p className="share-page-title" data-share-title>
+          {shareData.title}
+        </p>
+        <p className="share-page-url" data-share-url>
+          {shareData.url}
+        </p>
         <div className="share-options">
-          <button className="share-option share-option-copy-button" type="button" data-share-action="copy" onClick={copyUrl}>
+          <button className="share-option" type="button" data-share-action="x" onClick={shareToX}>
+            <span className="share-option-icon share-option-x" aria-hidden="true">
+              X
+            </span>
+            <span>Xでシェア</span>
+          </button>
+          <button className="share-option" type="button" data-share-action="line" onClick={shareToLine}>
+            <span className="share-option-icon share-option-line" aria-hidden="true">
+              LINE
+            </span>
+            <span>LINEでシェア</span>
+          </button>
+          <button className="share-option" type="button" data-share-action="copy" onClick={copyUrl}>
             <span className="share-option-icon share-option-copy" aria-hidden="true">
               <svg viewBox="0 0 24 24" focusable="false">
                 <path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.9-3.9a3 3 0 0 1 4.2 4.2l-3 3a3 3 0 0 1-4.25 0 1 1 0 1 1 1.42-1.42 1 1 0 0 0 1.41 0l3-3a1 1 0 0 0-1.41-1.41L12 13.4a1 1 0 0 1-1.4 0Zm2.8-2.8a1 1 0 0 1 0 1.4l-3.9 3.9a3 3 0 1 1-4.2-4.2l3-3a3 3 0 0 1 4.25 0 1 1 0 0 1-1.42 1.42 1 1 0 0 0-1.41 0l-3 3a1 1 0 1 0 1.41 1.41L12 10.6a1 1 0 0 1 1.4 0Z" />
               </svg>
             </span>
             <span data-copy-label>{copied ? "URLをコピーしました" : "URLをコピー"}</span>
-          </button>
-          <button className="share-option share-option-social" type="button" data-share-action="x" onClick={shareToX}>
-            <span className="share-option-icon share-option-x" aria-hidden="true">
-              X
-            </span>
-            <span>X</span>
-          </button>
-          <button className="share-option share-option-social" type="button" data-share-action="line" onClick={shareToLine}>
-            <span className="share-option-icon share-option-line" aria-hidden="true">
-              LINE
-            </span>
-            <span>LINE</span>
           </button>
         </div>
       </div>

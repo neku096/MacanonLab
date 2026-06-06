@@ -44,6 +44,23 @@ export default function AdminFilePathInput({ value = "", onChange, targetDir, pl
     setMessage("");
 
     try {
+      if (!overwrite) {
+        const checkResponse = await fetch(`${FILE_API}?targetPath=${encodeURIComponent(pendingPath)}`, { cache: "no-store" });
+        const checkPayload = await checkResponse.json().catch(() => ({}));
+        if (!checkResponse.ok) {
+          throw new Error(checkPayload.error || "保存先を確認できませんでした。");
+        }
+        if (checkPayload.exists) {
+          const shouldOverwrite = window.confirm(`既存ファイルを上書きしますか？\npublic${pendingPath}`);
+          if (shouldOverwrite) {
+            await uploadPendingFile(true);
+          } else {
+            setMessage("上書きをキャンセルしました。");
+          }
+          return;
+        }
+      }
+
       const formData = new FormData();
       formData.set("file", pendingFile);
       formData.set("targetPath", pendingPath);
