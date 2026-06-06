@@ -14,6 +14,9 @@ export const metadata = {
   },
   description: SITE.description,
   applicationName: SITE.name,
+  verification: {
+    google: "t030Yl6f4yLzRK-yLO4CXP_zbh9gt84ytZpVyXrnwos"
+  },
   icons: {
     icon: [
       { url: "/favicon.ico?v=20260516", sizes: "any" },
