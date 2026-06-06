@@ -1,11 +1,21 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import AdminFilePathInput from "./AdminFilePathInput";
 import styles from "./AdminProductsClient.module.css";
 
 const API_BASE = "/api/admin/products";
+const FILE_API = "/api/admin/files";
+const SLIDE_LINKS_API = "/api/admin/slide-links";
+const ALLOWED_IMAGE_EXTENSIONS = new Set(["webp", "png", "jpg", "jpeg"]);
+const PRODUCT_WIZARD_STEPS = [
+  { id: "basic", label: "基本情報" },
+  { id: "images", label: "画像" },
+  { id: "description", label: "商品説明" },
+  { id: "english", label: "英語情報" },
+  { id: "publish", label: "公開準備" }
+];
 const AVATAR_SEARCH_ALIASES = {
   愛莉: "Airi",
   イチゴ: "Ichigo",
@@ -74,6 +84,141 @@ function galleryImageCandidate(product, index) {
   };
 }
 
+function getFileExtension(fileName = "") {
+  const match = String(fileName).toLowerCase().match(/\.([a-z0-9]+)$/);
+  return match?.[1] || "";
+}
+
+function isSupportedImageName(fileName = "") {
+  return ALLOWED_IMAGE_EXTENSIONS.has(getFileExtension(fileName));
+}
+
+function sanitizeFileName(fileName = "") {
+  const safeName = String(fileName || "image.webp")
+    .replace(/[\\/:*?"<>|#%{}^~[\]`]/g, "-")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+  return safeName || "image.webp";
+}
+
+function fileNameStem(fileName = "") {
+  return sanitizeFileName(fileName).replace(/\.[^.]+$/, "");
+}
+
+function isThumbFileName(fileName = "") {
+  return /-thumb\.webp$/i.test(fileName);
+}
+
+function isCoverFileName(fileName = "") {
+  return sanitizeFileName(fileName).toLowerCase() === "cover.webp";
+}
+
+function buildBatchImageEntry(file, product) {
+  const safeName = sanitizeFileName(file.name);
+  const targetPath = `${productImageDir(product)}${safeName}`;
+  const stem = fileNameStem(safeName);
+  return {
+    file,
+    safeName,
+    targetPath,
+    stem: stem.replace(/-thumb$/i, ""),
+    isCover: isCoverFileName(safeName),
+    isThumb: isThumbFileName(safeName)
+  };
+}
+
+function buildBatchImagePlan(files, product) {
+  const entries = Array.from(files || []).map((file) => ({
+    file,
+    supported: isSupportedImageName(file.name)
+  }));
+  const unsupported = entries.filter((entry) => !entry.supported).map((entry) => entry.file.name);
+  const supportedEntries = entries
+    .filter((entry) => entry.supported)
+    .map((entry) => buildBatchImageEntry(entry.file, product));
+  const thumbByStem = new Map();
+  supportedEntries
+    .filter((entry) => entry.isThumb)
+    .forEach((entry) => thumbByStem.set(entry.stem.toLowerCase(), entry));
+
+  const imageEntries = supportedEntries.filter((entry) => !entry.isThumb);
+  const coverEntry = imageEntries.find((entry) => entry.isCover) || imageEntries[0] || null;
+  const galleryEntries = imageEntries.filter((entry) => entry !== coverEntry);
+  const gallery = galleryEntries.map((entry) => {
+    const thumbEntry = thumbByStem.get(entry.stem.toLowerCase());
+    return {
+      src: entry.targetPath,
+      thumb: thumbEntry?.targetPath || thumbCandidate(entry.targetPath),
+      alt: product?.coverAlt || product?.title || product?.slug || "",
+      width: product?.coverWidth ?? 1000,
+      height: product?.coverHeight ?? 1000
+    };
+  });
+
+  return {
+    coverPath: coverEntry?.targetPath || "",
+    entries: supportedEntries,
+    gallery,
+    unsupported
+  };
+}
+
+function getPrimarySalesUrl(product) {
+  const externalUrl = Array.isArray(product?.salesUrls?.external)
+    ? product.salesUrls.external.find((item) => hasText(item?.url) || hasText(item?.href))
+    : null;
+  return (
+    product?.salesUrls?.booth ||
+    product?.salesUrls?.dlsite ||
+    externalUrl?.url ||
+    externalUrl?.href ||
+    (product?.slug ? `/products/${product.slug}` : "")
+  );
+}
+
+function getTopCardCategory(product) {
+  return (
+    product?.categoryLabel ||
+    product?.category ||
+    product?.tagLabels?.[0] ||
+    product?.tags?.[0] ||
+    "other"
+  );
+}
+
+function uniqueSlideLinkId(base, slideLinks, currentId = "") {
+  const normalizedBase = slugify(base) || "slide-link";
+  const used = new Set(slideLinks.map((link) => link.id).filter((id) => id && id !== currentId));
+  let nextId = normalizedBase;
+  let suffix = 2;
+
+  while (used.has(nextId)) {
+    nextId = `${normalizedBase}-${suffix}`;
+    suffix += 1;
+  }
+
+  return nextId;
+}
+
+function buildSlideLinkFromProduct(product, slideLinks, existingLink = null) {
+  const sortOrder = existingLink?.sortOrder ?? Math.max(-1, ...slideLinks.map((link) => Number(link.sortOrder) || 0)) + 1;
+  return {
+    ...(existingLink || {}),
+    id: existingLink?.id || uniqueSlideLinkId(product.slug || product.title, slideLinks),
+    title: product.title || product.slug,
+    description: product.description || "",
+    url: getPrimarySalesUrl(product),
+    thumbnail: product.coverImage || "",
+    category: getTopCardCategory(product),
+    tags: Array.isArray(product.tags) ? product.tags : [],
+    sortOrder,
+    published: true,
+    openInNewTab: true,
+    sourceProductSlug: product.slug
+  };
+}
+
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -134,6 +279,20 @@ function splitList(value) {
 
 function joinList(value) {
   return Array.isArray(value) ? value.join(", ") : "";
+}
+
+function hasText(value) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+function parseJsonArrayText(value) {
+  try {
+    const parsed = JSON.parse(value || "[]");
+    if (!Array.isArray(parsed)) return { items: [], error: "配列形式にしてください" };
+    return { items: parsed, error: "" };
+  } catch (error) {
+    return { items: [], error: error.message };
+  }
 }
 
 function addUniqueValue(list, value) {
@@ -259,6 +418,95 @@ function createEnglish(product) {
   };
 }
 
+function buildPublishChecklist({ english, externalLinks, galleryError, galleryItems, product, validation }) {
+  const salesUrlReady =
+    hasText(product?.salesUrls?.booth) ||
+    hasText(product?.salesUrls?.dlsite) ||
+    externalLinks.some((item) => hasText(item?.url) || hasText(item?.href));
+  const galleryReady = !galleryError && galleryItems.some((image) => hasText(image?.src));
+
+  return [
+    { label: "タイトル", ready: hasText(product?.title), hint: "商品名を入力" },
+    { label: "商品ID / slug", ready: hasText(product?.slug), hint: "URLと画像フォルダ名に使います" },
+    { label: "BOOTH URL または販売URL", ready: salesUrlReady, hint: "BOOTH URL優先。なければDLsite/外部販売URL" },
+    { label: "説明文", ready: hasText(product?.description), hint: "商品一覧やTopカードの説明元になります" },
+    { label: "cover画像", ready: hasText(product?.coverImage), hint: "Topカードのサムネイル元になります" },
+    { label: "gallery画像", ready: galleryReady, hint: "最低1枚の画像パス" },
+    { label: "本文HTML", ready: hasText(product?.contentHtml), hint: "商品詳細の本文" },
+    { label: "英語タイトル", ready: hasText(english?.title), hint: "EN切替用" },
+    { label: "英語説明", ready: hasText(english?.description), hint: "EN切替用" },
+    { label: "relatedIds", ready: Array.isArray(product?.relatedIds) && product.relatedIds.length > 0, hint: "関連商品を1件以上" },
+    { label: "published", ready: Boolean(product?.published), hint: "公開ON" },
+    { label: "validate OK", ready: Boolean(validation?.ok), hint: "商品データを確認でOKにする" }
+  ];
+}
+
+function contentHtmlHas(product, patterns) {
+  const contentHtml = product?.contentHtml || "";
+  return patterns.some((pattern) => contentHtml.includes(pattern));
+}
+
+function buildDescriptionSectionItems(product) {
+  return [
+    { label: "導入方法", ready: contentHtmlHas(product, ["導入方法"]) },
+    { label: "梱包内容", ready: hasText(product?.content) || contentHtmlHas(product, ["梱包内容", "同梱内容"]) },
+    { label: "FAQ", ready: contentHtmlHas(product, ["FAQ"]) }
+  ];
+}
+
+function buildWizardStepStatuses({ english, galleryError, galleryItems, product, publishChecklist, validation }) {
+  const galleryReady = !galleryError && galleryItems.some((image) => hasText(image?.src));
+  const thumbReady = !galleryError && galleryItems.some((image) => hasText(image?.thumb));
+  const checklistReady = publishChecklist.filter((item) => item.ready).length;
+
+  return PRODUCT_WIZARD_STEPS.map((step) => {
+    const itemsByStep = {
+      basic: [
+        { key: "title", label: "タイトル", ready: hasText(product?.title) },
+        { key: "slug", label: "商品ID / slug", ready: hasText(product?.slug) },
+        { key: "category", label: "カテゴリ", ready: hasText(product?.category) },
+        { key: "tags", label: "タグ", ready: Array.isArray(product?.tags) && product.tags.length > 0 },
+        { key: "avatars", label: "対応アバター", ready: Array.isArray(product?.avatars) && product.avatars.length > 0 },
+        { key: "price", label: "価格", ready: hasText(product?.price) },
+        { key: "booth", label: "BOOTH URL", ready: hasText(product?.salesUrls?.booth) }
+      ],
+      images: [
+        { key: "coverImage", label: "coverImage", ready: hasText(product?.coverImage) },
+        { key: "gallery", label: "gallery", ready: galleryReady },
+        { key: "thumb", label: "thumb", ready: thumbReady },
+        { key: "preview", label: "画像プレビュー", ready: hasText(product?.coverImage) || galleryReady, required: false }
+      ],
+      description: [
+        { key: "description", label: "description", ready: hasText(product?.description) },
+        { key: "contentHtml", label: "本文HTML", ready: hasText(product?.contentHtml) },
+        { key: "install", label: "導入方法", ready: contentHtmlHas(product, ["導入方法"]) },
+        { key: "contents", label: "梱包内容", ready: hasText(product?.content) || contentHtmlHas(product, ["梱包内容", "同梱内容"]) },
+        { key: "faq", label: "FAQ", ready: contentHtmlHas(product, ["FAQ"]) }
+      ],
+      english: [
+        { key: "englishTitle", label: "EN title", ready: hasText(english?.title) },
+        { key: "englishDescription", label: "EN description", ready: hasText(english?.description) },
+        { key: "englishTags", label: "EN tags", ready: Array.isArray(english?.summaryTags) && english.summaryTags.length > 0 },
+        { key: "englishDetail", label: "EN本文", ready: hasText(english?.detailHtml), required: false }
+      ],
+      publish: [
+        { key: "checklist", label: `公開準備チェックリスト ${checklistReady}/${publishChecklist.length}`, ready: checklistReady === publishChecklist.length },
+        { key: "validate", label: "validate OK", ready: Boolean(validation?.ok) },
+        { key: "published", label: "published", ready: Boolean(product?.published) }
+      ]
+    };
+    const items = itemsByStep[step.id] || [];
+    const missingItems = items.filter((item) => item.required !== false && !item.ready);
+    return {
+      ...step,
+      items,
+      missingItems,
+      readyCount: items.filter((item) => item.ready).length,
+      requiredCount: items.filter((item) => item.required !== false).length
+    };
+  });
+}
+
 function uniqueSlug(base, products, currentSlug = "") {
   const normalized = slugify(base) || "new-product";
   const used = new Set(products.map((product) => product.slug).filter((slug) => slug !== currentSlug));
@@ -279,6 +527,7 @@ function withCopySuffix(value, fallback = "New Product") {
 }
 
 export default function AdminProductsClient() {
+  const batchImageInputRef = useRef(null);
   const [products, setProducts] = useState([]);
   const [productTemplate, setProductTemplate] = useState(null);
   const [productPageEnglish, setProductPageEnglish] = useState({});
@@ -296,8 +545,17 @@ export default function AdminProductsClient() {
   const [subtagSearch, setSubtagSearch] = useState("");
   const [avatarSearch, setAvatarSearch] = useState("");
   const [duplicateNoticeSlug, setDuplicateNoticeSlug] = useState("");
+  const [savedProductSlug, setSavedProductSlug] = useState("");
+  const [topCardStatus, setTopCardStatus] = useState(null);
+  const [batchImageStatus, setBatchImageStatus] = useState(null);
+  const [isBatchDragging, setBatchDragging] = useState(false);
+  const [isBatchUploading, setBatchUploading] = useState(false);
+  const [imagePreviewRevision, setImagePreviewRevision] = useState(0);
+  const [editorMode, setEditorMode] = useState("wizard");
+  const [wizardStepIndex, setWizardStepIndex] = useState(0);
   const [isLoading, setLoading] = useState(true);
   const [isSaving, setSaving] = useState(false);
+  const [isSyncingTopCard, setSyncingTopCard] = useState(false);
 
   const selectedProduct = useMemo(
     () => products.find((product) => product.slug === selectedSlug) || products[0] || null,
@@ -306,6 +564,7 @@ export default function AdminProductsClient() {
   const selectedKey = legacyKey(selectedProduct);
   const english = selectedProduct ? productPageEnglish[selectedKey] || createEnglish(selectedProduct) : null;
   const galleryState = useMemo(() => parseGalleryText(galleryText), [galleryText]);
+  const externalLinksState = useMemo(() => parseJsonArrayText(externalLinksText), [externalLinksText]);
   const galleryItems = galleryState.items;
   const tagOptions = useMemo(() => buildOptionList(products, "tags", "tagLabels"), [products]);
   const subtagOptions = useMemo(() => buildOptionList(products, "subtags", "subtagLabels"), [products]);
@@ -349,6 +608,43 @@ export default function AdminProductsClient() {
       }
     ]);
   }, [galleryItems, selectedProduct]);
+  const publishChecklist = useMemo(
+    () =>
+      selectedProduct
+        ? buildPublishChecklist({
+            english,
+            externalLinks: externalLinksState.items,
+            galleryError: galleryState.error,
+            galleryItems,
+            product: selectedProduct,
+            validation
+          })
+        : [],
+    [english, externalLinksState.items, galleryItems, galleryState.error, selectedProduct, validation]
+  );
+  const descriptionSectionItems = useMemo(() => buildDescriptionSectionItems(selectedProduct), [selectedProduct]);
+  const wizardStepStatuses = useMemo(
+    () =>
+      selectedProduct
+        ? buildWizardStepStatuses({
+            english,
+            galleryError: galleryState.error,
+            galleryItems,
+            product: selectedProduct,
+            publishChecklist,
+            validation
+          })
+        : PRODUCT_WIZARD_STEPS.map((step) => ({ ...step, items: [], missingItems: [], readyCount: 0, requiredCount: 0 })),
+    [english, galleryItems, galleryState.error, publishChecklist, selectedProduct, validation]
+  );
+  const isWizardMode = editorMode === "wizard";
+  const activeWizardStep = wizardStepStatuses[wizardStepIndex] || wizardStepStatuses[0];
+  const activeWizardStepId = activeWizardStep?.id || PRODUCT_WIZARD_STEPS[0].id;
+  const publishWarningItems = wizardStepStatuses.flatMap((step) =>
+    step.missingItems
+      .filter((item) => item.key !== "published")
+      .map((item) => `${step.label}: ${item.label}`)
+  );
   const selectedImageSignature = selectedImageEntries.map((entry) => `${entry.label}:${entry.path}`).join("|");
 
   useEffect(() => {
@@ -409,8 +705,35 @@ export default function AdminProductsClient() {
     }
   }
 
+  function markDraftChanged() {
+    setSavedProductSlug("");
+    setTopCardStatus(null);
+    setBatchImageStatus(null);
+    setValidation(null);
+    setImageCheckSummary(null);
+  }
+
+  function setWizardStep(nextIndex) {
+    setWizardStepIndex(Math.max(0, Math.min(PRODUCT_WIZARD_STEPS.length - 1, nextIndex)));
+  }
+
+  function getWizardPanelClass(stepId) {
+    return `${styles.wizardPanel}${isWizardMode && activeWizardStepId !== stepId ? ` ${styles.isWizardHidden}` : ""}`;
+  }
+
+  function updatePublished(nextPublished) {
+    if (nextPublished && publishWarningItems.length) {
+      const preview = publishWarningItems.slice(0, 8).join("\n");
+      const extra = publishWarningItems.length > 8 ? `\n...ほか ${publishWarningItems.length - 8}件` : "";
+      const confirmed = window.confirm(`公開前の不足項目があります。\n${preview}${extra}\n\npublished=true にしますか？`);
+      if (!confirmed) return;
+    }
+    updateSelected({ published: nextPublished });
+  }
+
   function updateSelected(patch) {
     if (!selectedProduct) return;
+    markDraftChanged();
     setProducts((current) =>
       current.map((product) => (product.slug === selectedProduct.slug ? { ...product, ...patch } : product))
     );
@@ -418,6 +741,7 @@ export default function AdminProductsClient() {
 
   function updateEnglish(patch) {
     if (!selectedProduct) return;
+    markDraftChanged();
     setProductPageEnglish((current) => ({
       ...current,
       [selectedKey]: {
@@ -432,6 +756,7 @@ export default function AdminProductsClient() {
     if (!selectedProduct) return;
     const nextSlug = slugify(nextValue);
     if (!nextSlug) return;
+    markDraftChanged();
 
     const oldSlug = selectedProduct.slug;
     if (nextSlug === oldSlug) {
@@ -521,10 +846,14 @@ export default function AdminProductsClient() {
     setDuplicateNoticeSlug("");
     setValidation(null);
     setImageCheckSummary(null);
+    setSavedProductSlug("");
+    setTopCardStatus(null);
+    setEditorMode("wizard");
+    setWizardStep(0);
     setMessage("新規商品を追加しました。保存前に内容と画像パスを確認してください。");
   }
 
-  function duplicateSelectedProduct() {
+  async function duplicateSelectedProduct() {
     if (!selectedProduct || !english) return;
     if (galleryState.error) {
       setJsonError(`商品画像一覧JSON を修正してください: ${galleryState.error}`);
@@ -539,6 +868,24 @@ export default function AdminProductsClient() {
     const nextCoverImage = selectedProduct.coverImage
       ? replaceProductDirPath(selectedProduct.coverImage, oldSlug, nextSlug)
       : productImageDirForSlug(nextSlug) + "cover.webp";
+    let finalGallery = nextGallery;
+    let finalCoverImage = nextCoverImage;
+    let imageCopyMessage = "";
+
+    setJsonError("");
+    setMessage(`画像を public/products/${nextSlug}/ へコピーしています...`);
+    try {
+      const copyResult = await copyProductImagesForDuplicate(oldSlug, nextSlug);
+      if (!copyResult?.ok || Number(copyResult.copied) < 1) {
+        throw new Error("コピーできる画像が見つかりませんでした。");
+      }
+      imageCopyMessage = `画像 ${copyResult.copied} 件を public/products/${nextSlug}/ へコピーしました。`;
+    } catch (error) {
+      finalGallery = clone(galleryItems);
+      finalCoverImage = selectedProduct.coverImage || "";
+      imageCopyMessage = `画像コピーに失敗したため、元商品の画像パスを参照しています。${error.message ? ` ${error.message}` : ""}`;
+    }
+
     const nextEnglishTitle = withCopySuffix(
       english.title,
       selectedProduct.title || selectedProduct.slug || "New Product"
@@ -551,8 +898,8 @@ export default function AdminProductsClient() {
       sortOrder: Math.max(-1, ...products.map((product) => Number(product.sortOrder) || 0)) + 1,
       title: nextTitle,
       legacyPath: `/${nextKey}`,
-      coverImage: nextCoverImage,
-      gallery: nextGallery
+      coverImage: finalCoverImage,
+      gallery: finalGallery
     };
     const nextEnglish = {
       ...clone(english),
@@ -569,8 +916,14 @@ export default function AdminProductsClient() {
     setDuplicateNoticeSlug(nextSlug);
     setValidation(null);
     setImageCheckSummary(null);
+    setSavedProductSlug("");
+    setTopCardStatus(null);
+    setEditorMode("wizard");
+    setWizardStep(0);
     setJsonError("");
-    setMessage("商品を複製しました。slug / タイトル / 画像を変更してから検証してください。");
+    setGalleryText(JSON.stringify(finalGallery, null, 2));
+    setImagePreviewRevision((current) => current + 1);
+    setMessage(`商品を複製しました。${imageCopyMessage} slug / タイトル / 画像を確認してから検証してください。`);
   }
 
   function deleteSelectedProduct() {
@@ -661,7 +1014,10 @@ export default function AdminProductsClient() {
   function updateGallery(nextItems) {
     setGalleryText(JSON.stringify(nextItems, null, 2));
     setJsonError("");
+    setValidation(null);
     setImageCheckSummary(null);
+    setSavedProductSlug("");
+    setTopCardStatus(null);
   }
 
   function updateGalleryItem(index, patch) {
@@ -728,6 +1084,199 @@ export default function AdminProductsClient() {
 
   function applyCoverCandidate() {
     updateSelected({ coverImage: coverImageCandidate(selectedProduct) });
+  }
+
+  function openBatchImagePicker() {
+    batchImageInputRef.current?.click();
+  }
+
+  async function checkImageTarget(entry) {
+    const checkResponse = await fetch(`${FILE_API}?targetPath=${encodeURIComponent(entry.targetPath)}`, { cache: "no-store" });
+    const checkPayload = await checkResponse.json().catch(() => ({}));
+    if (!checkResponse.ok) {
+      throw new Error(checkPayload.error || `${entry.safeName} の保存先を確認できませんでした。`);
+    }
+    return { entry, exists: Boolean(checkPayload.exists) };
+  }
+
+  async function copyProductImagesForDuplicate(sourceSlug, targetSlug, overwrite = false) {
+    const response = await fetch(FILE_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "copyProductImages",
+        sourceSlug,
+        targetSlug,
+        overwrite
+      })
+    });
+    const payload = await response.json().catch(() => ({}));
+
+    if (response.status === 409 && payload.conflict) {
+      const shouldOverwrite = window.confirm(`public/products/${targetSlug}/ は既に存在します。画像を上書きしますか？`);
+      if (shouldOverwrite) {
+        return copyProductImagesForDuplicate(sourceSlug, targetSlug, true);
+      }
+      throw new Error("画像コピーをキャンセルしました。");
+    }
+
+    if (!response.ok) {
+      throw new Error(payload.error || "画像コピーに失敗しました。");
+    }
+
+    return payload;
+  }
+
+  async function uploadBatchImage(entry, overwrite = false) {
+    const formData = new FormData();
+    formData.set("file", entry.file);
+    formData.set("targetPath", entry.targetPath);
+    formData.set("overwrite", overwrite ? "true" : "false");
+
+    const response = await fetch(FILE_API, { method: "POST", body: formData });
+    const payload = await response.json().catch(() => ({}));
+
+    if (response.status === 409 && payload.conflict) {
+      const shouldOverwrite = window.confirm(`public${entry.targetPath} は既に存在します。上書きしますか？`);
+      if (shouldOverwrite) {
+        return uploadBatchImage(entry, true);
+      }
+      return { path: entry.targetPath, skipped: true, overwritten: false };
+    }
+
+    if (!response.ok) {
+      throw new Error(payload.error || `${entry.safeName} の保存に失敗しました。`);
+    }
+
+    return {
+      path: payload.path || entry.targetPath,
+      skipped: false,
+      overwritten: Boolean(payload.overwritten)
+    };
+  }
+
+  async function validateImageBatchDraft(nextProducts) {
+    await runImageCheck(nextProducts);
+    const response = await fetch(`${API_BASE}/validate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ products: nextProducts, productPageEnglish })
+    });
+    const payload = await response.json();
+    setValidation(payload.validation || null);
+    return payload.validation || null;
+  }
+
+  async function processBatchImages(fileList) {
+    if (!selectedProduct || isBatchUploading) return;
+    const files = Array.from(fileList || []);
+    if (!files.length) return;
+
+    const plan = buildBatchImagePlan(files, selectedProduct);
+    if (!plan.entries.length) {
+      setBatchImageStatus({
+        ok: false,
+        message: "対応画像がありません。WebP / PNG / JPG / JPEG を選んでください。",
+        details: plan.unsupported
+      });
+      return;
+    }
+
+    setBatchUploading(true);
+    setBatchImageStatus({ ok: true, message: "画像を保存しています...", details: [] });
+    setJsonError("");
+    setMessage("");
+
+    try {
+      const targetStates = await Promise.all(plan.entries.map((entry) => checkImageTarget(entry)));
+      const existingTargets = targetStates.filter((state) => state.exists);
+      let overwriteExisting = false;
+      if (existingTargets.length) {
+        const previewList = existingTargets
+          .slice(0, 6)
+          .map((state) => `public${state.entry.targetPath}`)
+          .join("\n");
+        const extraCount = existingTargets.length > 6 ? `\n...ほか ${existingTargets.length - 6}件` : "";
+        overwriteExisting = window.confirm(`既存ファイル ${existingTargets.length} 件を上書きしますか？\n${previewList}${extraCount}`);
+      }
+
+      const uploadResults = [];
+      for (const targetState of targetStates) {
+        if (targetState.exists && !overwriteExisting) {
+          uploadResults.push({
+            entry: targetState.entry,
+            result: { path: targetState.entry.targetPath, skipped: true, overwritten: false }
+          });
+          continue;
+        }
+        uploadResults.push({
+          entry: targetState.entry,
+          result: await uploadBatchImage(targetState.entry, targetState.exists && overwriteExisting)
+        });
+      }
+
+      const skipped = uploadResults.filter((item) => item.result.skipped);
+      const overwritten = uploadResults.filter((item) => item.result.overwritten);
+      const uploadedPaths = uploadResults.map((item) => item.entry.targetPath);
+      const nextGallery = plan.gallery.length ? plan.gallery : galleryItems;
+      const nextProducts = products.map((product) =>
+        product.slug === selectedProduct.slug
+          ? {
+              ...product,
+              ...(plan.coverPath ? { coverImage: plan.coverPath } : {}),
+              gallery: nextGallery
+            }
+          : product
+      );
+
+      setProducts(nextProducts);
+      setGalleryText(JSON.stringify(nextGallery, null, 2));
+      setSavedProductSlug("");
+      setTopCardStatus(null);
+      setImagePreviewRevision((current) => current + 1);
+      setImageChecks((current) => {
+        const next = { ...current };
+        uploadedPaths.forEach((path) => {
+          next[path] = { ok: true, state: "ok", message: "保存済み" };
+        });
+        return next;
+      });
+
+      const nextValidation = await validateImageBatchDraft(nextProducts);
+      const details = [
+        `保存先: public${productImageDir(selectedProduct)}`,
+        plan.coverPath ? `coverImage: ${plan.coverPath}` : "coverImage: 変更なし",
+        plan.gallery.length ? `gallery: ${plan.gallery.length}件を反映` : "gallery: 変更なし",
+        overwritten.length ? `上書き: ${overwritten.length}件` : "",
+        skipped.length ? `既存ファイルを使用: ${skipped.length}件` : "",
+        plan.unsupported.length ? `未対応でスキップ: ${plan.unsupported.join(", ")}` : ""
+      ].filter(Boolean);
+
+      setBatchImageStatus({
+        ok: Boolean(nextValidation?.ok),
+        message: nextValidation?.ok
+          ? "画像を反映し、検証OKです。"
+          : "画像を反映しました。検証結果を確認してください。",
+        details
+      });
+      setMessage("画像候補をcover/galleryへ反映しました。プレビューと検証結果を確認してください。");
+    } catch (error) {
+      setBatchImageStatus({ ok: false, message: error.message, details: [] });
+      setJsonError(error.message);
+    } finally {
+      setBatchUploading(false);
+    }
+  }
+
+  function handleBatchImageDrop(event) {
+    event.preventDefault();
+    setBatchDragging(false);
+    processBatchImages(event.dataTransfer.files);
+  }
+
+  function handleBatchImageInputChange(event) {
+    processBatchImages(event.target.files);
+    event.target.value = "";
   }
 
   function addRelatedId(relatedId) {
@@ -820,6 +1369,8 @@ export default function AdminProductsClient() {
       const payload = await response.json();
       setValidation(payload.validation || preflightPayload.validation);
       if (!response.ok) throw new Error(payload.error || "保存に失敗しました");
+      setSavedProductSlug(selectedProduct.slug);
+      setTopCardStatus(null);
       setMessage(
         imageCheck.warnings.length
           ? `products.json と legacy-i18n.json を保存しました。画像警告が ${imageCheck.warnings.length} 件あります。`
@@ -829,6 +1380,52 @@ export default function AdminProductsClient() {
       setJsonError(error.message);
     } finally {
       setSaving(false);
+    }
+  }
+
+  async function syncTopCardFromProduct() {
+    if (!selectedProduct) return;
+    const confirmed = window.confirm(
+      `${selectedProduct.title || selectedProduct.slug} のTopカードを作成/更新します。\n` +
+        "同じ参照商品がある場合は更新し、ない場合は末尾に追加します。\n" +
+        "Topカードは公開状態で保存します。"
+    );
+    if (!confirmed) return;
+
+    setSyncingTopCard(true);
+    setTopCardStatus(null);
+    setJsonError("");
+
+    try {
+      const response = await fetch(SLIDE_LINKS_API, { cache: "no-store" });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "スライドリンク集カードを読み込めませんでした。");
+
+      const currentSlideLinks = Array.isArray(payload.slideLinks) ? payload.slideLinks : [];
+      const existingIndex = currentSlideLinks.findIndex((link) => link.sourceProductSlug === selectedProduct.slug);
+      const existingLink = existingIndex >= 0 ? currentSlideLinks[existingIndex] : null;
+      const nextLink = buildSlideLinkFromProduct(selectedProduct, currentSlideLinks, existingLink);
+      const nextSlideLinks =
+        existingIndex >= 0
+          ? currentSlideLinks.map((link, index) => (index === existingIndex ? nextLink : link))
+          : [...currentSlideLinks, nextLink];
+
+      const saveResponse = await fetch(SLIDE_LINKS_API, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slideLinks: nextSlideLinks })
+      });
+      const savePayload = await saveResponse.json();
+      if (!saveResponse.ok) throw new Error(savePayload.error || "Topカードの保存に失敗しました。");
+
+      setTopCardStatus({
+        ok: true,
+        message: existingLink ? "Topカードを更新しました。" : "Topカードを作成しました。"
+      });
+    } catch (error) {
+      setTopCardStatus({ ok: false, message: error.message });
+    } finally {
+      setSyncingTopCard(false);
     }
   }
 
@@ -886,9 +1483,16 @@ export default function AdminProductsClient() {
           <div className={styles.sidebarHeader}>
             <strong>{products.length} 商品</strong>
             <button className={styles.smallButton} type="button" onClick={addProduct}>
-              追加
+              新規追加
             </button>
           </div>
+          <section className={styles.quickCreatePanel}>
+            <strong>既存商品から複製して作成</strong>
+            <p>似ている商品を選んで複製すると、カテゴリ、タグ、本文、英語欄、画像構成を流用できます。</p>
+            <button className={styles.secondaryButton} type="button" onClick={duplicateSelectedProduct}>
+              選択中の商品を複製
+            </button>
+          </section>
           <div className={styles.productList}>
             {products
               .slice()
@@ -898,7 +1502,10 @@ export default function AdminProductsClient() {
                   className={`${styles.productItem}${product.slug === selectedProduct.slug ? ` ${styles.isSelected}` : ""}`}
                   type="button"
                   key={product.slug}
-                  onClick={() => setSelectedSlug(product.slug)}
+                  onClick={() => {
+                    setSelectedSlug(product.slug);
+                    setWizardStep(0);
+                  }}
                 >
                   <span>{product.title || product.slug}</span>
                   <small>{product.published ? "公開" : "下書き"} / {product.slug}</small>
@@ -939,6 +1546,18 @@ export default function AdminProductsClient() {
             </div>
           ) : null}
 
+          <WizardControls
+            activeStepId={activeWizardStepId}
+            isWizardMode={isWizardMode}
+            onModeChange={setEditorMode}
+            onNext={() => setWizardStep(wizardStepIndex + 1)}
+            onPrev={() => setWizardStep(wizardStepIndex - 1)}
+            onStepChange={(stepIndex) => setWizardStep(stepIndex)}
+            stepIndex={wizardStepIndex}
+            steps={wizardStepStatuses}
+          />
+
+          <div className={getWizardPanelClass("basic")}>
           <div className={styles.gridTwo}>
             <Field label="タイトル">
               <input value={selectedProduct.title || ""} onChange={(event) => handleTitleChange(event.target.value)} />
@@ -953,16 +1572,6 @@ export default function AdminProductsClient() {
               </div>
               <small className={styles.fieldHint}>URLや画像フォルダ名に使います。半角英数字とハイフンで管理してください。</small>
               <small className={styles.fieldHint}>現在の画像候補: {productImageDir(selectedProduct)}cover.webp</small>
-            </Field>
-            <Field label="公開状態">
-              <label className={styles.checkLabel}>
-                <input
-                  type="checkbox"
-                  checked={Boolean(selectedProduct.published)}
-                  onChange={(event) => updateSelected({ published: event.target.checked })}
-                />
-                公開
-              </label>
             </Field>
             <Field label="表示順">
               <input
@@ -987,7 +1596,9 @@ export default function AdminProductsClient() {
               />
             </Field>
           </div>
+          </div>
 
+          <div className={getWizardPanelClass("description")}>
           <Field label="説明 / SEO説明">
             <textarea value={selectedProduct.description || ""} onChange={(event) => updateSelected({ description: event.target.value })} />
           </Field>
@@ -1009,7 +1620,9 @@ export default function AdminProductsClient() {
               />
             </Field>
           </div>
+          </div>
 
+          <div className={getWizardPanelClass("basic")}>
           <div className={styles.gridTwo}>
             <Field label="通常タグ（カンマ区切り）">
               <input value={joinList(selectedProduct.tags)} onChange={(event) => updateSelected({ tags: splitList(event.target.value) })} />
@@ -1092,7 +1705,9 @@ export default function AdminProductsClient() {
               />
             </div>
           </section>
+          </div>
 
+          <div className={getWizardPanelClass("images")}>
           <div className={styles.gridTwo}>
             <Field label="カバー画像">
               <AdminFilePathInput
@@ -1126,11 +1741,58 @@ export default function AdminProductsClient() {
               </button>
             </div>
 
+            <div
+              className={`${styles.batchImageDropzone}${isBatchDragging ? ` ${styles.isDragging}` : ""}`}
+              onDragOver={(event) => {
+                event.preventDefault();
+                if (!isBatchUploading) setBatchDragging(true);
+              }}
+              onDragLeave={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setBatchDragging(false);
+              }}
+              onDrop={handleBatchImageDrop}
+            >
+              <div>
+                <span>複数画像D&amp;D</span>
+                <strong>まとめてcover/galleryへ反映</strong>
+                <small>
+                  cover.webp はcoverImageに優先反映。先頭画像はcover候補、残りはgallery候補、*-thumb.webp は同名画像のthumbに割り当てます。
+                </small>
+              </div>
+              <div className={styles.batchImageActions}>
+                <button className={styles.secondaryButton} type="button" onClick={openBatchImagePicker} disabled={isBatchUploading}>
+                  画像をまとめて選択
+                </button>
+                <input
+                  ref={batchImageInputRef}
+                  className={styles.hiddenFileInput}
+                  type="file"
+                  accept=".webp,.png,.jpg,.jpeg,image/webp,image/png,image/jpeg"
+                  multiple
+                  onChange={handleBatchImageInputChange}
+                />
+              </div>
+            </div>
+
+            {batchImageStatus ? (
+              <div className={`${styles.batchImageStatus}${batchImageStatus.ok ? "" : ` ${styles.hasBatchError}`}`} aria-live="polite">
+                <strong>{isBatchUploading ? "保存中..." : batchImageStatus.message}</strong>
+                {batchImageStatus.details?.length ? (
+                  <ul>
+                    {batchImageStatus.details.map((detail) => (
+                      <li key={detail}>{detail}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            ) : null}
+
             <div className={styles.coverPreviewGrid}>
               <ImagePreview
                 label="cover.webp"
                 path={selectedProduct.coverImage || ""}
                 check={imageChecks[selectedProduct.coverImage || ""]}
+                revision={imagePreviewRevision}
               />
               <div className={styles.imageWarnings}>
                 <strong>画像チェック</strong>
@@ -1161,7 +1823,12 @@ export default function AdminProductsClient() {
             <div className={styles.galleryEditorList}>
               {galleryItems.map((image, index) => (
                 <div className={styles.galleryEditorItem} key={`${image.src || "gallery"}-${index}`}>
-                  <ImagePreview label={`商品画像 ${index + 1}`} path={image.src || ""} check={imageChecks[image.src || ""]} />
+                  <ImagePreview
+                    label={`商品画像 ${index + 1}`}
+                    path={image.src || ""}
+                    check={imageChecks[image.src || ""]}
+                    revision={imagePreviewRevision}
+                  />
                   <div className={styles.galleryEditorFields}>
                     <label>
                       <span>画像パス</span>
@@ -1224,14 +1891,32 @@ export default function AdminProductsClient() {
           </section>
 
           <Field label="商品画像一覧JSON">
-            <textarea className={styles.codeArea} value={galleryText} onChange={(event) => setGalleryText(event.target.value)} />
+            <textarea
+              className={styles.codeArea}
+              value={galleryText}
+              onChange={(event) => {
+                setGalleryText(event.target.value);
+                markDraftChanged();
+              }}
+            />
             <small className={styles.fieldHint}>商品画像一覧をJSONで直接調整する管理者向け欄です。通常は上の画像入力欄を使ってください。</small>
           </Field>
+          </div>
 
+          <div className={getWizardPanelClass("basic")}>
           <Field label="外部販売URL JSON">
-            <textarea className={styles.codeArea} value={externalLinksText} onChange={(event) => setExternalLinksText(event.target.value)} />
+            <textarea
+              className={styles.codeArea}
+              value={externalLinksText}
+              onChange={(event) => {
+                setExternalLinksText(event.target.value);
+                markDraftChanged();
+              }}
+            />
           </Field>
+          </div>
 
+          <div className={getWizardPanelClass("description")}>
           <Field label="購入前注意文">
             <textarea value={selectedProduct.note || ""} onChange={(event) => updateSelected({ note: event.target.value })} />
           </Field>
@@ -1239,7 +1924,10 @@ export default function AdminProductsClient() {
           <Field label="本文HTML">
             <textarea className={styles.codeArea} value={selectedProduct.contentHtml || ""} onChange={(event) => updateSelected({ contentHtml: event.target.value })} />
           </Field>
+          <SectionChecklist title="本文HTMLの見出し" items={descriptionSectionItems} />
+          </div>
 
+          <div className={getWizardPanelClass("english")}>
           <section className={styles.subsection}>
             <h2>英語データ</h2>
             <div className={styles.gridTwo}>
@@ -1263,7 +1951,14 @@ export default function AdminProductsClient() {
               <input value={joinList(english?.summaryTags)} onChange={(event) => updateEnglish({ summaryTags: splitList(event.target.value) })} />
             </Field>
             <Field label="英語スペックJSON">
-              <textarea className={styles.codeArea} value={specsText} onChange={(event) => setSpecsText(event.target.value)} />
+              <textarea
+                className={styles.codeArea}
+                value={specsText}
+                onChange={(event) => {
+                  setSpecsText(event.target.value);
+                  markDraftChanged();
+                }}
+              />
             </Field>
             <Field label="英語購入前注意文">
               <textarea value={english?.note || ""} onChange={(event) => updateEnglish({ note: event.target.value })} />
@@ -1272,6 +1967,61 @@ export default function AdminProductsClient() {
               <textarea className={styles.codeArea} value={english?.detailHtml || ""} onChange={(event) => updateEnglish({ detailHtml: event.target.value })} />
             </Field>
           </section>
+          </div>
+
+          <div className={getWizardPanelClass("publish")}>
+            <PublishChecklist items={publishChecklist} />
+            <section className={styles.publishActionPanel}>
+              <Field label="公開状態">
+                <label className={styles.checkLabel}>
+                  <input
+                    type="checkbox"
+                    checked={Boolean(selectedProduct.published)}
+                    onChange={(event) => updatePublished(event.target.checked)}
+                  />
+                  公開
+                </label>
+                {publishWarningItems.length ? (
+                  <small className={styles.fieldHint}>不足項目が残っています。公開ON時に確認します。</small>
+                ) : null}
+              </Field>
+              <div className={styles.publishActions}>
+                <button className={styles.secondaryButton} type="button" onClick={validateDraft}>
+                  商品データを確認
+                </button>
+                <button className={styles.primaryButton} type="button" onClick={saveDraft} disabled={isSaving}>
+                  {isSaving ? "保存中..." : "確認して保存"}
+                </button>
+              </div>
+            </section>
+
+            {savedProductSlug === selectedProduct.slug ? (
+              <section className={styles.postSavePanel} aria-live="polite">
+                <div>
+                  <span>保存後の次の作業</span>
+                  <strong>{selectedProduct.title || selectedProduct.slug}</strong>
+                  <small>公開ページ確認、商品一覧確認、Topカード作成/更新へ進めます。</small>
+                </div>
+                <div className={styles.postSaveActions}>
+                  <Link className={styles.secondaryButton} href={`/products/${selectedProduct.slug}`} target="_blank">
+                    公開ページを開く
+                  </Link>
+                  <Link className={styles.secondaryButton} href="/products" target="_blank">
+                    商品一覧を開く
+                  </Link>
+                  <button className={styles.primaryButton} type="button" onClick={syncTopCardFromProduct} disabled={isSyncingTopCard}>
+                    {isSyncingTopCard ? "Topカード保存中..." : "Topカードを作成/更新"}
+                  </button>
+                  <Link className={styles.secondaryButton} href="/admin/slide-links">
+                    Topカード管理を開く
+                  </Link>
+                </div>
+                {topCardStatus ? (
+                  <p className={topCardStatus.ok ? styles.successText : styles.errorText}>{topCardStatus.message}</p>
+                ) : null}
+              </section>
+            ) : null}
+          </div>
         </section>
       </div>
     </main>
@@ -1284,6 +2034,132 @@ function Field({ children, label }) {
       <span>{label}</span>
       {children}
     </label>
+  );
+}
+
+function WizardControls({ activeStepId, isWizardMode, onModeChange, onNext, onPrev, onStepChange, stepIndex, steps }) {
+  const activeStep = steps.find((step) => step.id === activeStepId) || steps[stepIndex] || steps[0];
+  const canGoPrev = stepIndex > 0;
+  const canGoNext = stepIndex < steps.length - 1;
+
+  return (
+    <section className={styles.wizardBox} aria-label="商品追加ウィザード">
+      <div className={styles.wizardHeader}>
+        <div>
+          <span>商品追加ウィザード</span>
+          <strong>
+            STEP {stepIndex + 1}: {activeStep?.label || ""}
+          </strong>
+        </div>
+        <div className={styles.modeSwitch} aria-label="編集モード">
+          <button
+            className={isWizardMode ? styles.isActive : ""}
+            type="button"
+            onClick={() => onModeChange("wizard")}
+            aria-pressed={isWizardMode}
+          >
+            ウィザード
+          </button>
+          <button
+            className={!isWizardMode ? styles.isActive : ""}
+            type="button"
+            onClick={() => onModeChange("all")}
+            aria-pressed={!isWizardMode}
+          >
+            全項目表示
+          </button>
+        </div>
+      </div>
+
+      <div className={styles.wizardSteps}>
+        {steps.map((step, index) => (
+          <button
+            className={`${styles.wizardStepButton}${step.id === activeStepId ? ` ${styles.isActive}` : ""}${
+              step.missingItems.length ? "" : ` ${styles.isComplete}`
+            }`}
+            type="button"
+            key={step.id}
+            onClick={() => onStepChange(index)}
+          >
+            <span>STEP {index + 1}</span>
+            <strong>{step.label}</strong>
+            <small>
+              {step.readyCount} / {step.items.length} 完了
+            </small>
+            {step.missingItems.length ? <em>未入力 {step.missingItems.length}</em> : <em>OK</em>}
+          </button>
+        ))}
+      </div>
+
+      {isWizardMode ? (
+        <div className={styles.wizardMissingPanel} aria-live="polite">
+          <strong>{activeStep?.missingItems.length ? "このSTEPの未入力" : "このSTEPは入力済み"}</strong>
+          {activeStep?.missingItems.length ? (
+            <ul>
+              {activeStep.missingItems.map((item) => (
+                <li key={item.key}>{item.label}</li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      ) : null}
+
+      {isWizardMode ? (
+        <div className={styles.wizardNavigation}>
+          <button className={styles.secondaryButton} type="button" onClick={onPrev} disabled={!canGoPrev}>
+            戻る
+          </button>
+          <button className={styles.primaryButton} type="button" onClick={onNext} disabled={!canGoNext}>
+            次へ
+          </button>
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
+function SectionChecklist({ items, title }) {
+  return (
+    <section className={styles.sectionChecklist} aria-label={title}>
+      <strong>{title}</strong>
+      <ul>
+        {items.map((item) => (
+          <li className={item.ready ? styles.isReady : ""} key={item.label}>
+            <span aria-hidden="true">{item.ready ? "OK" : "未"}</span>
+            {item.label}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function PublishChecklist({ items }) {
+  const readyCount = items.filter((item) => item.ready).length;
+
+  return (
+    <section className={styles.publishChecklist} aria-label="公開準備チェックリスト">
+      <header>
+        <div>
+          <span>公開準備チェックリスト</span>
+          <strong>
+            {readyCount} / {items.length} 完了
+          </strong>
+        </div>
+        <small>商品を公開してTopカードへつなぐ前に確認する項目です。</small>
+      </header>
+      <ul>
+        {items.map((item) => (
+          <li className={item.ready ? styles.isReady : ""} key={item.label}>
+            <span aria-hidden="true">{item.ready ? "OK" : "未"}</span>
+            <div>
+              <strong>{item.label}</strong>
+              <small>{item.hint}</small>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
@@ -1376,14 +2252,15 @@ function isImageValidationMessage(message) {
   return /coverImage|gallery\[\d+\]\.(src|thumb)|画像ファイル/.test(message);
 }
 
-function ImagePreview({ check, label, path }) {
+function ImagePreview({ check, label, path, revision = 0 }) {
   const status = check || (path ? { state: "checking", message: "確認中..." } : { state: "missing", message: "パス未入力" });
   const isOk = status.ok;
+  const previewSrc = isOk && path && revision ? `${path}${path.includes("?") ? "&" : "?"}adminPreview=${revision}` : path;
 
   return (
     <figure className={`${styles.imagePreview}${isOk ? "" : ` ${styles.hasImageWarning}`}`}>
       <div className={styles.imagePreviewFrame}>
-        {isOk && path ? <img src={path} alt={label} loading="lazy" /> : <span>{label}</span>}
+        {isOk && path ? <img src={previewSrc} alt={label} loading="lazy" /> : <span>{label}</span>}
       </div>
       <figcaption>
         <strong>{label}</strong>

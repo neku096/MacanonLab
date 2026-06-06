@@ -163,6 +163,33 @@
   background: rgba(72, 209, 233, 0.16);
 }
 
+.quickCreatePanel {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(240, 190, 72, 0.74);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 248, 226, 0.86);
+}
+
+.quickCreatePanel strong {
+  color: #6b4a00;
+  font-size: 0.95rem;
+}
+
+.quickCreatePanel p {
+  margin: 0;
+  color: #6b4a00;
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.quickCreatePanel .secondaryButton {
+  width: 100%;
+}
+
 .sortableList {
   gap: 10px;
   padding: 2px 4px 2px 0;
@@ -488,7 +515,7 @@
 
 .suggestionSearch {
   display: grid;
-  gap: 6px;
+  gap: 4px;
   color: #05a9d9;
   font-size: 0.82rem;
   font-weight: 900;
@@ -514,7 +541,9 @@
 .selectedChips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  align-content: flex-start;
+  gap: 7px;
 }
 
 .suggestionChips button,
@@ -534,11 +563,22 @@
 }
 
 .suggestionChips button {
-  display: inline-grid;
-  gap: 1px;
-  min-height: 40px;
-  padding: 5px 12px;
-  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.suggestionChips button span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .suggestionChips button:hover,
@@ -553,6 +593,8 @@
   color: #5e7886;
   font-size: 0.72rem;
   font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .suggestionChips p {
@@ -614,6 +656,85 @@
 .imageGuide small,
 .galleryHeader small {
   color: #5e7886;
+  font-weight: 800;
+}
+
+.batchImageDropzone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 2px dashed rgba(5, 169, 217, 0.54);
+  border-radius: 13px;
+  padding: 16px;
+  background: rgba(237, 251, 255, 0.78);
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.batchImageDropzone.isDragging {
+  border-color: rgba(240, 190, 72, 0.96);
+  background: rgba(255, 248, 226, 0.92);
+  box-shadow: 0 16px 34px rgba(240, 190, 72, 0.16);
+}
+
+.batchImageDropzone div:first-child {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.batchImageDropzone span {
+  color: #05a9d9;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.batchImageDropzone strong {
+  color: #073047;
+  font-size: 1rem;
+}
+
+.batchImageDropzone small {
+  color: #5e7886;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.batchImageActions {
+  flex: 0 0 auto;
+}
+
+.batchImageStatus {
+  display: grid;
+  gap: 8px;
+  border: 1px solid rgba(54, 184, 129, 0.58);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(221, 250, 238, 0.78);
+}
+
+.batchImageStatus.hasBatchError {
+  border-color: rgba(243, 161, 189, 0.88);
+  background: rgba(255, 248, 251, 0.9);
+}
+
+.batchImageStatus strong {
+  color: #0a6e4d;
+}
+
+.batchImageStatus.hasBatchError strong {
+  color: #9e174c;
+}
+
+.batchImageStatus ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #073047;
+  font-size: 0.86rem;
   font-weight: 800;
 }
 
@@ -968,6 +1089,331 @@
   padding: 16px 18px;
 }
 
+.wizardBox {
+  display: grid;
+  gap: 14px;
+  border: 1px solid rgba(158, 230, 247, 0.94);
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: rgba(246, 253, 255, 0.92);
+}
+
+.wizardHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.wizardHeader > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.wizardHeader span,
+.wizardStepButton span {
+  color: #05a9d9;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wizardHeader strong {
+  color: #073047;
+  font-size: 1.08rem;
+}
+
+.modeSwitch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border: 1px solid rgba(125, 218, 242, 0.85);
+  border-radius: 999px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.modeSwitch button {
+  min-height: 36px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 14px;
+  color: #05758b;
+  background: transparent;
+  font-weight: 900;
+}
+
+.modeSwitch button.isActive {
+  color: #073047;
+  background: rgba(72, 209, 233, 0.2);
+}
+
+.wizardSteps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.wizardStepButton {
+  display: grid;
+  gap: 4px;
+  min-height: 116px;
+  border: 1px solid rgba(135, 214, 238, 0.72);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: none;
+}
+
+.wizardStepButton.isActive {
+  border-color: rgba(240, 190, 72, 0.95);
+  background: rgba(255, 248, 226, 0.94);
+}
+
+.wizardStepButton.isComplete {
+  border-color: rgba(54, 184, 129, 0.62);
+}
+
+.wizardStepButton strong {
+  color: #073047;
+  font-size: 0.92rem;
+}
+
+.wizardStepButton small {
+  color: #5e7886;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.wizardStepButton em {
+  align-self: end;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: #8a5d00;
+  background: rgba(255, 248, 226, 0.95);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.wizardStepButton.isComplete em {
+  color: #0a6e4d;
+  background: rgba(221, 250, 238, 0.95);
+}
+
+.wizardMissingPanel {
+  display: grid;
+  gap: 8px;
+  border: 1px solid rgba(240, 190, 72, 0.72);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 248, 226, 0.72);
+}
+
+.wizardMissingPanel strong {
+  color: #6b4a00;
+}
+
+.wizardMissingPanel ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wizardMissingPanel li {
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: #6b4a00;
+  background: rgba(255, 255, 255, 0.86);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.wizardNavigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.wizardPanel {
+  display: grid;
+  gap: 18px;
+}
+
+.wizardPanel.isWizardHidden {
+  display: none;
+}
+
+.sectionChecklist {
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(125, 218, 242, 0.72);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.sectionChecklist > strong {
+  color: #073047;
+}
+
+.sectionChecklist ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sectionChecklist li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: #8a5d00;
+  background: rgba(255, 248, 226, 0.95);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.sectionChecklist li.isReady {
+  color: #0a6e4d;
+  background: rgba(221, 250, 238, 0.95);
+}
+
+.publishChecklist,
+.postSavePanel {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(158, 230, 247, 0.94);
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: rgba(246, 253, 255, 0.9);
+  box-shadow: 0 18px 42px rgba(61, 166, 194, 0.12);
+}
+
+.publishChecklist header,
+.postSavePanel > div:first-child {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.publishChecklist header div,
+.postSavePanel > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.publishChecklist header span,
+.postSavePanel span {
+  color: #05a9d9;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.publishChecklist header strong,
+.postSavePanel strong {
+  color: #073047;
+  font-size: 1.05rem;
+}
+
+.publishChecklist header small,
+.postSavePanel small {
+  color: #5e7886;
+  font-weight: 800;
+}
+
+.publishChecklist ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.publishChecklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid rgba(135, 214, 238, 0.7);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.84);
+}
+
+.publishChecklist li > span {
+  flex: 0 0 auto;
+  border: 1px solid rgba(240, 190, 72, 0.7);
+  border-radius: 999px;
+  padding: 2px 7px;
+  color: #8a5d00;
+  background: rgba(255, 248, 226, 0.95);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.publishChecklist li.isReady > span {
+  border-color: rgba(54, 184, 129, 0.58);
+  color: #0a6e4d;
+  background: rgba(221, 250, 238, 0.95);
+}
+
+.publishChecklist li div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.publishChecklist li strong {
+  color: #073047;
+  font-size: 0.9rem;
+}
+
+.publishChecklist li small {
+  color: #5e7886;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.postSaveActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.publishActionPanel {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1.2fr);
+  gap: 14px;
+  align-items: end;
+  border: 1px solid rgba(125, 218, 242, 0.72);
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.publishActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 .orderNotice {
   display: flex;
   flex-wrap: wrap;
@@ -1134,6 +1580,24 @@
     display: grid;
   }
 
+  .publishChecklist header,
+  .postSavePanel > div:first-child {
+    display: grid;
+  }
+
+  .publishChecklist ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wizardHeader,
+  .publishActionPanel {
+    display: grid;
+  }
+
+  .wizardSteps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .gridTwo {
     grid-template-columns: 1fr;
   }
@@ -1145,6 +1609,10 @@
   .coverPreviewGrid,
   .galleryEditorItem {
     grid-template-columns: 1fr;
+  }
+
+  .batchImageDropzone {
+    display: grid;
   }
 
   .galleryItemActions {
@@ -1171,6 +1639,28 @@
   .secondaryButton,
   .dangerButton {
     width: 100%;
+  }
+
+  .publishChecklist ul {
+    grid-template-columns: 1fr;
+  }
+
+  .modeSwitch,
+  .wizardNavigation,
+  .publishActions {
+    display: grid;
+  }
+
+  .wizardSteps {
+    grid-template-columns: 1fr;
+  }
+
+  .wizardStepButton {
+    min-height: auto;
+  }
+
+  .postSaveActions {
+    display: grid;
   }
 
   .editorHeader {
