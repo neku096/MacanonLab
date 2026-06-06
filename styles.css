@@ -3062,6 +3062,10 @@ body {
   box-shadow: 0 12px 28px rgba(0, 185, 225, 0.22);
 }
 
+.site-footer .footer-pill[href="/links"] .footer-pill-icon {
+  color: #ffffff;
+}
+
 .booth-list-page .booth-filter-button[aria-pressed="true"],
 .booth-list-page .booth-subtag-button[aria-pressed="true"],
 .booth-list-page .booth-subtag-picker-toggle.is-selected {
