@@ -18,28 +18,40 @@ This branch is for migration validation only. Do not switch DNS or merge to prod
 
 Set `NEXT_PUBLIC_SITE_URL` for the Cloudflare preview URL. This value is used by Next.js metadata through `lib/site.js`; it does not affect the existing Vercel production deployment unless this branch is merged and the environment variable is set there.
 
-Current remote preview:
+Current workers.dev URL:
 
 ```txt
-https://macanon-lab-preview.macanon-vrc.workers.dev
+https://macanon-lab.macanon-vrc.workers.dev
 ```
 
 Example `.dev.vars`:
 
 ```env
 # Replace with the final canonical domain before DNS cutover.
-NEXT_PUBLIC_SITE_URL=https://macanon-lab-preview.macanon-vrc.workers.dev
+NEXT_PUBLIC_SITE_URL=https://macanon-lab.macanon-vrc.workers.dev
 MACANON_ENABLE_ADMIN=0
 ```
 
 `MACANON_ENABLE_ADMIN` must stay disabled for Cloudflare production/preview deployments. The admin UI is still local-only, and admin APIs should return `403` in production.
 
-`wrangler.jsonc` intentionally keeps this as a workers.dev preview worker:
+`wrangler.jsonc` intentionally keeps this as a workers.dev Worker without DNS cutover:
 
+- `name: macanon-lab`
 - `workers_dev: true`
 - `preview_urls: true`
 - no custom domains
 - no DNS routes
+
+The `WORKER_SELF_REFERENCE` service binding must reference the same Worker name:
+
+```jsonc
+{
+  "binding": "WORKER_SELF_REFERENCE",
+  "service": "macanon-lab"
+}
+```
+
+If the binding points at the package name, such as `macanonlab-next`, Wrangler fails with Cloudflare API error `10143` because that Worker does not exist.
 
 ## Commands
 
@@ -101,7 +113,7 @@ Do not deploy to the production domain from this branch.
 Checked remote Workers preview:
 
 ```txt
-https://macanon-lab-preview.macanon-vrc.workers.dev
+https://macanon-lab.macanon-vrc.workers.dev
 ```
 
 - Public pages returned `200`.
@@ -118,19 +130,13 @@ https://macanon-lab-preview.macanon-vrc.workers.dev
 - `next.config.mjs` sets `output: "standalone"` for the OpenNext build path. Confirm this has no unwanted Vercel production impact before merging this branch into the production branch.
 - Cloudflare Images is not configured in this preview-only branch. Remote preview returned `200` for `/_next/image`, so keep image binding out of this migration commit. If image optimization needs Cloudflare Images later, handle it as a separate task.
 - OpenNext prints a Windows compatibility warning. The reliable Windows path for this repo remains `next build --webpack` followed by `opennextjs-cloudflare build --skipNextBuild`.
-- Wrangler warns that `compatibility_date: "2024-12-30"` could be updated to a newer date. Keep it unchanged in this preview stabilization pass because changing it may alter runtime behavior. Candidate follow-up: test a newer compatibility date in a separate branch after re-running the full route checklist.
+- `compatibility_date` is aligned with the remote Worker at `2026-06-06`.
 
 ## Robots And Sitemap
 
-`public/robots.txt` and `public/sitemap.xml` currently contain the existing GitHub Pages URL:
+`/robots.txt` and `/sitemap.xml` are generated dynamically by App Router route handlers:
 
-```txt
-https://neku096.github.io/MacanonLab
-```
+- `app/robots.txt/route.js`
+- `app/sitemap.xml/route.js`
 
-Do not change these to the Cloudflare workers.dev preview URL. Before production DNS cutover, replace them with the final canonical domain or migrate to dynamic Next.js generation:
-
-- `app/robots.js`
-- `app/sitemap.js`
-
-Dynamic generation would let the files derive URLs from `SITE.url` / `NEXT_PUBLIC_SITE_URL`, but it should be reviewed separately because it changes how public metadata files are produced.
+Both routes derive URLs from `SITE.url` / `NEXT_PUBLIC_SITE_URL`. Before production DNS cutover, set `NEXT_PUBLIC_SITE_URL` to the final canonical domain and re-run the route checklist.
