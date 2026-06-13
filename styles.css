@@ -2620,7 +2620,9 @@ p {
   height: 58%;
 }
 
-.site-footer .footer-pill[href$="links.html"] .footer-pill-icon {
+.site-footer .footer-pill[href="/links"] .footer-pill-icon,
+.site-footer .footer-pill[href$="links.html"] .footer-pill-icon,
+.footer-pill[href="/links"] .footer-pill-icon {
   color: #ffffff;
 }
 

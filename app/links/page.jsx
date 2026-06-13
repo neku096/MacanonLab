@@ -15,49 +15,67 @@ export const metadata = {
 export default function LinksPage() {
   return (
     <main className="links-page">
-      <section className="section sub-hero">
-        <p className="eyebrow">Links</p>
-        <h1>Links</h1>
-        <p>BOOTH、X、サイト内ページへのリンクをまとめています。</p>
-      </section>
-      <section className="section link-hub-section" aria-label="外部リンク">
-        <img className="link-hub-image" src="/Macanon_Samune/macanon_samune.webp" alt="macanon" width="600" height="600" loading="lazy" />
-        <div className="link-hub-actions">
-          <a className="footer-pill link-hub-pill" href={SITE.boothUrl} target="_blank" rel="noopener noreferrer">
-            <span className="footer-pill-icon" aria-hidden="true">B</span>
-            <span>BOOTH</span>
+      <h1 className="visually-hidden" id="links-title">
+        macanon Links
+      </h1>
+
+      <section className="section links-hero" aria-labelledby="links-title">
+        <div className="links-profile">
+          <img
+            className="links-profile-icon"
+            src="/Macanon_Samune/macanon_samune.webp"
+            alt="macanon"
+            width="400"
+            height="400"
+            decoding="async"
+          />
+          <p className="links-profile-name">macanon</p>
+          <p className="links-profile-bio">
+            VRChat向け3D衣装、召喚ギミック、アクセサリーを制作しています。作品ページと更新情報はこちらから確認できます。
+          </p>
+        </div>
+
+        <div className="links-list" aria-label="外部リンク">
+          <a className="link-card link-card-primary" href={SITE.boothUrl} target="_blank" rel="noopener noreferrer">
+            <span className="link-card-icon" aria-hidden="true">
+              <img src="/images/link-icons/booth.webp" alt="" width="56" height="56" decoding="async" />
+            </span>
+            <span className="link-card-body">
+              <strong>BOOTH</strong>
+              <small>VRChat向け3D衣装・ギミック作品ページ</small>
+            </span>
           </a>
-          <a className="footer-pill link-hub-pill" href={SITE.xUrl} target="_blank" rel="noopener noreferrer">
-            <span className="footer-pill-icon" aria-hidden="true">X</span>
-            <span>X</span>
+
+          <a className="link-card" href={SITE.xUrl} target="_blank" rel="noopener noreferrer">
+            <span className="link-card-icon" aria-hidden="true">
+              <img src="/images/link-icons/x.svg" alt="" width="56" height="56" decoding="async" />
+            </span>
+            <span className="link-card-body">
+              <strong>X</strong>
+              <small>制作告知・更新情報・お問い合わせ</small>
+            </span>
           </a>
         </div>
       </section>
-      <section className="section link-hub-section" aria-label="サイト内で探す">
+
+      <section className="section links-internal" aria-labelledby="site-links-title">
         <div className="section-heading">
           <div>
-            <small>Internal</small>
-            <h2>サイト内で探す</h2>
+            <h2 id="site-links-title">サイト内で探す</h2>
           </div>
         </div>
-        <div className="link-hub-grid">
-          <Link className="article-related-item" href="/products">
-            <span className="article-related-copy">
-              <strong>BOOTH作品一覧</strong>
-              <small>サムネイルから作品を探す</small>
-            </span>
+        <div className="links-mini-grid">
+          <Link className="links-mini-card" href="/products">
+            <strong>BOOTH作品一覧</strong>
+            <span>サムネイルから作品を探す</span>
           </Link>
-          <Link className="article-related-item" href="/terms">
-            <span className="article-related-copy">
-              <strong>利用規約</strong>
-              <small>使用条件を確認する</small>
-            </span>
+          <Link className="links-mini-card" href="/terms">
+            <strong>利用規約</strong>
+            <span>使用条件を確認する</span>
           </Link>
-          <Link className="article-related-item" href="/blog">
-            <span className="article-related-copy">
-              <strong>ブログ</strong>
-              <small>ブログを確認する</small>
-            </span>
+          <Link className="links-mini-card" href="/blog">
+            <strong>ブログ</strong>
+            <span>ブログを確認する</span>
           </Link>
         </div>
       </section>
