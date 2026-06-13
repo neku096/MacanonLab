@@ -34,7 +34,7 @@ export default function LinksPage() {
             VRChat向けの3D衣装やギミックを制作しています。
             <br />
             <br />
-            作品一覧はBOOTH、
+            作品一覧はBOOTHでご覧いただけます。
             <br />
             更新情報はXからご確認ください。
           </p>
