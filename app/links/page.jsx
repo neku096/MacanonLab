@@ -31,7 +31,12 @@ export default function LinksPage() {
           />
           <p className="links-profile-name">macanon</p>
           <p className="links-profile-bio">
-            VRChat向け3D衣装、召喚ギミック、アクセサリーを制作しています。作品ページと更新情報はこちらから確認できます。
+            VRChat向けの3D衣装やギミックを制作しています。
+            <br />
+            <br />
+            作品一覧はBOOTH、
+            <br />
+            更新情報はXからご確認ください。
           </p>
         </div>
 
