@@ -30,13 +30,36 @@ export default function LinksPage() {
             decoding="async"
           />
           <p className="links-profile-name">macanon</p>
+          <style>{`
+            .links-profile-bio [data-links-lang="en"] {
+              display: none;
+            }
+
+            html[lang="en"] .links-profile-bio [data-links-lang="ja"] {
+              display: none;
+            }
+
+            html[lang="en"] .links-profile-bio [data-links-lang="en"] {
+              display: inline;
+            }
+          `}</style>
           <p className="links-profile-bio">
-            VRChat向けの3D衣装やギミックを制作しています。
-            <br />
-            <br />
-            作品一覧はBOOTHでご覧いただけます。
-            <br />
-            更新情報はXからご確認ください。
+            <span data-links-lang="ja">
+              VRChat向けの3D衣装やギミックを制作しています。
+              <br />
+              <br />
+              作品一覧はBOOTHでご覧いただけます。
+              <br />
+              更新情報はXからご確認ください。
+            </span>
+            <span data-links-lang="en">
+              I create VRChat outfits, gimmicks, and accessories.
+              <br />
+              <br />
+              Browse my products on BOOTH.
+              <br />
+              Check X for updates and announcements.
+            </span>
           </p>
         </div>
 
