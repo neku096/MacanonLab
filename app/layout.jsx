@@ -4,7 +4,7 @@ import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LegacyLanguageBridge from "@/components/LegacyLanguageBridge";
-import { SITE } from "@/lib/site";
+import { SITE, getSiteUrl } from "@/lib/site";
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -57,6 +57,28 @@ const ENABLE_CLOUDFLARE_INSIGHTS =
   process.env.NODE_ENV === "production" &&
   process.env.NEXT_PUBLIC_ENABLE_CLOUDFLARE_INSIGHTS === "1";
 
+const siteStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE.name,
+    url: getSiteUrl("/"),
+    logo: getSiteUrl("/Macanon_Samune/macanon_Logo_transparent.webp"),
+    sameAs: [SITE.boothUrl, SITE.xUrl]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE.name,
+    url: getSiteUrl("/"),
+    publisher: {
+      "@type": "Organization",
+      name: SITE.name,
+      url: getSiteUrl("/")
+    }
+  }
+];
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ja" data-scroll-behavior="smooth">
@@ -64,6 +86,10 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteStructuredData) }}
+        />
         <LegacyLanguageBridge />
         {ENABLE_CLOUDFLARE_INSIGHTS ? (
           <Script

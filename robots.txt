@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://neku096.github.io/MacanonLab/sitemap.xml
+Sitemap: https://macanon-lab.macanon-vrc.workers.dev/sitemap.xml

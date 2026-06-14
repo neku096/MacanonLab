@@ -260,7 +260,7 @@ async function copySharedAssets() {
 }
 
 async function writeSitemap(products) {
-  const baseUrl = "https://neku096.github.io/MacanonLab";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://macanon-lab.macanon-vrc.workers.dev";
   const staticRoutes = [
     { path: "/", priority: "1.0" },
     { path: "/products", priority: "0.9" },
