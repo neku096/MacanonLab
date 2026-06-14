@@ -29,6 +29,7 @@ const pageRedirects = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   async redirects() {
     return [...productRedirects, ...pageRedirects];
   }

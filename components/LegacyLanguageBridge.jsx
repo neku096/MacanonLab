@@ -44,6 +44,14 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function matchBefore(text, suffix) {
+  return text.match(new RegExp(`^(.+)${escapeRegExp(suffix)}$`));
+}
+
 function replaceTrimmed(originalValue, nextText) {
   const originalText = originalValue.trim();
   return originalText ? originalValue.replace(originalText, nextText) : originalValue;
@@ -54,24 +62,34 @@ function translateText(text) {
     return translations[text];
   }
 
-  const pageTitle = text.match(/^(.+) \| macanon$/);
+  const pageTitle = matchBefore(text, " | macanon");
   if (pageTitle) {
     return `${translateText(pageTitle[1])} | macanon`;
   }
 
-  const productImageSwitch = text.match(/^(.+)の商品画像を切り替え$/);
+  const productImageSwitch = matchBefore(text, "の商品画像を切り替え");
   if (productImageSwitch) {
     return `Switch ${translateText(productImageSwitch[1])} product images`;
   }
 
-  const productImageOpen = text.match(/^(.+)の商品画像を拡大表示$/);
+  const productImageOpen = matchBefore(text, "の商品画像を拡大表示");
   if (productImageOpen) {
     return `Open ${translateText(productImageOpen[1])} product image gallery`;
   }
 
-  const productPageLink = text.match(/^(.+)の商品ページへ$/);
+  const productPageLink = matchBefore(text, "の商品ページへ");
   if (productPageLink) {
     return `Open ${translateText(productPageLink[1])} product page`;
+  }
+
+  const boothProductPageLink = matchBefore(text, "のBOOTH商品ページへ");
+  if (boothProductPageLink) {
+    return `Open ${translateText(boothProductPageLink[1])} BOOTH product page`;
+  }
+
+  const termsPageAlt = text.match(new RegExp(`^(.+) (\\d+)${escapeRegExp("ページ目")}$`));
+  if (termsPageAlt) {
+    return `${translateText(termsPageAlt[1])} page ${termsPageAlt[2]}`;
   }
 
   const slideLabel = text.match(/^商品スライド (\d+)$/);
@@ -82,6 +100,13 @@ function translateText(text) {
   const thumbLabel = text.match(/^(\d+)枚目の画像を表示$/);
   if (thumbLabel) {
     return `Show image ${thumbLabel[1]}`;
+  }
+
+  const productImageLabel = text.match(
+    new RegExp(`^(.+) ${escapeRegExp("商品画像")} (\\d+)${escapeRegExp("枚目")}$`)
+  );
+  if (productImageLabel) {
+    return `${translateText(productImageLabel[1])} product image ${productImageLabel[2]}`;
   }
 
   const itemCount = text.match(/^(\d+)件$/);
@@ -148,16 +173,16 @@ export default function LegacyLanguageBridge() {
     };
 
     const setProductAttribute = (selector, attribute, englishValue, isEnglish) => {
-      const element = document.querySelector(selector);
-      if (!element) return;
-      const original = rememberElementValue(element, attribute, element.getAttribute(attribute));
-      if (isEnglish) {
-        element.setAttribute(attribute, englishValue);
-      } else if (original == null) {
-        element.removeAttribute(attribute);
-      } else {
-        element.setAttribute(attribute, original);
-      }
+      document.querySelectorAll(selector).forEach((element) => {
+        const original = rememberElementValue(element, attribute, element.getAttribute(attribute));
+        if (isEnglish) {
+          element.setAttribute(attribute, englishValue);
+        } else if (original == null) {
+          element.removeAttribute(attribute);
+        } else {
+          element.setAttribute(attribute, original);
+        }
+      });
     };
 
     const applyProductEnglish = (isEnglish) => {

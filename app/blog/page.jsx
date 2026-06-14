@@ -1,6 +1,12 @@
 import BlogFilterPanel from "@/components/BlogFilterPanel";
 
 export const metadata = {
+  alternates: {
+    canonical: "/blog"
+  },
+  openGraph: {
+    url: "/blog"
+  },
   title: "Blog",
   description: "macanonのVRChat、Unity、Modular Avatar向けTips、商品レビュー、制作ブログ記事一覧です。タグで絞り込みできます。"
 };

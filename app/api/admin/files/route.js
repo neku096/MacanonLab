@@ -1,4 +1,3 @@
-import fs from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import { isAdminWriteEnabled } from "@/lib/adminProductsStore";
@@ -59,6 +58,7 @@ export async function POST(request) {
     return NextResponse.json({ error: "保存先に既存ファイルがあります。", conflict: true, targetPath }, { status: 409 });
   }
 
+  const fs = await getFs();
   await fs.mkdir(path.dirname(pathResult.filePath), { recursive: true });
   await fs.writeFile(pathResult.filePath, Buffer.from(await file.arrayBuffer()));
 
@@ -95,9 +95,14 @@ function isAllowedImageExtension(filePath) {
 
 async function fileExists(filePath) {
   try {
+    const fs = await getFs();
     const stat = await fs.stat(filePath);
     return stat.isFile();
   } catch {
     return false;
   }
+}
+
+async function getFs() {
+  return import("node:fs/promises");
 }
